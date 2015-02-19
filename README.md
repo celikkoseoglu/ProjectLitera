@@ -1,5 +1,5 @@
-# ProjectMinerva
-CS102 Project - All Stars
+# ProjectLitera
+CS102 Project - Minerva
 
 #GitHub öğrenin!
 JavaFX öğrenin, kodu indirip çalıştırıp okuyun

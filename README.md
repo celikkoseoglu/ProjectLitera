@@ -4,7 +4,7 @@ CS102 Project - All Stars
 #GitHub öğrenin!
 JavaFX öğrenin, kodu indirip çalıştırıp okuyun
 
-Orhun, Mert - WebView / HTMLEditor ‘dak bug nedir?
+Orhun, Mert - WebView / HTMLEditor ‘daki bug nedir? Bu kontroller nasıl çalışırlar? Documentation okumak yardımcı olabilir
 
 Caner - Bold, Italic vb butonları çalıştır (javascript) - CSS
 

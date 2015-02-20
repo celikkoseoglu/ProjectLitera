@@ -4,11 +4,11 @@ CS102 Project - Minerva
 #GitHub öğrenin!
 JavaFX öğrenin, kodu indirip çalıştırıp okuyun
 
-Orhun, Mert - HTML video & ses nasıl eklenir? Litera'nın içindeki WebView'a bunlar nasıl eklenir? HTMLEditor class'ı başka neler yapabilir?
+Orhun, Mert - Ses kaydetmeyi başardık. Bunu harddisk'e .mp3 formatında nasıl yazabilirsiniz?
 
-Caner - Bold, Italic vb butonları çalıştır (javascript) - CSS
+Caner - Bold, Italic vb butonları çalıştır (javascript) - CSS - Tasarım, renkler, cıvıl cıvıl
 
-Çelik - Butonlar, not kaydetme, listeleme, local database
+Çelik - Butonlar, not kaydetme, listeleme, local database, minik kaydetme sorunları
 
 Yiğit - Sync (Play Framework?)
 

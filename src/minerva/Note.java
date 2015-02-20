@@ -8,6 +8,12 @@ public class Note
     private boolean isEncrypted;
     private Color noteColor, notePadColor;
 
+    public Note(String noteName, String htmlNote)
+    {
+        this.noteName = noteName;
+        this.htmlNote = htmlNote;
+    }
+
     public String getHtmlNote()
     {
         return htmlNote;

@@ -4,7 +4,7 @@ CS102 Project - Minerva
 #GitHub öğrenin!
 JavaFX öğrenin, kodu indirip çalıştırıp okuyun
 
-Orhun, Mert - WebView / HTMLEditor ‘daki bug nedir? Bu kontroller nasıl çalışırlar? Documentation okumak yardımcı olabilir
+Orhun, Mert - HTML video & ses nasıl eklenir? Litera'nın içindeki WebView'a bunlar nasıl eklenir? HTMLEditor class'ı başka neler yapabilir?
 
 Caner - Bold, Italic vb butonları çalıştır (javascript) - CSS
 

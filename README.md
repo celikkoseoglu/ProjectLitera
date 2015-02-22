@@ -1,7 +1,6 @@
-# ProjectLitera
 CS102 Minerva - Project Litera
 
-#GitHub öğreninmemiz gerekli...
+#Yardım lazım...
 
 Orhun, Mert - Merak etmeyin, java ile de MP3 kaydedilir.. ama nasıl?..
 

@@ -14,6 +14,11 @@ public class Note
         this.htmlNote = htmlNote;
     }
 
+    public void setHtmlNote(String htmlNote)
+    {
+        this.htmlNote = htmlNote;
+    }
+
     public String getHtmlNote()
     {
         return htmlNote;

@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
-   <right>
-      <ToolBar fx:id="toolbar" orientation="VERTICAL" prefHeight="40.0" prefWidth="25.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button fx:id="myButton" minWidth="28" mnemonicParsing="false" text="B" />
-            <ToggleButton minWidth="28" mnemonicParsing="false" text="U" />
-            <ToggleButton minWidth="28" mnemonicParsing="false" text="I" />
-            <ToggleButton minWidth="28" mnemonicParsing="false" text="S" />
-        </items>
-      </ToolBar>
-   </right>
    <left>
-      <ListView fx:id="noteListScrollPane" prefWidth="180.0" BorderPane.alignment="CENTER_LEFT" />
+      <ListView fx:id="noteListScrollPane" prefWidth="180.0" style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER_LEFT" />
    </left>
    <center>
       <WebView fx:id="editor" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -33,19 +25,27 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: #99B4D1;">
               <items>
-                <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" text="-" />
-                  <Button mnemonicParsing="false" text="Options" />
+                <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
+                  <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />
+                  <Button fx:id="trashButton" mnemonicParsing="false">
+                   <graphic>
+                       <ImageView>
+                          <image>
+                              <Image url="@Trash-light_resized.png" />
+                          </image>
+                       </ImageView>
+                   </graphic>
+                   </Button>
               </items>
             </ToolBar>
-            <Label alignment="CENTER_RIGHT" text="                                   Project Litera Confidential" GridPane.columnIndex="2" />
+            <Label alignment="CENTER_RIGHT" text="                                   Project Litera Confidential" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </bottom>
    <top>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="180.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,7 +56,7 @@
         </rowConstraints>
          <children>
             <TextField fx:id="noteNameTextField" GridPane.columnIndex="1" />
-            <Label text="  Notes:">
+            <Label style="-fx-background-color: transparent;" text="  Notes:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -64,4 +64,27 @@
          </children>
       </GridPane>
    </top>
+   <right>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" percentWidth="0.0" prefWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <ToggleButton fx:id="boldToggleButton" mnemonicParsing="false" text="B" />
+                  <ToggleButton mnemonicParsing="false" text="I" />
+                  <ToggleButton mnemonicParsing="false" text="U" />
+                  <ToggleButton mnemonicParsing="false" text="S" />
+               </items>
+            </ToolBar>
+            <ToggleButton mnemonicParsing="false" text="E" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </right>
 </BorderPane>

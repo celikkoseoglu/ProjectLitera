@@ -21,6 +21,7 @@ public class Main extends Application {
 
         primaryStage.setOnCloseRequest(we -> {
             System.out.println("Stage is closing");
+            Controller.onExit();
         });
 
     }

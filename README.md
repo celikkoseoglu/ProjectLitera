@@ -1,19 +1,12 @@
 # ProjectLitera
-CS102 Project - Minerva
+CS102 Minerva - Project Litera
 
-#GitHub öğrenin!
-JavaFX öğrenin, kodu indirip çalıştırıp okuyun
+#GitHub öğreninmemiz gerekli...
 
-Orhun, Mert - Ses kaydetmeyi başardık. Bunu harddisk'e .mp3 formatında nasıl yazabilirsiniz?
+Orhun, Mert - Merak etmeyin, java ile de MP3 kaydedilir.. ama nasıl?..
 
-Caner - Bold, Italic vb butonları çalıştır (javascript) - CSS - Tasarım, renkler, cıvıl cıvıl
+Caner - Bold ve diğer tuşlar, ListView'daki her item için özel renkler. Aynen şu - http://doc.qt.digia.com/qq/qq08-fancylistview.png
 
-Çelik - Butonlar, not kaydetme, listeleme, local database, minik kaydetme sorunları
+Çelik - JavaFX CSS, UI Layout, minik kaydetme sorunları(evet hala var)
 
 Yiğit - Sync (Play Framework?)
-
-Tasarım
-Renk seçimi predetermined,
-hexagon renk paleti,
-Requirements,
-Android?

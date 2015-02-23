@@ -16,5 +16,4 @@ public class Defaults
     public final static String newNotePage = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head contenteditable=true><meta charset=\"utf-8\">" +
             "<title>Celik Koseoglu</title></head><body contenteditable=\"true\"></body></html>";
-
 }

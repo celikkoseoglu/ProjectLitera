@@ -1,5 +1,7 @@
 package minerva;
 
+import com.sun.javafx.webkit.Accessor;
+import com.sun.webkit.WebPage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,6 +30,7 @@ public class Controller implements Initializable {
 
     private static Note currentNote;
     private ObservableList<String> noteListScrollPaneItems;
+    private WebPage webPage;
 
     //TODO
     //Just for performance optimization : store opened notes in an ArrayList so you don't need to create Note objects again when the same
@@ -50,6 +53,9 @@ public class Controller implements Initializable {
             System.out.println("CS102 - All Stars");
             Note note = new Note(noteListScrollPane.getSelectionModel().getSelectedItem().toString(), getWebViewContent());
             DataManager.saveNote(note);
+
+            webPage = Accessor.getPageFor(editor.getEngine());
+            webPage.executeCommand("bold" ,boldToggleButton.selectedProperty().getValue().toString());
         });
 
         trashButton.setOnAction(event -> {
@@ -70,7 +76,8 @@ public class Controller implements Initializable {
                 if ((currentNote = DataManager.getNote(newValue)) == null)
                     currentNote = new Note(Defaults.newNoteName, Defaults.newNotePage);
 
-                editor.getEngine().loadContent(currentNote == null ? currentNote.getHtmlNote() : currentNote.getHtmlNote());
+                editor.getEngine().loadContent(currentNote.getHtmlNote());
+                //webPage.load(webPage.getMainFrame(), currentNote.getHtmlNote(), "text/html");
                 noteNameTextField.setText(newValue);
             }
         });

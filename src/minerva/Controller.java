@@ -78,12 +78,12 @@ public class Controller implements Initializable {
         webPage = Accessor.getPageFor(editor.getEngine());
         /*** *** *** *** *** BEGINNING OF Button Listeners *** *** *** *** ***/
 
-        boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND, boldToggleButton));
-        italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND, italicToggleButton));
-        underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND, underlineToggleButton));
-        strikeToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND, strikeToggleButton));
-        listToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND, listToggleButton));
-        bulletToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND, bulletToggleButton));
+        boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND));
+        italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND));
+        underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND));
+        strikeToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND));
+        listToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND));
+        bulletToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND));
 
         trashButton.setOnAction(event -> {
             System.out.println(trashButton);
@@ -143,16 +143,10 @@ public class Controller implements Initializable {
         return (String)editor.getEngine().executeScript("document.documentElement.outerHTML");
     }
 
-    private void addStyle( String command, ToggleButton toggleButton){
-        if (webPage.getClientSelectedText().equals( "")){
-            webPage.executeCommand( command, toggleButton.selectedProperty().getValue().toString());
-            editor.requestFocus();
-        }
-        else{
-            webPage.executeCommand( command, toggleButton.selectedProperty().getValue().toString());
-            editor.requestFocus();
-            toggleButton.setSelected( false);
-        }
+    private void addStyle( String command){
+        webPage.executeCommand( command, "false");
+        editor.requestFocus();
+        buttonFeedback();
     }
 
     private void buttonFeedback(){

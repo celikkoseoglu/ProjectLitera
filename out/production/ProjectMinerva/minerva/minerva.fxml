@@ -78,7 +78,7 @@
             <children>
                 <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0">
                     <items>
-                        <ToggleButton fx:id="boldToggleButton" mnemonicParsing="false" text="B" />
+                        <ToggleButton fx:id="boldToggleButton" mnemonicParsing="false" text="B"/>
                         <ToggleButton fx:id="italicToggleButton" mnemonicParsing="false" text="I" />
                         <ToggleButton fx:id="underlineToggleButton" mnemonicParsing="false" text="U" />
                         <ToggleButton fx:id="strikeToggleButton" mnemonicParsing="false" text="S" />

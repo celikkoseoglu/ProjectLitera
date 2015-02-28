@@ -10,3 +10,5 @@ Caner - JavaFX CSS, ListView'daki her item için özel renkler. Aynen şu - http
 Çelik - MATEMATİK SINAVLARI! - "New Note" bug. Not silme sorunları. Encryption. JavaFX CSS. UI Builder işleri...
 
 Yiğit - SQL Server Upload
+
+KAPALIK - MAT SINAVINA GİTTİK GELCEZ

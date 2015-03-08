@@ -32,8 +32,8 @@ public class Defaults
     public static final String ALIGN_RIGHT_COMMAND = "justifyright";
     public static final String ALIGN_JUSTIFY_COMMAND = "justifyfull";
 
-    public static final String BULLETS_COMMAND = "insertUnorderedList";
-    public static final String NUMBERS_COMMAND = "insertOrderedList";
+    //public static final String BULLETS_COMMAND = "insertUnorderedList";
+    //public static final String NUMBERS_COMMAND = "insertOrderedList";
 
     public static final String INDENT_COMMAND = "indent";
     public static final String OUTDENT_COMMAND = "outdent";
@@ -42,10 +42,10 @@ public class Defaults
     public static final String FONT_FAMILY_COMMAND = "fontname";
     public static final String FONT_SIZE_COMMAND = "fontsize";
 
-    public static final String BOLD_COMMAND = "bold";
-    public static final String ITALIC_COMMAND = "italic";
-    public static final String UNDERLINE_COMMAND = "underline";
-    public static final String STRIKETHROUGH_COMMAND = "strikethrough";
+    //public static final String BOLD_COMMAND = "bold";
+    //public static final String ITALIC_COMMAND = "italic";
+    //public static final String UNDERLINE_COMMAND = "underline";
+    //public static final String STRIKETHROUGH_COMMAND = "strikethrough";
 
     public static final String FOREGROUND_COLOR_COMMAND = "forecolor";
     public static final String BACKGROUND_COLOR_COMMAND = "backcolor";

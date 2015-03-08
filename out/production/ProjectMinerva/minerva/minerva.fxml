@@ -7,15 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
+<BorderPane style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
     <left>
-        <ListView fx:id="noteListScrollPane" prefWidth="180.0" style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER_LEFT" />
+        <ListView fx:id="noteListScrollPane" prefWidth="180.0" BorderPane.alignment="CENTER_LEFT" />
     </left>
     <center>
         <WebView fx:id="editor" BorderPane.alignment="CENTER" />
     </center>
     <bottom>
-        <GridPane style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER">
+        <GridPane fx:id="footer" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,7 +26,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: #99B4D1;">
+                <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: #FFFFFF;">
                     <items>
                         <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
                         <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />
@@ -41,7 +41,7 @@
                         </Button>
                     </items>
                 </ToolBar>
-                <Label alignment="CENTER_RIGHT" text="                                   Project Litera Confidential" GridPane.columnIndex="3" />
+                <Label alignment="TOP_RIGHT" text="Project Litera Confidential" GridPane.columnIndex="3" />
             </children>
         </GridPane>
     </bottom>
@@ -66,7 +66,7 @@
         </GridPane>
     </top>
     <right>
-        <GridPane BorderPane.alignment="CENTER">
+        <GridPane fx:id="rightPane" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" percentWidth="0.0" prefWidth="30.0" />
             </columnConstraints>
@@ -76,14 +76,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0">
+                <ToolBar fx:id="styleToolBar" orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                     <items>
-                        <ToggleButton fx:id="boldToggleButton" mnemonicParsing="false" text="B"/>
-                        <ToggleButton fx:id="italicToggleButton" mnemonicParsing="false" text="I" />
-                        <ToggleButton fx:id="underlineToggleButton" mnemonicParsing="false" text="U" />
-                        <ToggleButton fx:id="strikeToggleButton" mnemonicParsing="false" text="S" />
-                        <ToggleButton fx:id="listToggleButton" mnemonicParsing="false" text="1." />
-                        <ToggleButton fx:id="bulletToggleButton" mnemonicParsing="false" text="o." />
+                        <ToggleButton fx:id="bold" mnemonicParsing="false" text="B" />
+                        <ToggleButton fx:id="italic" mnemonicParsing="false" text="I" />
+                        <ToggleButton fx:id="underline" mnemonicParsing="false" text="U" />
+                        <ToggleButton fx:id="strikethrough" mnemonicParsing="false" text="S" />
+                        <ToggleButton fx:id="insertOrderedList" mnemonicParsing="false" text="1." />
+                        <ToggleButton fx:id="insertUnorderedList" mnemonicParsing="false" text="o." />
                     </items>
                 </ToolBar>
                 <ToggleButton mnemonicParsing="false" text="E" GridPane.rowIndex="2" />

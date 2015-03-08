@@ -2,39 +2,47 @@ package minerva;
 
 import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
-import com.sun.webkit.dom.KeyboardEventImpl;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.web.HTMLEditor;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebView;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    // FXML Panes
     @FXML
-    private ToggleButton boldToggleButton;
+    private GridPane footer;
     @FXML
-    private ToggleButton italicToggleButton;
-    @FXML
-    private ToggleButton underlineToggleButton;
-    @FXML
-    private ToggleButton strikeToggleButton;
-    @FXML
-    private ToggleButton listToggleButton;
-    @FXML
-    private ToggleButton bulletToggleButton;
+    private GridPane rightPane;
 
+    // FXML StyleToolbar Declaration
+    @FXML
+    private ToolBar styleToolBar;
+    @FXML
+    private ToggleButton bold;
+    @FXML
+    private ToggleButton italic;
+    @FXML
+    private ToggleButton underline;
+    @FXML
+    private ToggleButton strikethrough;
+    @FXML
+    private ToggleButton insertOrderedList;
+    @FXML
+    private ToggleButton insertUnorderedList;
+
+    // FXML Rest of the Program Declaration
     @FXML
     private ListView noteListScrollPane;
     @FXML
@@ -46,23 +54,26 @@ public class Controller implements Initializable {
     @FXML
     private Button addNoteButton, deleteNoteButton;
 
+    // Other variables' Declaration
     private static Note currentNote;
     private ObservableList<String> noteListScrollPaneItems;
     private WebPage webPage;
-    //TODO
-    //Just for performance optimization : store opened notes in an ArrayList so you don't need to create Note objects again when the same
-    // note is clicked again. Scheduled for future releases...
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
+        // Panes
+        assert footer != null : "fx:id\"footer\" was not injected: check you FXML file 'minerva.fxml'.";
+        assert rightPane != null : "fx:id\"rightPane\" was not injected: check you FXML file 'minerva.fxml'.";
+
         // Style Buttons
-        assert boldToggleButton != null : "fx:id=\"boldToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert italicToggleButton != null : "fx:id=\"italicToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert underlineToggleButton != null : "fx:id=\"underlineToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert strikeToggleButton != null : "fx:id=\"strikeToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert listToggleButton != null : "fx:id=\"listToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert bulletToggleButton != null : "fx:id=\"bulletToggleButton\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert styleToolBar != null : "fx:id\"styleToolBar\" was not injected: check you FXML file 'minerva.fxml'.";
+        assert bold != null : "fx:id=\"bold\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert italic != null : "fx:id=\"italic\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert underline != null : "fx:id=\"underline\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert strikethrough != null : "fx:id=\"strikethrough\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert insertOrderedList != null : "fx:id=\"insertOrderedList\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert insertUnorderedList != null : "fx:id=\"insertUnorderedList\" was not injected: check your FXML file 'minerva.fxml'.";
 
         // Editor and Pane
         assert noteListScrollPane != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
@@ -75,20 +86,40 @@ public class Controller implements Initializable {
 
         // initialize your logic here: all @FXML variables will have been injected
 
+        // initializing webPage
         webPage = Accessor.getPageFor(editor.getEngine());
-        /*** *** *** *** *** BEGINNING OF Button Listeners *** *** *** *** ***/
 
-        boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND));
-        italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND));
-        underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND));
-        strikeToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND));
-        listToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND));
-        bulletToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND));
+        /*** *** *** *** *** START OF Button Listeners *** *** *** *** ***/
+        // Button Listeners for Style
+        bold.setOnAction(event -> addStyle( bold.getId()));
+        italic.setOnAction(event -> addStyle( italic.getId()));
+        underline.setOnAction(event -> addStyle( underline.getId()));
+        strikethrough.setOnAction(event -> addStyle( strikethrough.getId()));
+        insertOrderedList.setOnAction(event -> addStyle( insertOrderedList.getId()));
+        insertUnorderedList.setOnAction(event -> addStyle( insertUnorderedList.getId()));
 
+        // Listener for  Style buttons
+        editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
+        editor.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> buttonFeedback());
+        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> buttonFeedback());
+        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> buttonFeedback());
+
+        // Button Listeners for Bottom Toolbar
         trashButton.setOnAction(event -> {
             System.out.println(trashButton);
         });
 
+        addNoteButton.setOnAction(event -> {
+            noteListScrollPaneItems.add(Defaults.newNoteName);
+            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
+        });
+
+        deleteNoteButton.setOnAction(event -> {
+            noteListScrollPaneItems.remove(Defaults.newNoteName);
+            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
+        });
+
+        // Listener for Note list selection
         noteListScrollPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
         {
             @Override
@@ -104,68 +135,55 @@ public class Controller implements Initializable {
                     currentNote = new Note(Defaults.newNoteName, Defaults.newNotePage);
                 }
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
-                //webPage.load(webPage.getMainFrame(), currentNote.getHtmlNote(), "text/html");
                 noteNameTextField.setText(newValue);
             }
+
         });
-
-        addNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.add(Defaults.newNoteName);
-            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
-        });
-
-        deleteNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.remove(Defaults.newNoteName);
-            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
-        });
-
-        // button state checker part
-        editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
-        editor.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> buttonFeedback());
-        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> buttonFeedback());
-        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> buttonFeedback());
-
-
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
+
+        // Start up of program
         noteListScrollPaneItems = FXCollections.observableArrayList(DataManager.getNoteNames());
         noteListScrollPane.setItems(noteListScrollPaneItems);
         noteListScrollPane.getSelectionModel().select(0);
+
+        // Make transparent everything beside the BorderPane
+        editor.setBlendMode(BlendMode.MULTIPLY);
+        footer.setBlendMode(BlendMode.MULTIPLY);
+        noteNameTextField.setBlendMode(BlendMode.MULTIPLY);
+        rightPane.setBlendMode(BlendMode.MULTIPLY);
+        noteListScrollPane.setBlendMode(BlendMode.MULTIPLY);
+
     }
 
+    // Saving on exit
     public static void onExit()
     {
         if(currentNote != null)
             DataManager.saveNote(currentNote);
     }
 
+    // Returns the string version of the page
     private String getWebViewContent()
     {
         return (String)editor.getEngine().executeScript("document.documentElement.outerHTML");
     }
 
+    // Style method for all things need styling
     private void addStyle( String command){
         webPage.executeCommand( command, "false");
         editor.requestFocus();
         buttonFeedback();
     }
 
+    // Button Feedback is aimed to show buttons natural :d
     private void buttonFeedback(){
-        boldToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.BOLD_COMMAND));
-        boldToggleButton.setSelected(webPage.queryCommandState(Defaults.BOLD_COMMAND));
-
-        italicToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.ITALIC_COMMAND));
-        italicToggleButton.setSelected(webPage.queryCommandState(Defaults.ITALIC_COMMAND));
-
-        underlineToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.UNDERLINE_COMMAND));
-        underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));
-
-        strikeToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.STRIKETHROUGH_COMMAND));
-        strikeToggleButton.setSelected(webPage.queryCommandState(Defaults.STRIKETHROUGH_COMMAND));
-
-        listToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.NUMBERS_COMMAND));
-        listToggleButton.setSelected(webPage.queryCommandState(Defaults.NUMBERS_COMMAND));
-
-        bulletToggleButton.setDisable(!webPage.queryCommandEnabled(Defaults.BULLETS_COMMAND));
-        bulletToggleButton.setSelected(webPage.queryCommandState(Defaults.BULLETS_COMMAND));
+        // For Style Toolbar
+        ToggleButton button;
+        for( Node node : styleToolBar.getItems()){
+            button = (ToggleButton)node;
+            button.setDisable(!webPage.queryCommandEnabled( button.getId()));
+            button.setSelected(webPage.queryCommandState( button.getId()));
+        }
     }
+
 }

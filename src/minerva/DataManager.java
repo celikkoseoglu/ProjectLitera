@@ -97,6 +97,8 @@ public class DataManager
     public static String[] getNoteNames()
     {
         String[] listOfFileNames;
+        int newNotePlace = -1;
+
         if ( applicationDirectoryExists() )
         {
             File folder = new File(OS_FILE_PATH);
@@ -113,8 +115,10 @@ public class DataManager
             for ( int i = 0; i < listOfFiles.length; i++ ) {
                 listOfFileNames[i] = listOfFiles[i].getName();
                 if( listOfFileNames[i].indexOf( Defaults.newNoteName) != -1)
-                    Defaults.newNoteCount++;
+                    newNotePlace = i;
             }
+            if( newNotePlace != -1)
+                Defaults.newNoteCount = Integer.parseInt( listOfFileNames[newNotePlace].substring(9)) + 1;
 
             return listOfFileNames;
         }

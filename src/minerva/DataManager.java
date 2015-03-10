@@ -110,8 +110,11 @@ public class DataManager
             File[] listOfFiles = folder.listFiles(textFilter);
             listOfFileNames = new String[listOfFiles.length];
 
-            for ( int i = 0; i < listOfFiles.length; i++ )
+            for ( int i = 0; i < listOfFiles.length; i++ ) {
                 listOfFileNames[i] = listOfFiles[i].getName();
+                if( listOfFileNames[i].indexOf( Defaults.newNoteName) != -1)
+                    Defaults.newNoteCount++;
+            }
 
             return listOfFileNames;
         }

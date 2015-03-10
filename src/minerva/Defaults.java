@@ -11,11 +11,12 @@ public class Defaults
         "</head><body><h1>Welcome to Project Litera</h1> <h2>Team Minerva &amp; Project Litera</h2>" +
         "<p>Caner, Celik, Mert, Orhun, Yigit</p> <h2>Initial version</h2><p>Herkes çalışıyor mu?</br>hadi beyler daha yapılcak çok şey var...<p></body></html>";
 
-    public final static String newNoteName = "New Note";
+    public static String newNoteName = "New Note";
+    public static int newNoteCount = 0;
 
     public final static String newNotePage = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head contenteditable=true><meta charset=\"utf-8\">" +
-            "<title>Celik Koseoglu</title></head><body contenteditable=\"true\"></body></html>";
+            "<title>Litera</title></head><body contenteditable=\"true\"></body></html>";
 
     // HTML Style Commands
     public static final String CUT_COMMAND = "cut";
@@ -69,4 +70,8 @@ public class Defaults
     public static final String INSERT_NEW_LINE_COMMAND = "insertnewline";
     public static final String INSERT_TAB_COMMAND = "inserttab";
     // end of HTML style commands
+
+    public static String newNoteGenerator(){
+         return newNoteName = "New Note " + newNoteCount++;
+    }
 }

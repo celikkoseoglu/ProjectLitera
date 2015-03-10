@@ -110,7 +110,7 @@ public class Controller implements Initializable {
         });
 
         addNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.add(Defaults.newNoteName);
+            noteListScrollPaneItems.add(Defaults.newNoteGenerator());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
         });
 
@@ -132,7 +132,7 @@ public class Controller implements Initializable {
                 }
 
                 if ((currentNote = DataManager.getNote(newValue)) == null) {
-                    currentNote = new Note(Defaults.newNoteName, Defaults.newNotePage);
+                    currentNote = new Note(Defaults.newNoteName, Defaults.newNoteName);
                 }
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
@@ -147,11 +147,11 @@ public class Controller implements Initializable {
         noteListScrollPane.getSelectionModel().select(0);
 
         // Make transparent everything beside the BorderPane
-        editor.setBlendMode(BlendMode.MULTIPLY);
+        /*editor.setBlendMode(BlendMode.MULTIPLY);
         footer.setBlendMode(BlendMode.MULTIPLY);
         noteNameTextField.setBlendMode(BlendMode.MULTIPLY);
         rightPane.setBlendMode(BlendMode.MULTIPLY);
-        noteListScrollPane.setBlendMode(BlendMode.MULTIPLY);
+        noteListScrollPane.setBlendMode(BlendMode.MULTIPLY);*/
 
     }
 
@@ -178,12 +178,6 @@ public class Controller implements Initializable {
     // Button Feedback is aimed to show buttons natural :d
     private void buttonFeedback(){
         // For Style Toolbar
-        ToggleButton button;
-        for( Node node : styleToolBar.getItems()){
-            button = (ToggleButton)node;
-            button.setDisable(!webPage.queryCommandEnabled( button.getId()));
-            button.setSelected(webPage.queryCommandState( button.getId()));
-        }
     }
 
 }

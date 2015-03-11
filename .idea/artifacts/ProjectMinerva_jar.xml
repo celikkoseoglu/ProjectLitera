@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="ProjectMinerva:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectMinerva_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ProjectMinerva.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$USER_HOME$/Desktop/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="ProjectMinerva" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,12 +1,13 @@
-CS102 Minerva - Project Litera
+#Minerva!
 
-#Beastmode
-Arkadaşlar bu hafta baya bir ilerleyelim çünkü geçen hafta gördüğünüz gibi bundan sonra böyle. Sıkışık gidicek.
+-Caner UI Report HTML Button is Action Trigger for Java CheckBox DPI Scaling GG
 
-Orhun, Mert - Merak etmeyin, java ile de MP3 kaydedilir.. ama nasıl?..
+-Mert HTML Button is Action Trigger for Java MediaView Video Kaydı (Caner'de Documentation var.)
 
-Caner - JavaFX CSS, ListView'daki her item için özel renkler. Aynen şu - http://doc.qt.digia.com/qq/qq08-fancylistbox.png
+-Orhun Ses Kaydı New Note isim Update from TextField Interface
 
-Çelik - BEAST MODE - "New Note" bug. Not silme sorunları. Encryption. JavaFX CSS. UI Builder işleri...
+-Yiğit UI Presentation ServerData Class CheckBox DPI Scaling GG ListCell OverRide (Caner olarak sulanabilirim, Ortak Girebilirim)
 
-Yiğit - SQL Server Upload
+-Über Meinsch Merge All Style Buttons Font Menu Encryption implementation ListBox font size (CSS var bi bakın) New Note (Ben yazdıydı arasından birini seç bugını fixle) Data Manager Big Update
+
+Buluşma yaptık!

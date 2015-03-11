@@ -1,5 +1,0 @@
-<root>
-    <item name='javafx.collections.ObservableList'>
-        <annotation name='java.lang.annotation.Deprecated'/>
-    </item>
-</root>

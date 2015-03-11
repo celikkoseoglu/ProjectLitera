@@ -16,8 +16,8 @@ import java.io.*;
  * changelog:
  * 11/04/2015
  * changed the data structure a little bit. notes go to a directory called Notes now.
- * fixed the "New Note" bug which prevented you from creating new notes if you clicked the New Note button repeatedly
- * added the ability to delete notes (trash feature coming in the next version, just use the '-' button for now)
+ * LIE : fixed the "New Note" bug which prevented you from creating new notes if you clicked the New Note button repeatedly
+ * Meh: added the ability to delete notes (trash feature coming in the next version, just use the '-' button for now)
  */
 
 public class LocalDataManager

@@ -5,13 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import litera.Data.LocalDataManager;
 
-import java.io.File;
-
-public class Main extends Application {
+public class Main extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception
+    {
         Parent root = FXMLLoader.load(getClass().getResource("minerva.fxml"));
         primaryStage.setTitle("Project Litera");
         primaryStage.setScene(new Scene(root, 920, 700));
@@ -26,8 +27,9 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) {
-        DataManager.setOS_FILE_PATH();
+    public static void main(String[] args)
+    {
+        LocalDataManager.setOS_FILE_PATH();
         launch(args);
     }
 }

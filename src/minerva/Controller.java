@@ -99,7 +99,7 @@ public class Controller implements Initializable
         });
 
         addNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.add(Defaults.newNoteName);
+            noteListScrollPaneItems.add(LocalDataManager.getNewNoteName());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
         });
 

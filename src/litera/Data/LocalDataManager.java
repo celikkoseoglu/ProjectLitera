@@ -4,6 +4,7 @@ import litera.Defaults.Defaults;
 import minerva.Note;
 
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * @description the Local Data Manager class for Litera. Manages local data & encryption
@@ -172,6 +173,24 @@ public class LocalDataManager
             System.out.println("Cannot find the note file. Make sure the file is in the correct place. Returning null");
             return null;
         }
+    }
+
+    /**
+     * @description generates a new note name when the user clicks the addNoteButton. Checks if the note with the Default.NewNoteName
+     *              exists and appends (occurenceCount) to the end of the new note name if a note with the same name exists.
+     * @return new note name  -> Ex: New Note (4)
+     */
+    public static String getNewNoteName()
+    {
+        String newNoteName = Defaults.newNoteName;
+        String[] listOfNoteNames = getNoteNames();
+        int occurenceCount = 2;
+        while( Arrays.asList(listOfNoteNames).contains(newNoteName) )
+        {
+            newNoteName = Defaults.newNoteName + " (" + occurenceCount + ")";
+            occurenceCount++;
+        }
+        return newNoteName;
     }
 
     /**

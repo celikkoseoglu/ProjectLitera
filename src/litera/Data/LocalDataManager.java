@@ -91,14 +91,14 @@ public class LocalDataManager
         }
     }
 
-    /**
+    /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
      * @param n is the note to be deleted
      * @return true if deletion is successful
      * @description permanently deletes notes. this function will be used for the Trash in the future..
      */
-    public static boolean deleteNote(Note n)
+    public static boolean deleteNote(String[] selectedNotes)
     {
-        File f = new File(OS_NOTES_FILE_PATH + "/" + n.getNoteName());
+        File f = new File(OS_NOTES_FILE_PATH + "/");
         return f.delete() ? true : false;
     }
 
@@ -157,8 +157,7 @@ public class LocalDataManager
 
         catch ( Exception e )
         {
-            System.out.println("Cannot find the note file. Make sure the file is in the correct place. Returning null");
-            return null;
+            throw new RuntimeException("Something is wrong with Litera's note files.");
         }
     }
 
@@ -184,6 +183,21 @@ public class LocalDataManager
         saveNote(new Note(newNoteName, Defaults.newNotePage));
 
         return newNoteName;
+    }
+
+    /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
+     * @description moves the selected notes to trash when the |-| button is clicked
+     * @param selectedNotes
+     * @return
+     */
+    public static boolean moveToTrash(String[] selectedNotes)
+    {
+        File sourceDir, targetDir;
+        for (String s : selectedNotes)
+        {
+            //to be implemented soon
+        }
+        return true;
     }
 
     /**

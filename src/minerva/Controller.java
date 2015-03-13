@@ -126,8 +126,7 @@ public class Controller implements Initializable
                 /* Gets the selected note from the notes directory
                  * If LocalDataManager can't find the file, returns null. Either this is the first run or the user messed up with Litera directory.
                  * While evaluating this statement, the note gets loaded into the currentNote object.*/
-                if ( ( currentNote = LocalDataManager.getNote(newValue) ) == null )
-                    throw new RuntimeException("Something is wrong with Litera's note files.");
+                currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
             }

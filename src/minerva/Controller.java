@@ -51,6 +51,7 @@ public class Controller implements Initializable
     private static Note currentNote;
     private ObservableList<String> noteListScrollPaneItems;
     private WebPage webPage;
+    private boolean isChanged;
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
@@ -78,6 +79,8 @@ public class Controller implements Initializable
         // initializing webPage
         webPage = Accessor.getPageFor(editor.getEngine());
 
+        isChanged = false;
+
         /*** *** *** *** *** START OF Button Listeners *** *** *** *** ***/
         // Button Listeners for Style
         boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND));
@@ -87,7 +90,7 @@ public class Controller implements Initializable
         insertOrderedListToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND));
         insertUnorderedListToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND));
 
-        // Listener for  Style buttons
+        // Listeners for Style buttons
         editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
         editor.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> buttonFeedback());
         editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> buttonFeedback());
@@ -99,7 +102,7 @@ public class Controller implements Initializable
         });
 
         addNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.add(LocalDataManager.getNewNoteName());
+            noteListScrollPaneItems.add(LocalDataManager.createNewNote());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
         });
 
@@ -114,34 +117,32 @@ public class Controller implements Initializable
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
             {
-                if ( currentNote != null )
+                if ( isChanged ) //there is no need for a save operation if you didn't change anything
                 {
                     currentNote.setHtmlNote(getWebViewContent());
                     LocalDataManager.saveNote(currentNote);
+                    isChanged = false; //checked via webPage listeners
                 }
-
+                /* Gets the selected note from the notes directory
+                 * If LocalDataManager can't find the file, returns null. Either this is the first run or the user messed up with Litera directory.
+                 * While evaluating this statement, the note gets loaded into the currentNote object.*/
                 if ( ( currentNote = LocalDataManager.getNote(newValue) ) == null )
-                {
-                    currentNote = new Note(Defaults.newNoteName, Defaults.newNotePage);
-                }
+                    throw new RuntimeException("Something is wrong with Litera's note files.");
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
             }
-
         });
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
 
         // Start up of program
-        noteListScrollPaneItems = FXCollections.observableArrayList(LocalDataManager.getNoteNames());
-        noteListScrollPane.setItems(noteListScrollPaneItems);
-        noteListScrollPane.getSelectionModel().select(0);
+        populateNoteListbox();
+        loadLastNote();
     }
 
     // Saving on exit
     public static void onExit()
     {
-        if ( currentNote != null )
-            LocalDataManager.saveNote(currentNote);
+        LocalDataManager.saveNote(currentNote);
     }
 
     // Returns the string version of the page
@@ -158,9 +159,34 @@ public class Controller implements Initializable
         buttonFeedback();
     }
 
+    private boolean populateNoteListbox()
+    {
+        String[] noteList = LocalDataManager.getNoteNames();
+        if (noteList == null)
+        {
+            currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
+            LocalDataManager.saveNote(currentNote);
+            noteList = LocalDataManager.getNoteNames();
+        }
+        noteListScrollPaneItems = FXCollections.observableArrayList(noteList);
+        noteListScrollPane.setItems(noteListScrollPaneItems);
+        return true;
+    }
+
+    /**
+     * @description the aim is to open the last note the user edited. I know it doesn't work as expected right now. (Celik)
+     * @return
+     */
+    private boolean loadLastNote()
+    {
+        noteListScrollPane.getSelectionModel().select(0);
+        return true;
+    }
+
     // Button Feedback is aimed to show buttons natural :d
     private void buttonFeedback()
     {
+        isChanged = true;
         boldToggleButton.setSelected(webPage.queryCommandState(Defaults.BOLD_COMMAND));
         italicToggleButton.setSelected(webPage.queryCommandState(Defaults.ITALIC_COMMAND));
         underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));

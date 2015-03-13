@@ -1,6 +1,7 @@
 package litera.Defaults;
 
 import javafx.scene.paint.Color;
+import minerva.Note;
 
 public class Defaults
 {
@@ -24,6 +25,7 @@ public class Defaults
             "-Über Meinsch Merge All Style Buttons Font Menu Encryption implementation ListBox font size (CSS var bi bakın) New Note (Ben yazdıydı arasından birini seç bugını fixle) Data Manager Big Update\n" +
             "\n" +
             "Buluşma yaptıq!<p></body></html>";
+    public final static String[] welcomeList = {"Welcome!"};
 
     public final static String newNoteName = "New Note";
 

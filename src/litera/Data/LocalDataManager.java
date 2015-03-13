@@ -14,10 +14,13 @@ import java.util.Arrays;
  */
 
 /*
- * changelog:
+ * change log:
+ * 13/04/2015
+ * fixed the "New Note" bug which prevented you from creating new notes if you clicked the New Note button repeatedly
+ * fixed the bug which the app was unable to save any new note. this was caused by the major change in data structure, my mistake..
+ *
  * 11/04/2015
  * changed the data structure a little bit. notes go to a directory called Notes now.
- * LIE : fixed the "New Note" bug which prevented you from creating new notes if you clicked the New Note button repeatedly
  * Meh: added the ability to delete notes (trash feature coming in the next version, just use the '-' button for now)
  */
 
@@ -70,14 +73,13 @@ public class LocalDataManager
     {
         try
         {
-            applicationDirectoryExists(); //make sure the application folder is there before trying to write the file
             noteDirectoryExists(n.getNoteName());
             FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
             fw.write(n.getHtmlNote());
             fw.close();
             return true;
         }
-        catch ( NullPointerException nullPtrException)
+        catch ( NullPointerException nullPtrException )
         {
             System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
             return false;
@@ -101,7 +103,7 @@ public class LocalDataManager
     }
 
     /**
-     * @return the String[] which contains notes or the Welcome! note
+     * @return the String[] which contains notes or if the note directory doesn't even exist, returns null
      * @description gets note names as a String[]. Checks if the application directory exists before trying to retrieve note names
      */
     public static String[] getNoteNames()
@@ -125,13 +127,7 @@ public class LocalDataManager
 
             return listOfFileNames;
         }
-        else
-        {
-            firstRun = true;
-            listOfFileNames = new String[1];
-            listOfFileNames[0] = "Welcome!";
-            return listOfFileNames;
-        }
+        return null;
     }
 
     /**
@@ -143,29 +139,20 @@ public class LocalDataManager
     {
         try
         {
-            if ( !firstRun )
+            FileReader fr = new FileReader(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html");
+            BufferedReader textReader = new BufferedReader(fr);
+            StringBuffer strBuffer = new StringBuffer();
+            String tempString = textReader.readLine();
+
+            while ( tempString != null )
             {
-                FileReader fr = new FileReader(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html");
-                BufferedReader textReader = new BufferedReader(fr);
-                StringBuffer strBuffer = new StringBuffer();
-                String tempString = textReader.readLine();
-
-                while ( tempString != null )
-                {
-                    strBuffer.append(tempString);
-                    tempString = textReader.readLine();
-                }
-
-                textReader.close();
-                fr.close();
-                return new Note(noteName, strBuffer.toString());
+                strBuffer.append(tempString);
+                tempString = textReader.readLine();
             }
 
-            else
-            {
-                firstRun = false;
-                return new Note(noteName, Defaults.welcomePage);
-            }
+            textReader.close();
+            fr.close();
+            return new Note(noteName, strBuffer.toString());
         }
 
         catch ( Exception e )
@@ -176,20 +163,26 @@ public class LocalDataManager
     }
 
     /**
-     * @description generates a new note name when the user clicks the addNoteButton. Checks if the note with the Default.NewNoteName
-     *              exists and appends (occurenceCount) to the end of the new note name if a note with the same name exists.
      * @return new note name  -> Ex: New Note (4)
+     * @description generates a new note name when the user clicks the addNoteButton. Checks if the note with the Default.NewNoteName
+     * exists and appends (occurenceCount) to the end of the new note name if a note with the same name exists.
      */
-    public static String getNewNoteName()
+    public static String createNewNote()
     {
         String newNoteName = Defaults.newNoteName;
         String[] listOfNoteNames = getNoteNames();
-        int occurenceCount = 2;
-        while( Arrays.asList(listOfNoteNames).contains(newNoteName) )
+        if (listOfNoteNames != null)
         {
-            newNoteName = Defaults.newNoteName + " (" + occurenceCount + ")";
-            occurenceCount++;
+            int occurenceCount = 2;
+            while ( Arrays.asList(listOfNoteNames).contains(newNoteName) )
+            {
+                newNoteName = Defaults.newNoteName + " (" + occurenceCount + ")";
+                occurenceCount++;
+            }
         }
+
+        saveNote(new Note(newNoteName, Defaults.newNotePage));
+
         return newNoteName;
     }
 
@@ -206,7 +199,7 @@ public class LocalDataManager
         {
             try
             {
-                new File(OS_FILE_PATH).mkdir();
+                new File(OS_FILE_PATH).mkdirs();
             }
             catch ( SecurityException sException )
             {
@@ -227,14 +220,14 @@ public class LocalDataManager
      */
     private static boolean noteDirectoryExists(String noteName)
     {
-        File f = new File(OS_NOTES_FILE_PATH + noteName);
+        File f = new File(OS_NOTES_FILE_PATH + noteName + "/");
         if ( f.exists() && f.isDirectory() )
             return true;
         else
         {
             try
             {
-                new File(OS_NOTES_FILE_PATH + noteName).mkdir();
+                new File(OS_NOTES_FILE_PATH + noteName + "/").mkdirs();
             }
             catch ( SecurityException sException )
             {

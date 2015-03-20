@@ -75,7 +75,7 @@ public class LocalDataManager
         {
             noteDirectoryExists(n.getNoteName());
             FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
-            fw.write(n.getHtmlNote());
+            fw.write(EncryptionManager.encryptString(n.getHtmlNote()));
             fw.close();
             return true;
         }
@@ -92,7 +92,6 @@ public class LocalDataManager
     }
 
     /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
-     * @param n is the note to be deleted
      * @return true if deletion is successful
      * @description permanently deletes notes. this function will be used for the Trash in the future..
      */
@@ -152,7 +151,7 @@ public class LocalDataManager
 
             textReader.close();
             fr.close();
-            return new Note(noteName, strBuffer.toString());
+            return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()));
         }
 
         catch ( Exception e )

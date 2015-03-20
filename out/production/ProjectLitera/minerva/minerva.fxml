@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
@@ -19,7 +20,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: #99B4D1;">
@@ -47,22 +48,23 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="39.0" percentWidth="0.0" prefWidth="39.0" />
             </columnConstraints>
             <rowConstraints>
+            <RowConstraints maxHeight="58.0" minHeight="58.0" prefHeight="58.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="39.0">
+                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="39.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="1">
                     <items>
-                        <ToggleButton fx:id="boldToggleButton" mnemonicParsing="false" text="B" />
-                        <ToggleButton fx:id="italicToggleButton" mnemonicParsing="false" text="I" />
-                        <ToggleButton fx:id="underlineToggleButton" mnemonicParsing="false" text="U" />
-                        <ToggleButton fx:id="strikethroughToggleButton" mnemonicParsing="false" text="S" />
-                  <ToggleButton fx:id="insertOrderedListToggleButton" mnemonicParsing="false" text="L" />
-                  <ToggleButton fx:id="insertUnorderedListToggleButton" mnemonicParsing="false" text="Li" />
+                        <ToggleButton fx:id="boldToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="B" />
+                        <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="I" />
+                        <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
+                        <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="S" />
+                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="L" />
+                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="li" />
                     </items>
                 </ToolBar>
-                <ToggleButton mnemonicParsing="false" text="E" GridPane.rowIndex="2" />
+                <ToggleButton mnemonicParsing="false" text="E" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
             </children>
         </GridPane>
     </right>
@@ -73,17 +75,25 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <WebView fx:id="editor" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                <TextField fx:id="noteNameTextField" style="-fx-background-color: transparent;">
+                <TextField fx:id="noteNameTextField" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: transparent;">
                     <font>
                         <Font size="26.0" />
                     </font></TextField>
-            <Separator maxHeight="81.0" minHeight="81.0" prefHeight="81.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <Separator maxHeight="8.0" minHeight="8.0" prefHeight="8.0" prefWidth="200.0" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </center>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+      </GridPane>
+   </top>
 </BorderPane>

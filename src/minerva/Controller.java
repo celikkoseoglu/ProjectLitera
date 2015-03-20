@@ -1,5 +1,6 @@
 package minerva;
 
+import com.sun.javafx.scene.web.skin.HTMLEditorSkin;
 import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
 import javafx.beans.value.ChangeListener;
@@ -14,6 +15,7 @@ import javafx.scene.web.WebView;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,7 +52,7 @@ public class Controller implements Initializable
     // Other variables' Declaration
     private static Note currentNote;
     private ObservableList<String> noteListScrollPaneItems;
-    private WebPage webPage;
+    private static WebPage webPage;
     private boolean isChanged;
 
     @Override // This method is called by the FXMLLoader when initialization is complete
@@ -67,7 +69,7 @@ public class Controller implements Initializable
 
         // Editor and Pane
         assert noteListScrollPane != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert editor != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
+        //assert editor != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
 
         // Add delete pane
         assert noteNameTextField != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
@@ -78,7 +80,6 @@ public class Controller implements Initializable
 
         // initializing webPage
         webPage = Accessor.getPageFor(editor.getEngine());
-
         isChanged = false;
 
         /*** *** *** *** *** START OF Button Listeners *** *** *** *** ***/
@@ -141,13 +142,14 @@ public class Controller implements Initializable
     // Saving on exit
     public static void onExit()
     {
+        currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
         LocalDataManager.saveNote(currentNote);
     }
 
     // Returns the string version of the page
     private String getWebViewContent()
     {
-        return (String) editor.getEngine().executeScript("document.documentElement.outerHTML");
+        return webPage.getHtml(webPage.getMainFrame()); //old method: (String)editor.getEngine().executeScript("document.documentElement.outerHTML");
     }
 
     // Style method for all things need styling

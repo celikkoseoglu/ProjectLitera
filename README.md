@@ -8,6 +8,6 @@
 
 -Yiğit UI Presentation ServerData Class CheckBox DPI Scaling GG ListCell OverRide (Caner olarak sulanabilirim, Ortak Girebilirim)
 
--Über Meinsch Merge All Style Buttons Font Menu Encryption implementation ListBox font size (CSS var bi bakın) New Note (Ben yazdıydı arasından birini seç bugını fixle) Data Manager Big Update
+-Çelik Font Menu, ListBox font size (CSS var bi bakın)
 
 Buluşma yaptık!

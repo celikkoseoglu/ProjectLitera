@@ -36,7 +36,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Options" />
+                  <Button fx:id="optionsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Options" />
                     </items>
                 </ToolBar>
                 <Label alignment="CENTER_RIGHT" text="                                   Project Litera Confidential" GridPane.columnIndex="3" />

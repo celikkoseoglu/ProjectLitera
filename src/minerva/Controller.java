@@ -7,11 +7,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 
@@ -48,6 +55,8 @@ public class Controller implements Initializable
     private Button trashButton;
     @FXML
     private Button addNoteButton, deleteNoteButton;
+    @FXML
+    private Button optionsButton;
 
     // Other variables' Declaration
     private static Note currentNote;
@@ -75,6 +84,7 @@ public class Controller implements Initializable
         assert noteNameTextField != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
         assert trashButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
         assert deleteNoteButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert optionsButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
 
         // initialize your logic here: all @FXML variables will have been injected
 
@@ -100,6 +110,22 @@ public class Controller implements Initializable
         // Button Listeners for Bottom Toolbar
         trashButton.setOnAction(event -> {
             System.out.println("trashButton clicked");
+        });
+
+        optionsButton.setOnAction(event -> {
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Options");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception ex )
+            {
+
+            }
         });
 
         addNoteButton.setOnAction(event -> {

@@ -61,8 +61,8 @@
                         <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="I" />
                         <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
                         <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="S" />
-                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="L" />
-                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="li" />
+                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
+                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="•" />
                     </items>
                 </ToolBar>
                 <ToggleButton mnemonicParsing="false" text="E" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />

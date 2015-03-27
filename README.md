@@ -8,6 +8,4 @@
 
 -Yiğit UI Presentation ServerData Class CheckBox DPI Scaling GG ListCell OverRide (Caner olarak sulanabilirim, Ortak Girebilirim)
 
--Çelik Font Menu, ListBox font size (CSS var bi bakın), color palette integration
-
-Buluşma yaptık!
+-Çelik - raad. pazartesiye kadar.

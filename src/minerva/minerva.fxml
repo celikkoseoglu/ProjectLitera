@@ -9,7 +9,7 @@
 
 <BorderPane prefHeight="700.0" prefWidth="920.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
     <left>
-        <ListView fx:id="noteListScrollPane" prefWidth="180.0" style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER_LEFT" />
+        <ListView fx:id="noteListScrollPane" prefWidth="180.0" style="-fx-background-color: #99B4D1;" stylesheets="@../../style/listView.css" BorderPane.alignment="CENTER_LEFT" />
     </left>
     <bottom>
         <GridPane style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER">
@@ -17,7 +17,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="182.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="212.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="240.0" prefWidth="240.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -39,7 +39,7 @@
                   <Button fx:id="optionsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Options" />
                     </items>
                 </ToolBar>
-                <Label alignment="CENTER_RIGHT" text="                                   Project Litera Confidential" GridPane.columnIndex="3" />
+                <Label alignment="CENTER_RIGHT" text="Project Litera Confidential. Alpha Build" GridPane.columnIndex="3" />
             </children>
         </GridPane>
     </bottom>
@@ -50,19 +50,20 @@
             </columnConstraints>
             <rowConstraints>
             <RowConstraints maxHeight="58.0" minHeight="58.0" prefHeight="58.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="354.92535400390625" minHeight="10.0" prefHeight="248.47793579101562" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="298.8440399169922" minHeight="10.0" prefHeight="267.5220642089844" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="39.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="1">
+                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="39.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="1">
                     <items>
                         <ToggleButton fx:id="boldToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="B" />
                         <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="I" />
                         <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
                         <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="S" />
-                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="L" />
-                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="li" />
+                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
+                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="•" />
+                  <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
                     </items>
                 </ToolBar>
                 <ToggleButton mnemonicParsing="false" text="E" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />

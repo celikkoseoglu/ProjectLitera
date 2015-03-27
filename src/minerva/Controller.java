@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ import litera.Defaults.Defaults;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -57,6 +59,8 @@ public class Controller implements Initializable
     private Button addNoteButton, deleteNoteButton;
     @FXML
     private Button optionsButton;
+    @FXML
+    private ColorPicker foregroundColorPicker;
 
     // Other variables' Declaration
     private static Note currentNote;
@@ -128,6 +132,14 @@ public class Controller implements Initializable
             }
         });
 
+        foregroundColorPicker.setOnAction(ev1 -> {
+            Color newValue = foregroundColorPicker.getValue();
+            if (newValue != null) {
+                addStyle(Defaults.FOREGROUND_COLOR_COMMAND, colorValueToHex(newValue));
+                foregroundColorPicker.hide();
+            }
+        });
+
         addNoteButton.setOnAction(event -> {
             noteListScrollPaneItems.add(LocalDataManager.createNewNote());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
@@ -186,6 +198,13 @@ public class Controller implements Initializable
         buttonFeedback();
     }
 
+    private void addStyle(String command, String color)
+    {
+        webPage.executeCommand(command, color);
+        editor.requestFocus();
+        buttonFeedback();
+    }
+
     private boolean populateNoteListbox()
     {
         String[] noteList = LocalDataManager.getNoteNames();
@@ -220,5 +239,12 @@ public class Controller implements Initializable
         strikethroughToggleButton.setSelected(webPage.queryCommandState(Defaults.STRIKETHROUGH_COMMAND));
         insertOrderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.NUMBERS_COMMAND));
         insertUnorderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.BULLETS_COMMAND));
+    }
+
+    private static String colorValueToHex(Color c) {
+        return String.format((Locale)null, "#%02x%02x%02x",
+                Math.round(c.getRed() * 255),
+                Math.round(c.getGreen() * 255),
+                Math.round(c.getBlue() * 255));
     }
 }

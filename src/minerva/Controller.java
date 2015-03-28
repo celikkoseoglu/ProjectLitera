@@ -45,6 +45,12 @@ public class Controller implements Initializable
     private ToggleButton insertOrderedListToggleButton;
     @FXML
     private ToggleButton insertUnorderedListToggleButton;
+    @FXML
+    private Button audioAddButton;
+    @FXML
+    private Button videoAddButton;
+    @FXML
+    private Button imgAddButton;
 
     // FXML Rest of the Program Declaration
     @FXML
@@ -123,6 +129,54 @@ public class Controller implements Initializable
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Options");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception ex )
+            {
+
+            }
+        });
+
+        audioAddButton.setOnAction( event ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("audio.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Audio");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception ex )
+            {
+
+            }
+        });
+
+        videoAddButton.setOnAction( event ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Video");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception ex )
+            {
+
+            }
+        });
+
+        imgAddButton.setOnAction( event ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Picture");
                 stage.setScene(new Scene(root));
                 stage.show();
             }

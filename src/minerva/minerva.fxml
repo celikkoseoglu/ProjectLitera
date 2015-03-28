@@ -50,9 +50,9 @@
             </columnConstraints>
             <rowConstraints>
             <RowConstraints maxHeight="58.0" minHeight="58.0" prefHeight="58.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="354.92535400390625" minHeight="10.0" prefHeight="248.47793579101562" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="298.8440399169922" minHeight="10.0" prefHeight="267.5220642089844" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="461.0" minHeight="10.0" prefHeight="313.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="298.8440399169922" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="39.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="1">
@@ -61,15 +61,24 @@
                         <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="I" />
                         <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
                         <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="S" />
-                  <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
-                  <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="•" />
-<<<<<<< HEAD
-                  <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
-=======
->>>>>>> origin/master
+                        <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
+                        <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="•" />
+                        <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
+                        <Button fx:id="audioAddButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="A" />
+                        <Button fx:id="videoAddButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="V" />
+                        <Button fx:id="imgAddButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="P" />
                     </items>
                 </ToolBar>
-                <ToggleButton mnemonicParsing="false" text="E" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+            <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="3">
+              <items>
+                  <ImageView fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Sync.png" />
+                     </image>
+                  </ImageView>
+                      <ToggleButton mnemonicParsing="false" text="E" />
+              </items>
+            </ToolBar>
             </children>
         </GridPane>
     </right>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="40.0" maxWidth="119.0" minHeight="40.0" minWidth="119.0" prefHeight="40.0" prefWidth="119.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="119.0">
+        <items>
+            <Button mnemonicParsing="false" text="Choose" />
+            <Button mnemonicParsing="false" text="OK" />
+        </items>
+      </ToolBar>
+   </children>
+</Pane>

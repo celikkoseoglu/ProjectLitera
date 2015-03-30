@@ -7,12 +7,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="920.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
+<BorderPane fx:id="borderPane" prefHeight="700.0" prefWidth="920.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
     <left>
-        <ListView fx:id="noteListScrollPane" prefWidth="180.0" style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER_LEFT" />
+        <ListView fx:id="noteListScrollPane" prefWidth="180.0" stylesheets="@../../style/listView.css" BorderPane.alignment="CENTER_LEFT" />
     </left>
     <bottom>
-        <GridPane style="-fx-background-color: #99B4D1;" BorderPane.alignment="CENTER">
+        <GridPane style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="182.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="212.0" />
@@ -23,7 +23,7 @@
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: #99B4D1;">
+                <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: transparent;">
                     <items>
                         <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
                         <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />
@@ -66,10 +66,10 @@
                 <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="39.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="1">
+                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="39.0" style="-fx-background-color: transparent;" GridPane.rowIndex="1">
                     <items>
                         <ToggleButton fx:id="boldToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="B" />
-                        <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" style="-fx-font-style: italic;" text="I" />
+                        <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" style="-fx-font-style:italic;" text="I" />
                         <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
                         <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" style="-fx-strikethrough: true;" text="S" />
                         <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
@@ -80,7 +80,7 @@
                         <Button fx:id="addImageButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="P" />
                     </items>
                 </ToolBar>
-            <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: #99B4D1;" GridPane.rowIndex="3">
+            <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: transparent;" GridPane.rowIndex="3">
               <items>
                   <ImageView fitHeight="70.0" fitWidth="28.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -108,7 +108,18 @@
                 <TextField fx:id="noteNameTextField" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: transparent;">
                     <font>
                         <Font size="26.0" />
-                    </font></TextField>
+                    </font>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Choose NotePad Color">
+                           <graphic>
+                              <ColorPicker fx:id="notePadColorPicker" promptText="Choose NotePad Color" />
+                           </graphic>
+                        </MenuItem>
+                    </items>
+                  </ContextMenu>
+               </contextMenu></TextField>
             <Separator maxHeight="8.0" minHeight="8.0" prefHeight="8.0" prefWidth="200.0" GridPane.rowIndex="1" />
             </children>
         </GridPane>

@@ -2,7 +2,6 @@ package litera.Data;
 
 import litera.Defaults.Defaults;
 import minerva.Note;
-
 import java.io.*;
 import java.util.Arrays;
 
@@ -216,6 +215,27 @@ public class LocalDataManager
         saveNote(new Note(newNoteName, Defaults.newNotePage));
 
         return newNoteName;
+    }
+
+    public static File addAudio(File file, Note n) {
+        try
+        {
+            //pass note object instead of making current note public!!
+            //noteDirectoryExists(Controller.currentNote.getNoteName());
+            noteDirectoryExists(n.getNoteName());
+            // copy!
+            return file;
+        }
+        catch ( NullPointerException nullPtrException )
+        {
+            System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
+            return null;
+        }
+        catch ( Exception ioe )
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+            return null;
+        }
     }
 
     /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...

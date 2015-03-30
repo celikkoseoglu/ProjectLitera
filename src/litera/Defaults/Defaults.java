@@ -5,57 +5,10 @@ import minerva.Note;
 
 public class Defaults
 {
-    public final static String welcomePage = "<html lang=\"en\" contenteditable=\"true\">\n" +
-            "<head>\n" +
-            "\t<style>\n" +
-            "\tbody{\n" +
-            "\t\tfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;\n" +
-            "\t\tmargin: 0px;\n" +
-            "\t\tbackground-color: rgb(153 , 180, 209);\n" +
-            "\t}\n" +
-            "\th1{\n" +
-            "\t\ttext-align left;\n" +
-            "\t\tcolor: white;\n" +
-            "\t\tpadding: 0px 15px 0px;\n" +
-            "\t\tmargin: 0px;\n" +
-            "\t\tfont-size: 24;\n" +
-            "\t}\n" +
-            "\th2{\n" +
-            "\t\ttext-align: right;\n" +
-            "\t\tcolor: white;\n" +
-            "\t\tpadding: 0px 15px 0px;\n" +
-            "\t\tfont-weight: normal;\n" +
-            "\t}\n" +
-            "\tli,ul{\n" +
-            "\t\ttext-align: left;\n" +
-            "\t\tcolor: white;\n" +
-            "\t}\n" +
-            "\t</style>\n" +
-            "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\">\n" +
-            "\t<meta charset=\"utf-8\">\n" +
-            "\t<title>Litera</title>\n" +
-            "</head>\n" +
-            "<body>\n" +
-            "\t<h1>Project Litera</h1>\n" +
-            "\t<h2>Team Minerva</h2>\n" +
-            "\t<h1>Seems like you are running this application fro the first time.</h1>\n" +
-            "\t<ul>\n" +
-            "\t\t<li>This place is for you to take notes</li>\n" +
-            "\t\t<li>You can customize this window from the options menu</li>\n" +
-            "\t\t<li>Highlight some text and check out the buttons on the right to add style to your notes</li>\n" +
-            "\t\t<li>You can also encrypt specific notes for privacy by clicking the encrypt/decrypt button on the bottom right corner.</li>\n" +
-            "\t\t<li>You can also encrypt all your notes from the options menu by one click.</li>\n" +
-            "\t\t<li>You can also use sync functions from options by signing up.</li>\n" +
-            "\t\t<li>You can also add various multimedia\n" +
-            "\t\t\t<ul>\n" +
-            "\t\t\t\t<li>Add images</li>\n" +
-            "\t\t\t\t<li>Add voice records</li>\n" +
-            "\t\t\t\t<li>Add videos</li>\n" +
-            "\t\t\t</ul>\n" +
-            "\t\t</li>\n" +
-            "\t</ul>\n" +
-            "</body>\n" +
-            "</html>";
+    public final static String welcomePage = "<!DOCTYPE html>" +
+            "<html lang=\"en\"><head contenteditable=true><meta charset=\"utf-8\">" +
+            "<title>Celik Koseoglu</title></head><body contenteditable=\"true\"></body></html>";
+
     public final static String[] welcomeList = {"Welcome!"};
 
     public final static String newNoteName = "New Note";

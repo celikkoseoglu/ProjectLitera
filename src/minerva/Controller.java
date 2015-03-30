@@ -13,18 +13,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import litera.Data.AudioLibrary;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
-
+import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import netscape.javascript.JSObject;
 
 public class Controller implements Initializable
 {
@@ -49,6 +54,8 @@ public class Controller implements Initializable
     private Button addVideoButton;
     @FXML
     private Button addImageButton;
+    @FXML
+    private BorderPane borderPane;
 
     // FXML Rest of the Program Declaration
     @FXML
@@ -67,6 +74,8 @@ public class Controller implements Initializable
     private Button optionsButton;
     @FXML
     private ColorPicker foregroundColorPicker;
+    @FXML
+    private ColorPicker notePadColorPicker;
 
     // Other variables' Declaration
     private static Note currentNote;
@@ -162,7 +171,7 @@ public class Controller implements Initializable
             try
             {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.showOpenDialog(( (javafx.scene.Node) event.getTarget() ).getScene().getWindow());
+                fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
             }
             catch ( Exception ex )
             {
@@ -196,6 +205,16 @@ public class Controller implements Initializable
             }
         });
 
+        notePadColorPicker.setOnAction(ev1 -> {
+            Color newValue = notePadColorPicker.getValue();
+            if ( newValue != null )
+            {
+                webPage.executeScript(webPage.getMainFrame(), "document.body.style.backgroundColor = \"" + colorValueToHex(newValue) + "\";");
+                borderPane.setStyle("-fx-background-color: " + colorValueToHex(newValue));
+                notePadColorPicker.hide();
+            }
+        });
+
         addNoteButton.setOnAction(event -> {
             noteListScrollPaneItems.add(LocalDataManager.createNewNote());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
@@ -223,6 +242,11 @@ public class Controller implements Initializable
                  * While evaluating this statement, the note gets loaded into the currentNote object.*/
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
+
+                editor.getEngine().executeScript("document.write('" + currentNote.getHtmlNote() + "');");
+                JSObject win = (JSObject) editor.getEngine().executeScript("window");
+                win.setMember("audioLibrary", new AudioLibrary());
+
                 noteNameTextField.setText(newValue);
             }
         });
@@ -258,9 +282,9 @@ public class Controller implements Initializable
     }
 
     /**
-     * @description adds style to the selected text. It is a low-level function. Not much to say here.
-     * @param command some commands are located in the Defaults class
+     * @param command           some commands are located in the Defaults class
      * @param commandComplement Color commands may go here
+     * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
     private void addStyle(String command, String commandComplement)
     {
@@ -270,8 +294,8 @@ public class Controller implements Initializable
     }
 
     /**
-     * @description loads saved notes into the list note list view
      * @return true if the operation is a success
+     * @description loads saved notes into the list note list view
      */
     private boolean populateNoteListbox()
     {
@@ -300,7 +324,7 @@ public class Controller implements Initializable
 
     /**
      * @description changes button states according to the currently edited text. For instance if the text you are working on is
-     *              Italic, toggles the Italic button.
+     * Italic, toggles the Italic button.
      */
     private void buttonFeedback()
     {
@@ -314,9 +338,9 @@ public class Controller implements Initializable
     }
 
     /**
-     * @description converts the Color object c to a Hex representation of th color
      * @param c Color to be converted
      * @return String containing Hex representation of the color
+     * @description converts the Color object c to a Hex representation of th color
      */
     private static String colorValueToHex(Color c)
     {
@@ -324,5 +348,10 @@ public class Controller implements Initializable
                 Math.round(c.getRed() * 255),
                 Math.round(c.getGreen() * 255),
                 Math.round(c.getBlue() * 255));
+    }
+
+    public static void addAudio(File file)
+    {
+        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"audioLibrary.play(" + file.getPath() + ")\">Audio</button>')");
     }
 }

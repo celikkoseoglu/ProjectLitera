@@ -12,6 +12,7 @@ public class Note
     {
         this.noteName = noteName;
         this.htmlNote = htmlNote;
+        this.notePadColor = Color.WHITE;
     }
 
     public void setHtmlNote(String htmlNote)

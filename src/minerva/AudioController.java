@@ -5,7 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import litera.Data.EncryptionManager;
+import litera.Data.LocalDataManager;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +28,8 @@ public class AudioController implements Initializable {
     Button choose;
     @FXML
     Button ok;
+
+    File file;
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
@@ -64,8 +71,10 @@ public class AudioController implements Initializable {
             choose.setDisable(true);
             ok.setDisable(true);
             FileChooser fileChooser = new FileChooser();
-            fileChooser.showOpenDialog(((Node)event.getTarget()).getScene().getWindow());
-            // file extension selector should be added!
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac", "*.ogg")
+            );
+            file = fileChooser.showOpenDialog(choose.getScene().getWindow());
             rec.setDisable(false);
             play.setDisable(false);
             stop.setDisable(true);
@@ -73,6 +82,11 @@ public class AudioController implements Initializable {
             ok.setDisable(false);
         });
 
-        ok.setOnAction(event ->{});
+        ok.setOnAction(event ->{
+            if( file != null){
+                Controller.addAudio( LocalDataManager.addAudio( file, null));
+            }
+            ((Stage) ok.getScene().getWindow()).close();
+        });
     }
 }

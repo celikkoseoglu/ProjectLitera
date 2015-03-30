@@ -76,6 +76,7 @@ public class LocalDataManager
             noteDirectoryExists(n.getNoteName());
             FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
             fw.write(EncryptionManager.encryptString(n.getHtmlNote()));
+            //fw.write((n.getHtmlNote()));
             fw.close();
             return true;
         }
@@ -89,6 +90,38 @@ public class LocalDataManager
             System.err.println("IOException: " + ioe.getMessage());
             return false;
         }
+    }
+
+    /**
+     * @descriotion renames the Note object
+     * @param n the Note object to change the name for
+     * @param name new name for the note
+     * @return true if the rename operation is a success
+     * @author Orhun Caglayan - written the rename method
+     * @editor Celik Koseoglu - changed the method to return a boolean so we know if the rename operation is successful or not.
+     */
+    public static boolean renameNote( Note n, String name )
+    {
+        boolean fileRenameSuccessful = false, folderRenameSuccessful = false;
+
+        File oldFile = new File( OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html");
+        File newFile = new File( OS_NOTES_FILE_PATH + n.getNoteName() + "/" + name + ".html");
+        File oldDir = new File(OS_NOTES_FILE_PATH + n.getNoteName());
+        File newDir = new File(OS_NOTES_FILE_PATH + name);
+
+        if(oldFile.exists())
+            fileRenameSuccessful = oldFile.renameTo(newFile);
+
+        if (oldDir.exists())
+            folderRenameSuccessful = oldDir.renameTo(newDir);
+
+        if (fileRenameSuccessful && folderRenameSuccessful)
+        {
+            n.setNoteName(name);
+            return true;
+        }
+        return false;
+
     }
 
     /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
@@ -152,6 +185,7 @@ public class LocalDataManager
             textReader.close();
             fr.close();
             return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()));
+            //return new Note(noteName, (strBuffer.toString()));
         }
 
         catch ( Exception e )

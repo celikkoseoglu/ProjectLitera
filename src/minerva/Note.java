@@ -18,6 +18,10 @@ public class Note
     {
         this.htmlNote = htmlNote;
     }
+    public void setNoteName(String newName)
+    {
+        noteName = newName;
+    }
 
     public String getHtmlNote()
     {

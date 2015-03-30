@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import litera.Data.LocalDataManager;
 
 public class Main extends Application
@@ -20,7 +21,7 @@ public class Main extends Application
     {
         Parent root = FXMLLoader.load(getClass().getResource("minerva.fxml"));
         primaryStage.setTitle("Project Litera");
-        primaryStage.setScene(new Scene(root, 920, 700));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setMinHeight(576);
         primaryStage.setMinWidth(720);
 
@@ -50,8 +51,7 @@ public class Main extends Application
         });
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws Exception {
         LocalDataManager.setOS_FILE_PATH();
         launch(args);
     }

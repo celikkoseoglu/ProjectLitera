@@ -10,11 +10,11 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="210.0">
         <items>
-            <Button mnemonicParsing="false" text="●" textFill="RED" />
-            <Button mnemonicParsing="false" text="▶" />
-            <Button mnemonicParsing="false" text="■" />
-            <Button mnemonicParsing="false" text="Choose" />
-            <Button mnemonicParsing="false" text="OK" />
+            <Button fx:id="rec" mnemonicParsing="false" text="●" textFill="RED" />
+            <Button fx:id="play" mnemonicParsing="false" text="▶" />
+            <Button fx:id="stop" mnemonicParsing="false" text="■" />
+            <Button fx:id="choose" mnemonicParsing="false" text="Choose" />
+            <Button fx:id="ok" mnemonicParsing="false" text="OK" />
         </items>
       </ToolBar>
    </children>

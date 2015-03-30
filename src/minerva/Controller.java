@@ -1,13 +1,11 @@
 package minerva;
 
-import com.sun.javafx.scene.web.skin.HTMLEditorSkin;
 import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,14 +15,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 
-import javax.swing.*;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -46,15 +44,17 @@ public class Controller implements Initializable
     @FXML
     private ToggleButton insertUnorderedListToggleButton;
     @FXML
-    private Button audioAddButton;
+    private Button addAudioButton;
     @FXML
-    private Button videoAddButton;
+    private Button addVideoButton;
     @FXML
-    private Button imgAddButton;
+    private Button addImageButton;
 
     // FXML Rest of the Program Declaration
     @FXML
     private ListView noteListScrollPane;
+    @FXML
+    private ListView trashNoteListView;
     @FXML
     private WebView editor;
     @FXML
@@ -88,7 +88,8 @@ public class Controller implements Initializable
 
         // Editor and Pane
         assert noteListScrollPane != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        //assert editor != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert trashNoteListView != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
+        assert editor != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
 
         // Add delete pane
         assert noteNameTextField != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
@@ -104,12 +105,12 @@ public class Controller implements Initializable
 
         /*** *** *** *** *** START OF Button Listeners *** *** *** *** ***/
         // Button Listeners for Style
-        boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND));
-        italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND));
-        underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND));
-        strikethroughToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND));
-        insertOrderedListToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND));
-        insertUnorderedListToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND));
+        boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND, null));
+        italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND, null));
+        underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND, null));
+        strikethroughToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND, null));
+        insertOrderedListToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND, null));
+        insertUnorderedListToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND, null));
 
         // Listeners for Style buttons
         editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
@@ -123,8 +124,9 @@ public class Controller implements Initializable
         });
 
         optionsButton.setOnAction(event -> {
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options.fxml"));
+            try
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options2.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -138,9 +140,11 @@ public class Controller implements Initializable
             }
         });
 
-        audioAddButton.setOnAction( event ->{
-            try{
+        addAudioButton.setOnAction(event -> {
+            try
+            {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("audio.fxml"));
+                fxmlLoader.setController(new AudioController());
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -154,15 +158,11 @@ public class Controller implements Initializable
             }
         });
 
-        videoAddButton.setOnAction( event ->{
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Video");
-                stage.setScene(new Scene(root));
-                stage.show();
+        addVideoButton.setOnAction(event -> {
+            try
+            {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.showOpenDialog(( (javafx.scene.Node) event.getTarget() ).getScene().getWindow());
             }
             catch ( Exception ex )
             {
@@ -170,8 +170,9 @@ public class Controller implements Initializable
             }
         });
 
-        imgAddButton.setOnAction( event ->{
-            try{
+        addImageButton.setOnAction(event -> {
+            try
+            {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
@@ -188,7 +189,8 @@ public class Controller implements Initializable
 
         foregroundColorPicker.setOnAction(ev1 -> {
             Color newValue = foregroundColorPicker.getValue();
-            if (newValue != null) {
+            if ( newValue != null )
+            {
                 addStyle(Defaults.FOREGROUND_COLOR_COMMAND, colorValueToHex(newValue));
                 foregroundColorPicker.hide();
             }
@@ -224,14 +226,25 @@ public class Controller implements Initializable
                 noteNameTextField.setText(newValue);
             }
         });
+
+        //calling populateListbox() is EXTREMELY INEFFICIENT. Will fix.
+        noteNameTextField.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> {
+            //do not try to change the name if textField is empty.
+            if ( !noteNameTextField.getText().isEmpty() && !Arrays.asList(LocalDataManager.getNoteNames()).contains(noteNameTextField.getText()) )
+            {
+                LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
+                populateNoteListbox();
+            }
+            //LocalDataManager.getNoteNames();
+        });
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
 
-        // Start up of program
+        // Start up of the program
         populateNoteListbox();
         loadLastNote();
     }
 
-    // Saving on exit
+    // Saves the current note on exit
     public static void onExit()
     {
         currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
@@ -244,25 +257,26 @@ public class Controller implements Initializable
         return webPage.getHtml(webPage.getMainFrame()); //old method: (String)editor.getEngine().executeScript("document.documentElement.outerHTML");
     }
 
-    // Style method for all things need styling
-    private void addStyle(String command)
+    /**
+     * @description adds style to the selected text. It is a low-level function. Not much to say here.
+     * @param command some commands are located in the Defaults class
+     * @param commandComplement Color commands may go here
+     */
+    private void addStyle(String command, String commandComplement)
     {
-        webPage.executeCommand(command, null);
+        webPage.executeCommand(command, commandComplement);
         editor.requestFocus();
         buttonFeedback();
     }
 
-    private void addStyle(String command, String color)
-    {
-        webPage.executeCommand(command, color);
-        editor.requestFocus();
-        buttonFeedback();
-    }
-
+    /**
+     * @description loads saved notes into the list note list view
+     * @return true if the operation is a success
+     */
     private boolean populateNoteListbox()
     {
         String[] noteList = LocalDataManager.getNoteNames();
-        if (noteList == null)
+        if ( noteList == null )
         {
             currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
             LocalDataManager.saveNote(currentNote);
@@ -270,12 +284,13 @@ public class Controller implements Initializable
         }
         noteListScrollPaneItems = FXCollections.observableArrayList(noteList);
         noteListScrollPane.setItems(noteListScrollPaneItems);
+        trashNoteListView.setItems(noteListScrollPaneItems);
         return true;
     }
 
     /**
-     * @description the aim is to open the last note the user edited. I know it doesn't work as expected right now. (Celik)
      * @return
+     * @description the aim is to open the last note the user edited. I know it doesn't work as expected right now. (Celik)
      */
     private boolean loadLastNote()
     {
@@ -283,7 +298,10 @@ public class Controller implements Initializable
         return true;
     }
 
-    // Button Feedback is aimed to show buttons natural :d
+    /**
+     * @description changes button states according to the currently edited text. For instance if the text you are working on is
+     *              Italic, toggles the Italic button.
+     */
     private void buttonFeedback()
     {
         isChanged = true;
@@ -295,8 +313,14 @@ public class Controller implements Initializable
         insertUnorderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.BULLETS_COMMAND));
     }
 
-    private static String colorValueToHex(Color c) {
-        return String.format((Locale)null, "#%02x%02x%02x",
+    /**
+     * @description converts the Color object c to a Hex representation of th color
+     * @param c Color to be converted
+     * @return String containing Hex representation of the color
+     */
+    private static String colorValueToHex(Color c)
+    {
+        return String.format((Locale) null, "#%02x%02x%02x",
                 Math.round(c.getRed() * 255),
                 Math.round(c.getGreen() * 255),
                 Math.round(c.getBlue() * 255));

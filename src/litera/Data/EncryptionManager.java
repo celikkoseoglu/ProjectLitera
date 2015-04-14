@@ -14,14 +14,23 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionManager
 {
-    private static byte[] encryptionKey = {0x76, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79};
+    private byte[] encryptionKey;
 
     /**
      * @param s String to be encoded
      * @return encoded String
      * @description encrypts a String using AES
      */
-    public static String encryptString(String s)
+    private EncryptionManager( String keyStr)
+    {
+        encryptionKey = keyStr.getBytes();
+    }
+     
+    public void setKeyFromString( String keyStr)
+    {
+        encryptionKey = keyStr.getBytes();
+    }
+    public String encryptString(String s)
     {
         try
         {
@@ -33,7 +42,7 @@ public class EncryptionManager
         }
         catch ( Exception e )
         {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
         return null;
     }
@@ -43,7 +52,7 @@ public class EncryptionManager
      * @return decoded string
      * @description decrypts a String using AES
      */
-    public static String decryptString(String s)
+    public String decryptString(String s)
     {
         try
         {

@@ -98,11 +98,7 @@ public class ServerManager
         //set isSignedIn bit to true if login succesful
         int state = -1;
         state = client.login( usernmae, password);
-        
-        if( state == 0)
-            isSignedIn = true;
-        else
-            isSignedIn = false;
+        isSignedIn = ( state == 0);
         return state;
     }
     

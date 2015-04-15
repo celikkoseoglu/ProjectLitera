@@ -1,7 +1,9 @@
 package litera.Data;
 
 /**
- * Created by celikkoseoglu on 09/03/15.
+ * @author Minerva
+ * Server connector
+ * 
  */
 public class ServerDataManager
 {

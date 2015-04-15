@@ -31,9 +31,11 @@ public class ServerManager
      * @return true when provided user credentials are true
      * @description sets the current user. returns true when provided credentials are true.
      */
-    public boolean setUser(String username, String password)
+    public int setUser(String user, String pass)
     {
-        return true;
+        username = user;
+        password = pass;
+        return connect();
     }
 
     /**
@@ -90,13 +92,18 @@ public class ServerManager
     }
 
 
-    public boolean connect()
+    public int connect()
     {
         //try login
         //set isSignedIn bit to true if login succesful
-        isSignedIn = client.login( username, password);
-        //return true when successful.
-        return isSignedIn;
+        int state = -1;
+        state = client.login( usernmae, password);
+        
+        if( state == 0)
+            isSignedIn = true;
+        else
+            isSignedIn = false;
+        return state;
     }
     
     /**

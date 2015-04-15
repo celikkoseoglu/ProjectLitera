@@ -12,13 +12,18 @@ public class ServerDataManager
     private ArrayList<String> files;
     private ArrayList<String> hashes;
     private boolean isSignedIn;
-    
+    private LiteraClient client;
     
     public ServerDataManager( String user, String pass)
     {
         //Initiate user data
+        username = user;
+        password = pass;
+        //create and initiate client
+        client = new LiteraClient( username, password);
         //try login
         //set isSignedIn bit to true if login succesful
+        isSignedIn = client.connect();
     }
     
     /**
@@ -86,11 +91,12 @@ public class ServerDataManager
     }
 
 
-    public boolean login()
+    public boolean connect()
     {
         //login using username & password properties...
+       
         //return true when successful.
-        return true;
+        return  client.login( username, password);
     }
     
     /**

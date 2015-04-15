@@ -2,10 +2,10 @@ package litera.Data;
 
 /**
  * @author Minerva
- * Server connector
+ * Server tasks manager
  * 
  */
-public class ServerDataManager
+public class ServerManager
 {
     private String username;
     private String password;
@@ -100,21 +100,12 @@ public class ServerDataManager
     }
     
     /**
-     * @return
+     * @return 0 if possible 1 if duplicate username, 2 if duplicate email, 3 if connection not possible
      * @description checks if the username and password is valid, then creates a new user and its directories on the server
      */
-    public boolean createNewUser(String username, String password, String email)
+    public int createNewUser(String user, String pass, String email)
     {
-        return true;
+        return 0;
     }
 
-    /**
-     * @return true if the username is available for usage
-     * @description checks for the username on the database when creating a new user
-     * @description Makes sure the application directory exists for file operations. Creates directory, then returns false if first run.
-     */
-    private boolean duplicateUserData() //This should better be a createUser Exception.. ---- Consider later.
-    {
-        return true;
-    }
 }

@@ -9,21 +9,20 @@ public class ServerDataManager
 {
     private String username;
     private String password;
-    private ArrayList<String> files;
-    private ArrayList<String> hashes;
+    private String literaPath
+    private ArrayList<String> files; //File ID List
+    private ArrayList<String> hashes; //validation hashes for the files in fileID arraylist, same indexes.
     private boolean isSignedIn;
     private LiteraClient client;
     
-    public ServerDataManager( String user, String pass)
+    public ServerDataManager( String user, String pass, String path)
     {
         //Initiate user data
         username = user;
         password = pass;
         //create and initiate client
         client = new LiteraClient( username, password);
-        //try login
-        //set isSignedIn bit to true if login succesful
-        isSignedIn = client.connect();
+        
     }
     
     /**
@@ -74,7 +73,7 @@ public class ServerDataManager
      * @return true when download & save operation is successful
      * @description only downloads the HTML file containing the note  DO THIS ASYNCHRONOUSLY!!
      */
-    public boolean downloadNoteHTMLOnly(String osFilePath, String noteName)
+    public boolean downloadNoteHTMLOnly( String noteName)
     {
         return true;
     }
@@ -85,7 +84,7 @@ public class ServerDataManager
      * @return true when upload operation is successful
      * @description only uploads the HTML file containing the note  DO THIS ASYNCHRONOUSLY!!
      */
-    public boolean uploadNoteHTMLOnly(String osFilePath, String noteName)
+    public boolean uploadNoteHTMLOnly( String noteName)
     {
         return true;
     }
@@ -93,10 +92,11 @@ public class ServerDataManager
 
     public boolean connect()
     {
-        //login using username & password properties...
-       
+        //try login
+        //set isSignedIn bit to true if login succesful
+        isSignedIn = client.login( username, password);
         //return true when successful.
-        return  client.login( username, password);
+        return isSignedIn;
     }
     
     /**

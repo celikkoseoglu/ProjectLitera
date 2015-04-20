@@ -1,4 +1,4 @@
-package minerva;
+package litera.MainFrame;
 
 import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
@@ -21,6 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
+import litera.Multimedia.AudioController;
 
 import java.io.File;
 import java.net.URL;
@@ -33,21 +34,11 @@ public class Controller implements Initializable
     // Other variables' Declaration
     private static Note currentNote;
     private static WebPage webPage;
-    //Toolbars
+
     @FXML
     private ToolBar styleToolbar;
-    //Toggle Buttons
     @FXML
-    private ToggleButton boldToggleButton;
-    @FXML
-    private ToggleButton italicToggleButton;
-    @FXML
-    private ToggleButton underlineToggleButton;
-    @FXML
-    private ToggleButton strikethroughToggleButton;
-    @FXML
-    private ToggleButton insertOrderedListToggleButton;
-    //Buttons
+    private ToggleButton boldToggleButton, italicToggleButton, underlineToggleButton, strikethroughToggleButton, insertOrderedListToggleButton;
     @FXML
     private Button addAudioButton, addVideoButton, addImageButton;
     @FXML
@@ -58,18 +49,15 @@ public class Controller implements Initializable
     private Button trashButton;
     @FXML
     private Button optionsButton;
-    //List Views
     @FXML
     private ListView noteListScrollPane, trashNoteListView;
-    //Text Fields
     @FXML
     private TextField noteNameTextField;
-    //Color Pickers
     @FXML
     private ColorPicker foregroundColorPicker, notePadColorPicker;
-    //Web Views
     @FXML
     private WebView editor;
+
     private ObservableList<String> noteListScrollPaneItems;
     private boolean isChanged;
 
@@ -77,7 +65,7 @@ public class Controller implements Initializable
     public static void onExit()
     {
         currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
-        LocalDataManager.saveNote(currentNote);
+        LocalDataManager.saveLastNote(currentNote);
     }
 
     /**
@@ -101,32 +89,10 @@ public class Controller implements Initializable
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
-        // Style Buttons
-        assert styleToolbar != null : "fx:id\"styleToolBar\" was not injected: check you FXML file 'minerva.fxml'.";
-        assert boldToggleButton != null : "fx:id=\"bold\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert italicToggleButton != null : "fx:id=\"italic\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert underlineToggleButton != null : "fx:id=\"underline\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert strikethroughToggleButton != null : "fx:id=\"strikethrough\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert insertOrderedListToggleButton != null : "fx:id=\"insertOrderedList\" was not injected: check your FXML file 'minerva.fxml'.";
-
-        // Editor and Pane
-        assert noteListScrollPane != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert trashNoteListView != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert editor != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-
-        // Add delete pane
-        assert noteNameTextField != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert trashButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert deleteNoteButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert optionsButton != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
-
-        // initialize your logic here: all @FXML variables will have been injected
-
         // initializing webPage
         webPage = Accessor.getPageFor(editor.getEngine());
         isChanged = false;
 
-        /*** *** *** *** *** START OF Button Listeners *** *** *** *** ***/
         // Button Listeners for Style
         boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND, null));
         italicToggleButton.setOnAction(event -> addStyle(Defaults.ITALIC_COMMAND, null));
@@ -148,7 +114,7 @@ public class Controller implements Initializable
         optionsButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options2.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Options/options.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -165,7 +131,7 @@ public class Controller implements Initializable
         addAudioButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("audio.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Multimedia/audio.fxml"));
                 fxmlLoader.setController(new AudioController());
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
@@ -195,7 +161,7 @@ public class Controller implements Initializable
         addImageButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Multimedia/video.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -324,7 +290,7 @@ public class Controller implements Initializable
      */
     private boolean loadLastNote()
     {
-        noteListScrollPane.getSelectionModel().select(0);
+        noteListScrollPane.getSelectionModel().select(LocalDataManager.getLastNote());
         return true;
     }
 

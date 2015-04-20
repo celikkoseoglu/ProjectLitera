@@ -1,16 +1,12 @@
-package minerva;
+package litera.Multimedia;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import litera.Data.EncryptionManager;
-import litera.Data.LocalDataManager;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -84,7 +80,7 @@ public class AudioController implements Initializable {
 
         ok.setOnAction(event ->{
             if( file != null){
-                Controller.addAudio( LocalDataManager.addAudio( file, null));
+                //Controller.addAudio( LocalDataManager.addAudio( file, null));
             }
             ((Stage) ok.getScene().getWindow()).close();
         });

@@ -8,9 +8,10 @@
 <?import javafx.scene.web.WebView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="700.0" prefWidth="920.0"
             style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8"
-            fx:controller="minerva.Controller">
+            fx:controller="litera.MainFrame.Controller">
     <left>
-        <ListView fx:id="noteListScrollPane" prefWidth="180.0" stylesheets="@../../style/listView.css" BorderPane.alignment="CENTER_LEFT" />
+        <ListView fx:id="noteListScrollPane" prefWidth="180.0" stylesheets="@../../../style/listView.css"
+                  BorderPane.alignment="CENTER_LEFT"/>
     </left>
     <bottom>
         <GridPane style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
@@ -32,7 +33,7 @@
                             <graphic>
                                 <ImageView>
                                     <image>
-                                        <Image url="@Trash-light_resized.png" />
+                                        <Image url="@../Icons/Trash-light_resized.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -84,7 +85,7 @@
               <items>
                   <ImageView fitHeight="70.0" fitWidth="28.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Sync.png" />
+                         <Image url="@../Icons/Sync.png"/>
                      </image>
                   </ImageView>
                       <ToggleButton mnemonicParsing="false" text="E" />

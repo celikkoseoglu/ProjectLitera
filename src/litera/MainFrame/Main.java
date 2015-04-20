@@ -1,4 +1,4 @@
-package minerva;
+package litera.MainFrame;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

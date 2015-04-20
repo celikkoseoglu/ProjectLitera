@@ -1,8 +1,13 @@
 package litera.Data;
 
 import litera.Defaults.Defaults;
-import minerva.Note;
+import litera.MainFrame.Note;
+
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 
 /**
@@ -14,11 +19,15 @@ import java.util.Arrays;
 
 /*
  * change log:
- * 13/04/2015
+ * 20/04/2015
+ * merged 'directoryExists() methods'
+ * implemented load last note algorithm (possible bug: try closing the app after deleting all notes)
+ *
+ * 13/03/2015
  * fixed the "New Note" bug which prevented you from creating new notes if you clicked the New Note button repeatedly
  * fixed the bug which the app was unable to save any new note. this was caused by the major change in data structure, my mistake..
  *
- * 11/04/2015
+ * 11/03/2015
  * changed the data structure a little bit. notes go to a directory called Notes now.
  * Meh: added the ability to delete notes (trash feature coming in the next version, just use the '-' button for now)
  */
@@ -29,7 +38,6 @@ public class LocalDataManager
     private static String OS_NOTES_FILE_PATH;
     private static String OS_TRASH_FILE_PATH;
     private static String OS_OPTIONS_FILE_PATH;
-    private static boolean firstRun = false;
 
     /**
      * @return true if operating system is supported by Litera
@@ -52,14 +60,11 @@ public class LocalDataManager
         OS_NOTES_FILE_PATH = OS_FILE_PATH + "Notes/";
         OS_TRASH_FILE_PATH = OS_FILE_PATH + "Trash/";
         OS_OPTIONS_FILE_PATH = OS_FILE_PATH + "Options/";
-
         System.out.println("Default OS FilePath: " + OS_FILE_PATH);
         System.out.println("Default note directory FilePath:" + OS_NOTES_FILE_PATH);
         System.out.println("Default trash directory FilePath: " + OS_TRASH_FILE_PATH);
         System.out.println("Default options directory FilePath: " + OS_OPTIONS_FILE_PATH);
-
         System.out.println("\nOS FILE PATH SET SUCCESS\n");
-
         return true;
     }
 
@@ -72,10 +77,9 @@ public class LocalDataManager
     {
         try
         {
-            noteDirectoryExists(n.getNoteName());
+            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
             FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
             fw.write(EncryptionManager.encryptString(n.getHtmlNote()));
-            //fw.write((n.getHtmlNote()));
             fw.close();
             return true;
         }
@@ -129,8 +133,23 @@ public class LocalDataManager
      */
     public static boolean deleteNote(String[] selectedNotes)
     {
-        File f = new File(OS_NOTES_FILE_PATH + "/");
-        return f.delete() ? true : false;
+        if ( directoryExists(OS_TRASH_FILE_PATH) )
+            for ( String s : selectedNotes )
+            {
+                File f = new File(OS_NOTES_FILE_PATH + s);
+                Path source = Paths.get(OS_NOTES_FILE_PATH + s);
+                Path destination = Paths.get(OS_TRASH_FILE_PATH + s);
+                try
+                {
+                    Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                }
+                catch ( Exception e )
+                {
+                    System.out.println("File move operation failed");
+                }
+            }
+        return false;
+
     }
 
     /**
@@ -140,7 +159,7 @@ public class LocalDataManager
     public static String[] getNoteNames()
     {
         String[] listOfFileNames;
-        if ( noteDirectoryExists() )
+        if ( directoryExists(OS_NOTES_FILE_PATH) )
         {
             File folder = new File(OS_NOTES_FILE_PATH);
             FileFilter textFilter = new FileFilter()
@@ -193,6 +212,41 @@ public class LocalDataManager
         }
     }
 
+    public static String getLastNote()
+    {
+        try
+        {
+            FileReader fr = new FileReader(OS_OPTIONS_FILE_PATH + "lastNote.lit");
+            BufferedReader textReader = new BufferedReader(fr);
+            StringBuffer strBuffer = new StringBuffer();
+            String s = EncryptionManager.decryptString(textReader.readLine());
+            System.out.println(s);
+            return s;
+        }
+        catch ( Exception e )
+        {
+            System.out.println("Last note not found!");
+        }
+        return null;
+    }
+
+    public static Note saveLastNote(Note n)
+    {
+        try
+        {
+            saveNote(n);
+            directoryExists(OS_OPTIONS_FILE_PATH + "lastNote.lit");
+            FileWriter fw = new FileWriter(OS_OPTIONS_FILE_PATH + "lastNote.lit");
+            fw.write(EncryptionManager.encryptString(n.getNoteName()));
+            fw.close();
+        }
+        catch ( Exception e )
+        {
+            throw new RuntimeException("Where is the lsat note? Did you delete all of them?");
+        }
+        return null;
+    }
+
     /**
      * @return new note name  -> Ex: New Note (4)
      * @description generates a new note name when the user clicks the addNoteButton. Checks if the note with the Default.NewNoteName
@@ -221,8 +275,7 @@ public class LocalDataManager
         try
         {
             //pass note object instead of making current note public!!
-            //noteDirectoryExists(Controller.currentNote.getNoteName());
-            noteDirectoryExists(n.getNoteName());
+            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
             // copy!
             return file;
         }
@@ -253,83 +306,24 @@ public class LocalDataManager
         return true;
     }
 
-    /**
-     * @return true if the user.home/Litera/ exists
-     * @description Makes sure the application directory exists for file operations. Creates directory, then returns false if first run.
-     */
-    private static boolean applicationDirectoryExists()
+    private static boolean directoryExists(String directoryName)
     {
-        File f = new File(OS_FILE_PATH);
+        File f = new File(directoryName);
         if ( f.exists() && f.isDirectory() )
             return true;
         else
         {
             try
             {
-                new File(OS_FILE_PATH).mkdirs();
+                new File(directoryName).mkdirs();
             }
             catch ( SecurityException sException )
             {
-                System.err.println(sException.toString() + " :Cannot create Litera/ directory because of security permissions");
+                System.err.println(sException.toString() + " :Cannot create " + directoryName + " directory because of security permissions");
             }
             catch ( Exception ex )
             {
-                System.err.println(ex.toString() + " :Unknown exception occured while creating /Litera directory.");
-            }
-            return false;
-        }
-    }
-
-    /**
-     * @param noteName
-     * @return true if the user.home/Litera/Notes/ exists
-     * @description Makes sure the note directory exists for file operations. Creates directory, then returns false if first run.
-     */
-    private static boolean noteDirectoryExists(String noteName)
-    {
-        File f = new File(OS_NOTES_FILE_PATH + noteName + "/");
-        if ( f.exists() && f.isDirectory() )
-            return true;
-        else
-        {
-            try
-            {
-                new File(OS_NOTES_FILE_PATH + noteName + "/").mkdirs();
-            }
-            catch ( SecurityException sException )
-            {
-                System.err.println(sException.toString() + " :Cannot create Litera/Notes/ directory because of security permissions");
-            }
-            catch ( Exception ex )
-            {
-                System.err.println(ex.toString() + " :Unknown exception occured while creating /Litera/Notes/ directory.");
-            }
-            return false;
-        }
-    }
-
-    /**
-     * @return true if the user.home/Litera/Notes/ exists
-     * @description Makes sure the note directory exists for file operations. Creates directory, then returns false if first run.
-     */
-    private static boolean noteDirectoryExists()
-    {
-        File f = new File(OS_NOTES_FILE_PATH);
-        if ( f.exists() && f.isDirectory() )
-            return true;
-        else
-        {
-            try
-            {
-                new File(OS_NOTES_FILE_PATH).mkdir();
-            }
-            catch ( SecurityException sException )
-            {
-                System.err.println(sException.toString() + " :Cannot create Litera/Notes/ directory because of security permissions");
-            }
-            catch ( Exception ex )
-            {
-                System.err.println(ex.toString() + " :Unknown exception occured while creating /Litera/Notes/ directory.");
+                System.err.println(ex.toString() + " :Unknown exception occured while creating \" + directoryName + \" directory.");
             }
             return false;
         }

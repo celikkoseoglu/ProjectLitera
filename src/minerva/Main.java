@@ -1,21 +1,23 @@
 package minerva;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import litera.Data.LocalDataManager;
 
 public class Main extends Application
 {
     private double xOffset = 0;
     private double yOffset = 0;
+
+    public static void main(String[] args) throws Exception
+    {
+        LocalDataManager.setOS_FILE_PATH();
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -24,35 +26,24 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setMinHeight(576);
         primaryStage.setMinWidth(720);
-
         primaryStage.show();
 
-        root.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                xOffset = primaryStage.getX() - event.getScreenX();
-                yOffset = primaryStage.getY() - event.getScreenY();
-            }
+        //DragMove support
+        root.setOnMousePressed(event -> {
+            xOffset = primaryStage.getX() - event.getScreenX();
+            yOffset = primaryStage.getY() - event.getScreenY();
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() + xOffset);
-                primaryStage.setY(event.getScreenY() + yOffset);
-            }
+        root.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() + xOffset);
+            primaryStage.setY(event.getScreenY() + yOffset);
         });
+        //End of DragMove support
 
+        //Stage Closing event handler
         primaryStage.setOnCloseRequest(we -> {
             System.out.println("Stage is closing");
             Controller.onExit();
             System.out.println("Closed!");
         });
-    }
-
-    public static void main(String[] args) throws Exception {
-        LocalDataManager.setOS_FILE_PATH();
-        launch(args);
     }
 }

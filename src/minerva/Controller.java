@@ -13,29 +13,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import litera.Data.AudioLibrary;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
+
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import netscape.javascript.JSObject;
 
 public class Controller implements Initializable
 {
-    // FXML StyleToolbar Declaration
+    // Other variables' Declaration
+    private static Note currentNote;
+    private static WebPage webPage;
+    //Toolbars
     @FXML
     private ToolBar styleToolbar;
+    //Toggle Buttons
     @FXML
     private ToggleButton boldToggleButton;
     @FXML
@@ -46,42 +47,56 @@ public class Controller implements Initializable
     private ToggleButton strikethroughToggleButton;
     @FXML
     private ToggleButton insertOrderedListToggleButton;
+    //Buttons
     @FXML
-    private ToggleButton insertUnorderedListToggleButton;
-    @FXML
-    private Button addAudioButton;
-    @FXML
-    private Button addVideoButton;
-    @FXML
-    private Button addImageButton;
-    @FXML
-    private BorderPane borderPane;
-
-    // FXML Rest of the Program Declaration
-    @FXML
-    private ListView noteListScrollPane;
-    @FXML
-    private ListView trashNoteListView;
-    @FXML
-    private WebView editor;
-    @FXML
-    private TextField noteNameTextField;
-    @FXML
-    private Button trashButton;
+    private Button addAudioButton, addVideoButton, addImageButton;
     @FXML
     private Button addNoteButton, deleteNoteButton;
     @FXML
+    private BorderPane borderPane;
+    @FXML
+    private Button trashButton;
+    @FXML
     private Button optionsButton;
+    //List Views
     @FXML
-    private ColorPicker foregroundColorPicker;
+    private ListView noteListScrollPane, trashNoteListView;
+    //Text Fields
     @FXML
-    private ColorPicker notePadColorPicker;
-
-    // Other variables' Declaration
-    private static Note currentNote;
+    private TextField noteNameTextField;
+    //Color Pickers
+    @FXML
+    private ColorPicker foregroundColorPicker, notePadColorPicker;
+    //Web Views
+    @FXML
+    private WebView editor;
     private ObservableList<String> noteListScrollPaneItems;
-    private static WebPage webPage;
     private boolean isChanged;
+
+    // Saves the current note on exit
+    public static void onExit()
+    {
+        currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
+        LocalDataManager.saveNote(currentNote);
+    }
+
+    /**
+     * @param c Color to be converted
+     * @return String containing Hex representation of the color
+     * @description converts the Color object c to a Hex representation of th color
+     */
+    private static String colorValueToHex(Color c)
+    {
+        return String.format((Locale) null, "#%02x%02x%02x",
+                Math.round(c.getRed() * 255),
+                Math.round(c.getGreen() * 255),
+                Math.round(c.getBlue() * 255));
+    }
+
+    public static void addAudio(File file)
+    {
+        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"audioLibrary.play(" + file.getPath() + ")\">Audio</button>')");
+    }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
@@ -93,7 +108,6 @@ public class Controller implements Initializable
         assert underlineToggleButton != null : "fx:id=\"underline\" was not injected: check your FXML file 'minerva.fxml'.";
         assert strikethroughToggleButton != null : "fx:id=\"strikethrough\" was not injected: check your FXML file 'minerva.fxml'.";
         assert insertOrderedListToggleButton != null : "fx:id=\"insertOrderedList\" was not injected: check your FXML file 'minerva.fxml'.";
-        assert insertUnorderedListToggleButton != null : "fx:id=\"insertUnorderedList\" was not injected: check your FXML file 'minerva.fxml'.";
 
         // Editor and Pane
         assert noteListScrollPane != null : "fx:id=\"noteListScrollPane\" was not injected: check your FXML file 'minerva.fxml'.";
@@ -119,7 +133,6 @@ public class Controller implements Initializable
         underlineToggleButton.setOnAction(event -> addStyle(Defaults.UNDERLINE_COMMAND, null));
         strikethroughToggleButton.setOnAction(event -> addStyle(Defaults.STRIKETHROUGH_COMMAND, null));
         insertOrderedListToggleButton.setOnAction(event -> addStyle(Defaults.NUMBERS_COMMAND, null));
-        insertUnorderedListToggleButton.setOnAction(event -> addStyle(Defaults.BULLETS_COMMAND, null));
 
         // Listeners for Style buttons
         editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
@@ -244,8 +257,8 @@ public class Controller implements Initializable
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
 
                 editor.getEngine().executeScript("document.write('" + currentNote.getHtmlNote() + "');");
-                JSObject win = (JSObject) editor.getEngine().executeScript("window");
-                win.setMember("audioLibrary", new AudioLibrary());
+                //JSObject win = (JSObject) editor.getEngine().executeScript("window");
+                //win.setMember("audioLibrary", new AudioLibrary());
 
                 noteNameTextField.setText(newValue);
             }
@@ -266,13 +279,6 @@ public class Controller implements Initializable
         // Start up of the program
         populateNoteListbox();
         loadLastNote();
-    }
-
-    // Saves the current note on exit
-    public static void onExit()
-    {
-        currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
-        LocalDataManager.saveNote(currentNote);
     }
 
     // Returns the string version of the page
@@ -334,24 +340,5 @@ public class Controller implements Initializable
         underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));
         strikethroughToggleButton.setSelected(webPage.queryCommandState(Defaults.STRIKETHROUGH_COMMAND));
         insertOrderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.NUMBERS_COMMAND));
-        insertUnorderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.BULLETS_COMMAND));
-    }
-
-    /**
-     * @param c Color to be converted
-     * @return String containing Hex representation of the color
-     * @description converts the Color object c to a Hex representation of th color
-     */
-    private static String colorValueToHex(Color c)
-    {
-        return String.format((Locale) null, "#%02x%02x%02x",
-                Math.round(c.getRed() * 255),
-                Math.round(c.getGreen() * 255),
-                Math.round(c.getBlue() * 255));
-    }
-
-    public static void addAudio(File file)
-    {
-        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"audioLibrary.play(" + file.getPath() + ")\">Audio</button>')");
     }
 }

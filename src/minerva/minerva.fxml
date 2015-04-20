@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane fx:id="borderPane" prefHeight="700.0" prefWidth="920.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minerva.Controller">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="700.0" prefWidth="920.0"
+            style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8"
+            fx:controller="minerva.Controller">
     <left>
         <ListView fx:id="noteListScrollPane" prefWidth="180.0" stylesheets="@../../style/listView.css" BorderPane.alignment="CENTER_LEFT" />
     </left>
@@ -73,7 +74,6 @@
                         <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="U" />
                         <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" style="-fx-strikethrough: true;" text="S" />
                         <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="1" />
-                        <ToggleButton fx:id="insertUnorderedListToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="•" />
                         <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
                         <Button fx:id="addAudioButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="A" />
                         <Button fx:id="addVideoButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false" prefWidth="28.0" text="V" />

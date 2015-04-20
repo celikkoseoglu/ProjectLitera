@@ -17,7 +17,7 @@
       <CheckBox layoutX="18.0" layoutY="140.0" mnemonicParsing="false" text="Optimize Images on Import for file size" />
       <Label layoutX="21.0" layoutY="179.0" text="Developers: Hover Over This Area">
          <tooltip>
-            <Tooltip text="Developers Names: Çelik, Caner" />
+            <Tooltip text="Developers Names: Caner, Çelik, Mert, Orhun, Yiğit" />
          </tooltip>
       </Label>
       <Separator layoutX="21.0" layoutY="170.0" prefHeight="3.0" prefWidth="352.0" />

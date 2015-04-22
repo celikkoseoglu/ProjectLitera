@@ -85,7 +85,7 @@ public class LocalDataManager
         {
             directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
             FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
-            fw.write(EncryptionManager.encryptString(n.getHtmlNote()));
+            fw.write(/*EncryptionManager.encryptString*/(n.getHtmlNote()));
             fw.close();
             return true;
         }
@@ -205,7 +205,7 @@ public class LocalDataManager
 
             textReader.close();
             fr.close();
-            return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()));
+            return new Note(noteName, /*EncryptionManager.decryptString*/(strBuffer.toString()));
             //return new Note(noteName, (strBuffer.toString()));
         }
 

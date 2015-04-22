@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -25,6 +26,9 @@ import litera.Multimedia.AudioController;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -152,11 +156,17 @@ public class Controller implements Initializable
             try
             {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
+                fileChooser.setTitle("Choose Video");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4"));
+                File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
+                System.out.println(Paths.get(selectedFile.toURI()));
+                System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
+                Files.copy(Paths.get(selectedFile.toURI()), Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"), StandardCopyOption.REPLACE_EXISTING);
+
             }
             catch ( Exception ex )
             {
-
+                System.out.println("File copy operation fail!");
             }
         });
 
@@ -207,7 +217,6 @@ public class Controller implements Initializable
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
         });
 
-        // Listener for Note list selection
         noteListScrollPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
         {
             @Override
@@ -225,12 +234,15 @@ public class Controller implements Initializable
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
 
-                editor.getEngine().executeScript("document.write('" + currentNote.getHtmlNote() + "');");
                 //JSObject win = (JSObject) editor.getEngine().executeScript("window");
-                //win.setMember("audioLibrary", new AudioLibrary());
+                //win.setMember("audioLibrary", new AudioController());
 
                 noteNameTextField.setText(newValue);
             }
+        });
+
+        editor.getEngine().setOnAlert((WebEvent<String> wEvent) -> {
+            System.out.println("Alert Event  -  Message:  " + wEvent.getData());
         });
 
         //calling populateListbox() is EXTREMELY INEFFICIENT. Will fix.

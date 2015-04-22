@@ -1,5 +1,6 @@
 package litera.Data;
 
+import javafx.collections.ObservableList;
 import litera.Defaults.Defaults;
 import litera.MainFrame.Note;
 
@@ -19,6 +20,10 @@ import java.util.Arrays;
 
 /*
  * change log:
+ * 22/04/2015
+ * moveToTrash and deleteNote functions were implemented
+ * also, RubberDuck method really works!
+ *
  * 20/04/2015
  * merged 'directoryExists() methods'
  * implemented load last note algorithm (possible bug: try closing the app after deleting all notes)
@@ -38,6 +43,7 @@ public class LocalDataManager
     private static String OS_NOTES_FILE_PATH;
     private static String OS_TRASH_FILE_PATH;
     private static String OS_OPTIONS_FILE_PATH;
+    private Path path;
 
     /**
      * @return true if operating system is supported by Litera
@@ -96,29 +102,29 @@ public class LocalDataManager
     }
 
     /**
-     * @descriotion renames the Note object
-     * @param n the Note object to change the name for
+     * @param n    the Note object to change the name for
      * @param name new name for the note
      * @return true if the rename operation is a success
+     * @descriotion renames the Note object
      * @author Orhun Caglayan - written the rename method
      * @editor Celik Koseoglu - changed the method to return a boolean so we know if the rename operation is successful or not.
      */
-    public static boolean renameNote( Note n, String name )
+    public static boolean renameNote(Note n, String name)
     {
         boolean fileRenameSuccessful = false, folderRenameSuccessful = false;
 
-        File oldFile = new File( OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html");
-        File newFile = new File( OS_NOTES_FILE_PATH + n.getNoteName() + "/" + name + ".html");
+        File oldFile = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html");
+        File newFile = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + name + ".html");
         File oldDir = new File(OS_NOTES_FILE_PATH + n.getNoteName());
         File newDir = new File(OS_NOTES_FILE_PATH + name);
 
-        if(oldFile.exists())
+        if ( oldFile.exists() )
             fileRenameSuccessful = oldFile.renameTo(newFile);
 
-        if (oldDir.exists())
+        if ( oldDir.exists() )
             folderRenameSuccessful = oldDir.renameTo(newDir);
 
-        if (fileRenameSuccessful && folderRenameSuccessful)
+        if ( fileRenameSuccessful && folderRenameSuccessful )
         {
             n.setNoteName(name);
             return true;
@@ -127,41 +133,38 @@ public class LocalDataManager
 
     }
 
-    /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
+    /**
+     * DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
+     *
      * @return true if deletion is successful
      * @description permanently deletes notes. this function will be used for the Trash in the future..
      */
-    public static boolean deleteNote(String[] selectedNotes)
+    public static boolean deleteNote(ObservableList selectedNotes)
     {
-        if ( directoryExists(OS_TRASH_FILE_PATH) )
-            for ( String s : selectedNotes )
+        for ( Object s : selectedNotes )
+        {
+            try
             {
-                File f = new File(OS_NOTES_FILE_PATH + s);
-                Path source = Paths.get(OS_NOTES_FILE_PATH + s);
-                Path destination = Paths.get(OS_TRASH_FILE_PATH + s);
-                try
-                {
-                    Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
-                }
-                catch ( Exception e )
-                {
-                    System.out.println("File move operation failed");
-                }
+                Files.delete(Paths.get(OS_TRASH_FILE_PATH + s));
             }
-        return false;
-
+            catch ( Exception e )
+            {
+                System.out.println("Permanent deletion error!");
+            }
+        }
+        return true;
     }
 
     /**
      * @return the String[] which contains notes or if the note directory doesn't even exist, returns null
      * @description gets note names as a String[]. Checks if the application directory exists before trying to retrieve note names
      */
-    public static String[] getNoteNames()
+    public static String[] getNoteNames(String directoryName)
     {
         String[] listOfFileNames;
-        if ( directoryExists(OS_NOTES_FILE_PATH) )
+        if ( directoryExists(directoryName) )
         {
-            File folder = new File(OS_NOTES_FILE_PATH);
+            File folder = new File(directoryName);
             FileFilter textFilter = new FileFilter()
             {
                 public boolean accept(File folder)
@@ -218,9 +221,10 @@ public class LocalDataManager
         {
             FileReader fr = new FileReader(OS_OPTIONS_FILE_PATH + "lastNote.lit");
             BufferedReader textReader = new BufferedReader(fr);
-            StringBuffer strBuffer = new StringBuffer();
             String s = EncryptionManager.decryptString(textReader.readLine());
             System.out.println(s);
+            textReader.close();
+            fr.close();
             return s;
         }
         catch ( Exception e )
@@ -235,7 +239,7 @@ public class LocalDataManager
         try
         {
             saveNote(n);
-            directoryExists(OS_OPTIONS_FILE_PATH + "lastNote.lit");
+            directoryExists(OS_OPTIONS_FILE_PATH);
             FileWriter fw = new FileWriter(OS_OPTIONS_FILE_PATH + "lastNote.lit");
             fw.write(EncryptionManager.encryptString(n.getNoteName()));
             fw.close();
@@ -255,8 +259,8 @@ public class LocalDataManager
     public static String createNewNote()
     {
         String newNoteName = Defaults.newNoteName;
-        String[] listOfNoteNames = getNoteNames();
-        if (listOfNoteNames != null)
+        String[] listOfNoteNames = getNoteNames(OS_NOTES_FILE_PATH);
+        if ( listOfNoteNames != null )
         {
             int occurenceCount = 2;
             while ( Arrays.asList(listOfNoteNames).contains(newNoteName) )
@@ -271,7 +275,8 @@ public class LocalDataManager
         return newNoteName;
     }
 
-    public static File addAudio(File file, Note n) {
+    public static File addAudio(File file, Note n)
+    {
         try
         {
             //pass note object instead of making current note public!!
@@ -291,19 +296,33 @@ public class LocalDataManager
         }
     }
 
-    /** DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
-     * @description moves the selected notes to trash when the |-| button is clicked
+    /**
+     * DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
+     *
      * @param selectedNotes
      * @return
+     * @description moves the selected notes to trash when the |-| button is clicked
      */
-    public static boolean moveToTrash(String[] selectedNotes)
+    public static boolean moveToTrash(ObservableList selectedNotes)
     {
-        File sourceDir, targetDir;
-        for (String s : selectedNotes)
+        directoryExists(OS_TRASH_FILE_PATH); //creates directory if it does not exist
+        for ( Object s : selectedNotes )
         {
-            //to be implemented soon
+            System.out.println("Trying to delete: " + s);
+            Path source = Paths.get(OS_NOTES_FILE_PATH + s);
+            Path destination = Paths.get((OS_TRASH_FILE_PATH) + s);
+            try
+            {
+                Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("File move success!");
+            }
+            catch ( Exception e )
+            {
+                System.out.println("File move operation failed");
+            }
         }
-        return true;
+        return false;
+
     }
 
     private static boolean directoryExists(String directoryName)
@@ -323,9 +342,19 @@ public class LocalDataManager
             }
             catch ( Exception ex )
             {
-                System.err.println(ex.toString() + " :Unknown exception occured while creating \" + directoryName + \" directory.");
+                System.err.println(ex.toString() + " :Unknown exception occured while creating \"" + directoryName + "\" directory.");
             }
             return false;
         }
+    }
+
+    public static String getLocalTrashFilePath()
+    {
+        return OS_TRASH_FILE_PATH;
+    }
+
+    public static String getLocalNotesFilePath()
+    {
+        return OS_NOTES_FILE_PATH;
     }
 }

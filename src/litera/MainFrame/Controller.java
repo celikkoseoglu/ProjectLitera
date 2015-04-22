@@ -58,7 +58,7 @@ public class Controller implements Initializable
     @FXML
     private WebView editor;
 
-    private ObservableList<String> noteListScrollPaneItems;
+    private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
     private boolean isChanged;
 
     // Saves the current note on exit
@@ -108,7 +108,9 @@ public class Controller implements Initializable
 
         // Button Listeners for Bottom Toolbar
         trashButton.setOnAction(event -> {
-            System.out.println("trashButton clicked");
+            String[] trashNoteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath());
+            trashListScrollPaneItems = FXCollections.observableArrayList(trashNoteList);
+            trashNoteListView.setItems(trashListScrollPaneItems);
         });
 
         optionsButton.setOnAction(event -> {
@@ -200,7 +202,8 @@ public class Controller implements Initializable
         });
 
         deleteNoteButton.setOnAction(event -> {
-            noteListScrollPaneItems.remove(Defaults.newNoteName);
+            LocalDataManager.moveToTrash((noteListScrollPane.getSelectionModel().getSelectedItems()));
+            noteListScrollPaneItems.remove(noteListScrollPane.getSelectionModel().getSelectedItem().toString());
             noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
         });
 
@@ -233,7 +236,7 @@ public class Controller implements Initializable
         //calling populateListbox() is EXTREMELY INEFFICIENT. Will fix.
         noteNameTextField.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> {
             //do not try to change the name if textField is empty.
-            if ( !noteNameTextField.getText().isEmpty() && !Arrays.asList(LocalDataManager.getNoteNames()).contains(noteNameTextField.getText()) )
+            if ( !noteNameTextField.getText().isEmpty() && !Arrays.asList(LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath())).contains(noteNameTextField.getText()) )
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
                 populateNoteListbox();
@@ -271,16 +274,16 @@ public class Controller implements Initializable
      */
     private boolean populateNoteListbox()
     {
-        String[] noteList = LocalDataManager.getNoteNames();
+        String[] noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
+
         if ( noteList == null )
         {
             currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
             LocalDataManager.saveNote(currentNote);
-            noteList = LocalDataManager.getNoteNames();
+            noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
         }
         noteListScrollPaneItems = FXCollections.observableArrayList(noteList);
         noteListScrollPane.setItems(noteListScrollPaneItems);
-        trashNoteListView.setItems(noteListScrollPaneItems);
         return true;
     }
 
@@ -290,7 +293,9 @@ public class Controller implements Initializable
      */
     private boolean loadLastNote()
     {
-        noteListScrollPane.getSelectionModel().select(LocalDataManager.getLastNote());
+        String lastNoteName = LocalDataManager.getLastNote();
+        if ( noteListScrollPane.getItems().contains(lastNoteName) ) ;
+        noteListScrollPane.getSelectionModel().select(lastNoteName);
         return true;
     }
 

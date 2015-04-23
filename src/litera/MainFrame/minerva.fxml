@@ -37,7 +37,7 @@
                                 </ImageView>
                             </graphic>
                      <contextMenu>
-                        <ContextMenu>
+                         <ContextMenu fx:id="trashContextMenu">
                           <items>
                               <SeparatorMenuItem mnemonicParsing="false">
                                  <content>

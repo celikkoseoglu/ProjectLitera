@@ -56,6 +56,8 @@ public class Controller implements Initializable
     private ColorPicker foregroundColorPicker, notePadColorPicker;
     @FXML
     private WebView editor;
+    @FXML
+    private ContextMenu trashContextMenu;
 
     private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
     private boolean isChanged;
@@ -110,12 +112,13 @@ public class Controller implements Initializable
             String[] trashNoteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath());
             trashListScrollPaneItems = FXCollections.observableArrayList(trashNoteList);
             trashNoteListView.setItems(trashListScrollPaneItems);
+            trashContextMenu.show(Main.getPrimaryStage());
         });
 
         optionsButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Options/options.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Options/options.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -133,7 +136,7 @@ public class Controller implements Initializable
             try
             {
                 addAudio();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Multimedia/audio.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/audio.fxml"));
                 fxmlLoader.setController(new AudioController());
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
@@ -170,7 +173,7 @@ public class Controller implements Initializable
         addImageButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Multimedia/video.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/video.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -197,7 +200,6 @@ public class Controller implements Initializable
             Color newValue = notePadColorPicker.getValue();
             if ( newValue != null )
             {
-                webPage.executeScript(webPage.getMainFrame(), "document.body.style.backgroundColor = \"" + colorValueToHex(newValue) + "\";");
                 borderPane.setStyle("-fx-background-color: " + colorValueToHex(newValue));
                 notePadColorPicker.hide();
             }
@@ -230,10 +232,6 @@ public class Controller implements Initializable
                  * While evaluating this statement, the note gets loaded into the currentNote object.*/
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
-
-                //JSObject win = (JSObject) editor.getEngine().executeScript("window");
-                //win.setMember("audioLibrary", new AudioController());
-
                 noteNameTextField.setText(newValue);
             }
         });

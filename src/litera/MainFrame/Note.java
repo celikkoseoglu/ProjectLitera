@@ -8,7 +8,7 @@ public class Note
 {
     private String noteName, htmlNote;
     private boolean isPasswordEncrypted;
-    private Color noteColor, notePadColor;
+    private Color notePadColor;
 
     public Note(String noteName, String htmlNote)
     {
@@ -40,11 +40,6 @@ public class Note
     public boolean isPasswordEncrypted()
     {
         return isPasswordEncrypted;
-    }
-
-    public Color getNoteColor()
-    {
-        return noteColor;
     }
 
     public Color getNotePadColor()

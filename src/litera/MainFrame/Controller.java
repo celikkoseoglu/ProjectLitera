@@ -17,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
@@ -26,9 +25,6 @@ import litera.Multimedia.AudioController;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -130,7 +126,7 @@ public class Controller implements Initializable
             }
             catch ( Exception ex )
             {
-
+                System.out.println(ex.toString());
             }
         });
 
@@ -152,6 +148,7 @@ public class Controller implements Initializable
             }
         });
 
+        /* STILL BEING IMPLEMENTED: DO NOT TOUCH THIS AREA
         addVideoButton.setOnAction(event -> {
             try
             {
@@ -168,7 +165,7 @@ public class Controller implements Initializable
             {
                 System.out.println("File copy operation fail!");
             }
-        });
+        });*/
 
         addImageButton.setOnAction(event -> {
             try

@@ -23,7 +23,6 @@ import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 import litera.Multimedia.AudioController;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Locale;
@@ -50,7 +49,7 @@ public class Controller implements Initializable
     @FXML
     private Button optionsButton;
     @FXML
-    private ListView noteListScrollPane, trashNoteListView;
+    private ListView noteListView, trashNoteListView;
     @FXML
     private TextField noteNameTextField;
     @FXML
@@ -81,9 +80,9 @@ public class Controller implements Initializable
                 Math.round(c.getBlue() * 255));
     }
 
-    public static void addAudio(File file)
+    public static void addAudio(/*File file*/)
     {
-        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"audioLibrary.play(" + file.getPath() + ")\">Audio</button>')");
+        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"alert(this.id)\">SesVer</button>')");
     }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
@@ -133,6 +132,7 @@ public class Controller implements Initializable
         addAudioButton.setOnAction(event -> {
             try
             {
+                addAudio();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../litera/Multimedia/audio.fxml"));
                 fxmlLoader.setController(new AudioController());
                 Parent root = fxmlLoader.load();
@@ -205,16 +205,16 @@ public class Controller implements Initializable
 
         addNoteButton.setOnAction(event -> {
             noteListScrollPaneItems.add(LocalDataManager.createNewNote());
-            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
+            noteListView.getSelectionModel().select(noteListView.getItems().size() - 1);
         });
 
         deleteNoteButton.setOnAction(event -> {
-            LocalDataManager.moveToTrash((noteListScrollPane.getSelectionModel().getSelectedItems()));
-            noteListScrollPaneItems.remove(noteListScrollPane.getSelectionModel().getSelectedItem().toString());
-            noteListScrollPane.getSelectionModel().select(noteListScrollPane.getItems().size() - 1);
+            LocalDataManager.moveToTrash(( noteListView.getSelectionModel().getSelectedItems() ));
+            noteListScrollPaneItems.remove(noteListView.getSelectionModel().getSelectedItem().toString());
+            noteListView.getSelectionModel().select(noteListView.getItems().size() - 1);
         });
 
-        noteListScrollPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+        noteListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
         {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
@@ -257,6 +257,7 @@ public class Controller implements Initializable
         // Start up of the program
         populateNoteListbox();
         loadLastNote();
+
     }
 
     // Returns the string version of the page
@@ -266,7 +267,7 @@ public class Controller implements Initializable
     }
 
     /**
-     * @param command           some commands are located in the Defaults class
+     * @param command some commands are located in the Defaults class
      * @param commandComplement Color commands may go here
      * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
@@ -292,7 +293,7 @@ public class Controller implements Initializable
             noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
         }
         noteListScrollPaneItems = FXCollections.observableArrayList(noteList);
-        noteListScrollPane.setItems(noteListScrollPaneItems);
+        noteListView.setItems(noteListScrollPaneItems);
         return true;
     }
 
@@ -303,8 +304,8 @@ public class Controller implements Initializable
     private boolean loadLastNote()
     {
         String lastNoteName = LocalDataManager.getLastNote();
-        if ( noteListScrollPane.getItems().contains(lastNoteName) ) ;
-        noteListScrollPane.getSelectionModel().select(lastNoteName);
+        if ( noteListView.getItems().contains(lastNoteName) ) ;
+        noteListView.getSelectionModel().select(lastNoteName);
         return true;
     }
 

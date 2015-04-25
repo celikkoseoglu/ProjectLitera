@@ -30,4 +30,7 @@ public class Defaults
 
     public static final String FOREGROUND_COLOR_COMMAND = "forecolor";
     public static final String BACKGROUND_COLOR_COMMAND = "backcolor";
+
+    public static final String COLOR_SCHEME_CSS_1 = ".list-cell:filled:selected:focused,.list-cell:filled:selected {-fx-background-color:";
+    public static final String COLOR_SCHEME_CSS_2 = ";-fx-text-fill: white;}.list-cell:filled:hover {-fx-background-color: #d2d2d2;-fx-text-fill: white;}";
 }

@@ -211,6 +211,7 @@ public class Controller implements Initializable
             Color newValue = notePadColorPicker.getValue();
             if ( newValue != null )
             {
+                LocalDataManager.saveNoteCSS(currentNote, colorValueToHex(newValue));
                 borderPane.setStyle("-fx-background-color: " + colorValueToHex(newValue));
                 notePadColorPicker.hide();
             }
@@ -238,12 +239,14 @@ public class Controller implements Initializable
                     LocalDataManager.saveNote(currentNote);
                     isChanged = false; //checked via webPage listeners
                 }
+
                 /* Gets the selected note from the notes directory
                  * If LocalDataManager can't find the file, returns null. Either this is the first run or the user messed up with Litera directory.
                  * While evaluating this statement, the note gets loaded into the currentNote object.*/
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
+                noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
             }
         });
 
@@ -315,6 +318,9 @@ public class Controller implements Initializable
         String lastNoteName = LocalDataManager.getLastNote();
         if ( noteListView.getItems().contains(lastNoteName) ) ;
         noteListView.getSelectionModel().select(lastNoteName);
+        System.out.println(noteListView.getStylesheets());
+        noteListView.getStylesheets().clear();
+        noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
         return true;
     }
 

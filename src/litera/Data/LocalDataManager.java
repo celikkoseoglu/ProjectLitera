@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
-
 /**
  * the Local Data Manager class for Litera. Manages local data & encryption
  * all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
@@ -51,6 +50,7 @@ public class LocalDataManager
     private static String OS_NOTES_FILE_PATH;
     private static String OS_TRASH_FILE_PATH;
     private static String OS_OPTIONS_FILE_PATH;
+    private static String OS_STYLE_FILE_PATH;
 
     /**
      * @return true if operating system is supported by Litera
@@ -73,6 +73,7 @@ public class LocalDataManager
         OS_NOTES_FILE_PATH = OS_FILE_PATH + "Notes/";
         OS_TRASH_FILE_PATH = OS_FILE_PATH + "Trash/";
         OS_OPTIONS_FILE_PATH = OS_FILE_PATH + "Options/";
+        OS_STYLE_FILE_PATH = OS_FILE_PATH + "Style/";
         System.out.println("Default OS FilePath: " + OS_FILE_PATH);
         System.out.println("Default note directory FilePath:" + OS_NOTES_FILE_PATH);
         System.out.println("Default trash directory FilePath: " + OS_TRASH_FILE_PATH);
@@ -106,6 +107,35 @@ public class LocalDataManager
             System.err.println("IOException: " + ioe.getMessage());
             return false;
         }
+    }
+
+    public static boolean saveNoteCSS(Note n, String hexColor)
+    {
+        try
+        {
+            directoryExists(OS_STYLE_FILE_PATH);
+            FileWriter fw = new FileWriter(OS_STYLE_FILE_PATH + n.getNoteName().replaceAll(" ", "_") + ".css"/* ,true (to append)*/);
+            fw.write(Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2);
+            fw.close();
+            return true;
+        }
+        catch ( NullPointerException nullPtrException )
+        {
+            System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
+            return false;
+        }
+        catch ( Exception ioe )
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+            return false;
+        }
+    }
+
+    public static File getNoteCSS(Note n)
+    {
+        File f = new File(OS_STYLE_FILE_PATH + n.getNoteName().replaceAll(" ", "_") + ".css");
+        System.out.println(f.exists());
+        return f;
     }
 
     /**
@@ -152,14 +182,61 @@ public class LocalDataManager
         {
             try
             {
-                Files.delete(Paths.get(OS_TRASH_FILE_PATH + s));
+                delete(new File(OS_TRASH_FILE_PATH + s));
             }
             catch ( Exception e )
             {
-                System.out.println("Permanent deletion error!");
+                System.out.println(e.toString());
             }
         }
         return true;
+    }
+
+    /**
+     * credit - http://www.mkyong.com/java/how-to-delete-directory-in-java/
+     *
+     * @param file
+     * @throws IOException
+     */
+    public static void delete(File file) throws IOException
+    {
+
+        if ( file.isDirectory() )
+        {
+
+            //directory is empty, then delete it
+            if ( file.list().length == 0 )
+            {
+                file.delete();
+                System.out.println("Directory is deleted : " + file.getAbsolutePath());
+            }
+            else
+            {
+                //list all the directory contents
+                String files[] = file.list();
+
+                for ( String temp : files )
+                {
+                    //construct the file structure
+                    File fileDelete = new File(file, temp);
+
+                    //recursive delete
+                    delete(fileDelete);
+                }
+                //check the directory again, if empty then delete it
+                if ( file.list().length == 0 )
+                {
+                    file.delete();
+                    System.out.println("Directory is deleted : " + file.getAbsolutePath());
+                }
+            }
+        }
+        else
+        {
+            //if file, then delete it
+            file.delete();
+            System.out.println("File is deleted : " + file.getAbsolutePath());
+        }
     }
 
     /**

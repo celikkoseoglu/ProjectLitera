@@ -44,8 +44,8 @@
                                     <ListView fx:id="trashNoteListView" prefHeight="200.0" prefWidth="200.0" />
                                  </content>
                               </SeparatorMenuItem>
-                              <MenuItem mnemonicParsing="false" text="Recover Selected"/>
-                              <MenuItem mnemonicParsing="false" text="Delete Selected"/>
+                              <MenuItem fx:id="recoverMenuItem" mnemonicParsing="false" text="Recover Selected"/>
+                              <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete Selected"/>
                           </items>
                         </ContextMenu>
                      </contextMenu>

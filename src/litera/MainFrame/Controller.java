@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -58,6 +59,8 @@ public class Controller implements Initializable
     private WebView editor;
     @FXML
     private ContextMenu trashContextMenu;
+    @FXML
+    private MenuItem recoverMenuItem, deleteMenuItem;
 
     private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
     private boolean isChanged;
@@ -110,9 +113,17 @@ public class Controller implements Initializable
         // Button Listeners for Bottom Toolbar
         trashButton.setOnAction(event -> {
             String[] trashNoteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath());
-            trashListScrollPaneItems = FXCollections.observableArrayList(trashNoteList);
-            trashNoteListView.setItems(trashListScrollPaneItems);
-            trashContextMenu.show(Main.getPrimaryStage());
+            trashNoteListView.setItems(FXCollections.observableArrayList(trashNoteList));
+            trashContextMenu.show(trashButton, Side.RIGHT, -20, -20); //show the trash menu on left click at the correct location
+        });
+
+        recoverMenuItem.setOnAction(event -> {
+            LocalDataManager.moveNotes(trashNoteListView.getSelectionModel().getSelectedItems(), false);
+            populateNoteListbox();
+        });
+
+        deleteMenuItem.setOnAction(event -> {
+            LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems());
         });
 
         optionsButton.setOnAction(event -> {
@@ -211,7 +222,7 @@ public class Controller implements Initializable
         });
 
         deleteNoteButton.setOnAction(event -> {
-            LocalDataManager.moveToTrash(( noteListView.getSelectionModel().getSelectedItems() ));
+            LocalDataManager.moveNotes(noteListView.getSelectionModel().getSelectedItems(), true);
             noteListScrollPaneItems.remove(noteListView.getSelectionModel().getSelectedItem().toString());
             noteListView.getSelectionModel().select(noteListView.getItems().size() - 1);
         });

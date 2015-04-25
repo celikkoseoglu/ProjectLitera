@@ -9,8 +9,8 @@
             style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8"
             fx:controller="litera.MainFrame.Controller">
     <left>
-        <ListView fx:id="noteListView" prefWidth="180.0" stylesheets="@../../../style/listView.css"
-                  BorderPane.alignment="CENTER_LEFT"/>
+        <ListView fx:id="noteListView" prefWidth="180.0" style="-fx-border-color: #b31a1a;"
+                  stylesheets="@../../../style/listView.css" BorderPane.alignment="CENTER_LEFT"/>
     </left>
     <bottom>
         <GridPane style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">

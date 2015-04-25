@@ -246,6 +246,7 @@ public class Controller implements Initializable
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
+                //noteListView.getStylesheets().clear();
                 noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
             }
         });
@@ -319,7 +320,7 @@ public class Controller implements Initializable
         if ( noteListView.getItems().contains(lastNoteName) ) ;
         noteListView.getSelectionModel().select(lastNoteName);
         System.out.println(noteListView.getStylesheets());
-        noteListView.getStylesheets().clear();
+        //noteListView.getStylesheets().clear();
         noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
         return true;
     }

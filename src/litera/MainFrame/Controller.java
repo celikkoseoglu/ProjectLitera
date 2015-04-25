@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 import litera.Multimedia.AudioController;
+import litera.Multimedia.PlayerController;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -162,24 +163,31 @@ public class Controller implements Initializable
             }
         });
 
-        /* STILL BEING IMPLEMENTED: DO NOT TOUCH THIS AREA
         addVideoButton.setOnAction(event -> {
             try
             {
-                FileChooser fileChooser = new FileChooser();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/player.fxml"));
+                fxmlLoader.setController(new PlayerController(null));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Litera Player");
+                stage.setScene(new Scene(root));
+                stage.show();
+                /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Choose Video");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4"));
                 File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
                 System.out.println(Paths.get(selectedFile.toURI()));
                 System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
-                Files.copy(Paths.get(selectedFile.toURI()), Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Paths.get(selectedFile.toURI()), Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"), StandardCopyOption.REPLACE_EXISTING);*/
 
             }
             catch ( Exception ex )
             {
                 System.out.println("File copy operation fail!");
             }
-        });*/
+        });
 
         addImageButton.setOnAction(event -> {
             try

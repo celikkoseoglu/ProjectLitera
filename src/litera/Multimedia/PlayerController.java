@@ -5,44 +5,96 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-public class LiteraPlayer extends BorderPane
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PlayerController implements Initializable
 {
-    private final boolean repeat = false;
-    private MediaPlayer mp;
+    private static final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+    private final boolean repeat = false; //new added here
+    private final Media m = new Media(MEDIA_URL); //MEDIA_URL);//f.toURI().toString());
+    @FXML
+    private Button playButton;
+    @FXML
+    private Slider timeSlider, volumeSlider;
+    @FXML
+    private Label playTime;
+    @FXML
     private MediaView mediaView;
+    private MediaPlayer mp = new MediaPlayer(m);
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
     private Duration duration;
-    private Slider timeSlider;
-    private Label playTime;
-    private Slider volumeSlider;
-    private HBox mediaBar;
 
-    public LiteraPlayer(final MediaPlayer mp)//, String fileName)
+    public PlayerController(File f)// , Note note, String fileName) needed
     {
-        this.mp = mp;
-        setStyle("-fx-background-color: #000000;"); //it was #bfc2c7
-        mediaView = new MediaView(mp);
-        Pane mvPane = new Pane();
-        mvPane.getChildren().add(mediaView);
-        mvPane.setStyle("-fx-background-color: black;");
-        setCenter(mvPane);
-        mediaBar = new HBox();
-        mediaBar.setAlignment(Pos.CENTER);
-        mediaBar.setPadding(new Insets(5, 10, 5, 10));
-        BorderPane.setAlignment(mediaBar, Pos.CENTER);
+    }
 
-        final Button playButton = new Button(">");
+    private static String formatTime(Duration elapsed, Duration duration)
+    {
+        int intElapsed = (int) Math.floor(elapsed.toSeconds());
+        int elapsedHours = intElapsed / ( 60 * 60 );
+        if ( elapsedHours > 0 )
+        {
+            intElapsed -= elapsedHours * 60 * 60;
+        }
+        int elapsedMinutes = intElapsed / 60;
+        int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
+
+        if ( duration.greaterThan(Duration.ZERO) )
+        {
+            int intDuration = (int) Math.floor(duration.toSeconds());
+            int durationHours = intDuration / ( 60 * 60 );
+            if ( durationHours > 0 )
+            {
+                intDuration -= durationHours * 60 * 60;
+            }
+            int durationMinutes = intDuration / 60;
+            int durationSeconds = intDuration - durationHours * 60 * 60 - durationMinutes * 60;
+            if ( durationHours > 0 )
+            {
+                return String.format("%d:%02d:%02d/%d:%02d:%02d",
+                        elapsedHours, elapsedMinutes, elapsedSeconds, durationHours, durationMinutes, durationSeconds);
+            }
+            else
+            {
+                return String.format("%02d:%02d/%02d:%02d",
+                        elapsedMinutes, elapsedSeconds, durationMinutes, durationSeconds);
+            }
+        }
+        else
+        {
+            if ( elapsedHours > 0 )
+            {
+                return String.format("%d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds);
+            }
+            else
+            {
+                return String.format("%02d:%02d", elapsedMinutes, elapsedSeconds);
+            }
+        }
+    }
+
+    @Override // This method is called by the FXMLLoader when initialization is complete
+    public void initialize(URL fxmlFileLocation, ResourceBundle resources)
+    {
+        mediaView.setMediaPlayer(mp);
+
+        final javafx.scene.control.Button playButton = new javafx.scene.control.Button(">");
         playButton.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent e)
@@ -130,17 +182,8 @@ public class LiteraPlayer extends BorderPane
             }
         });
 
-        mediaBar.getChildren().add(playButton);
-        // Add spacer
-        Label spacer = new Label("   ");
-        mediaBar.getChildren().add(spacer);
-
-        // Add Time label
-        Label timeLabel = new Label("Time: ");
-        mediaBar.getChildren().add(timeLabel);
 
         // Add time slider
-        timeSlider = new Slider();
         HBox.setHgrow(timeSlider, Priority.ALWAYS);
         timeSlider.setMinWidth(50);
         timeSlider.setMaxWidth(Double.MAX_VALUE);
@@ -155,20 +198,8 @@ public class LiteraPlayer extends BorderPane
                 }
             }
         });
-        mediaBar.getChildren().add(timeSlider);
-
-        // Playing it
-        playTime = new Label();
-        playTime.setPrefWidth(130);
-        playTime.setMinWidth(50);
-        mediaBar.getChildren().add(playTime);
-
-        // The volume level
-        Label volumeLabel = new Label("Vol: ");
-        mediaBar.getChildren().add(volumeLabel);
 
         // Adjusting the volume
-        volumeSlider = new Slider();
         volumeSlider.setPrefWidth(70);
         volumeSlider.setMaxWidth(Region.USE_PREF_SIZE);
         volumeSlider.setMinWidth(30);
@@ -182,54 +213,7 @@ public class LiteraPlayer extends BorderPane
                 }
             }
         });
-
-        mediaBar.getChildren().add(volumeSlider);
-        setBottom(mediaBar);
-    }
-
-    private static String formatTime(Duration elapsed, Duration duration)
-    {
-        int intElapsed = (int) Math.floor(elapsed.toSeconds());
-        int elapsedHours = intElapsed / (60 * 60);
-        if ( elapsedHours > 0 )
-        {
-            intElapsed -= elapsedHours * 60 * 60;
-        }
-        int elapsedMinutes = intElapsed / 60;
-        int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
-
-        if ( duration.greaterThan(Duration.ZERO) )
-        {
-            int intDuration = (int) Math.floor(duration.toSeconds());
-            int durationHours = intDuration / (60 * 60);
-            if ( durationHours > 0 )
-            {
-                intDuration -= durationHours * 60 * 60;
-            }
-            int durationMinutes = intDuration / 60;
-            int durationSeconds = intDuration - durationHours * 60 * 60 - durationMinutes * 60;
-            if ( durationHours > 0 )
-            {
-                return String.format("%d:%02d:%02d/%d:%02d:%02d",
-                        elapsedHours, elapsedMinutes, elapsedSeconds, durationHours, durationMinutes, durationSeconds);
-            }
-            else
-            {
-                return String.format("%02d:%02d/%02d:%02d",
-                        elapsedMinutes, elapsedSeconds, durationMinutes, durationSeconds);
-            }
-        }
-        else
-        {
-            if ( elapsedHours > 0 )
-            {
-                return String.format("%d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds);
-            }
-            else
-            {
-                return String.format("%02d:%02d", elapsedMinutes, elapsedSeconds);
-            }
-        }
+        mp.play();
     }
 
     protected void updateValues()

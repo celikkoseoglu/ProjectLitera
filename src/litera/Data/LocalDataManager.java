@@ -20,6 +20,9 @@ import java.util.Arrays;
 
 /*
  * change log:
+ * 25/04/2015
+ * Trash was finally implemented.
+ *
  * 23/04/2015
  * New comments were added
  * Shortened some of the code (Thanks to my RubberDuck)
@@ -317,14 +320,14 @@ public class LocalDataManager
      * @return
      * @description moves the selected notes to trash when the |-| button is clicked
      */
-    public static boolean moveToTrash(ObservableList selectedNotes)
+    public static boolean moveNotes(ObservableList selectedNotes, boolean isMovingToTrash)
     {
-        directoryExists(OS_TRASH_FILE_PATH); //creates the trash directory if it does not exist
+        directoryExists(isMovingToTrash ? OS_TRASH_FILE_PATH : OS_NOTES_FILE_PATH); //creates the trash directory if it does not exist
         for ( Object s : selectedNotes )
         {
-            System.out.println("Trying to delete: " + s);
-            Path source = Paths.get(OS_NOTES_FILE_PATH + s);
-            Path destination = Paths.get((OS_TRASH_FILE_PATH) + s);
+            System.out.println("Trying to move: " + s);
+            Path source = Paths.get((isMovingToTrash ? OS_NOTES_FILE_PATH : OS_TRASH_FILE_PATH) + s);
+            Path destination = Paths.get((isMovingToTrash ? OS_TRASH_FILE_PATH : OS_NOTES_FILE_PATH) + s);
             try
             {
                 Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);

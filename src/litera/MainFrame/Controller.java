@@ -211,7 +211,7 @@ public class Controller implements Initializable
             Color newValue = notePadColorPicker.getValue();
             if ( newValue != null )
             {
-                LocalDataManager.saveNoteCSS(currentNote, colorValueToHex(newValue));
+                //LocalDataManager.saveNoteCSS(currentNote, colorValueToHex(newValue));
                 borderPane.setStyle("-fx-background-color: " + colorValueToHex(newValue));
                 notePadColorPicker.hide();
             }
@@ -247,7 +247,7 @@ public class Controller implements Initializable
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
                 //noteListView.getStylesheets().clear();
-                noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
+                //noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
             }
         });
 
@@ -319,9 +319,9 @@ public class Controller implements Initializable
         String lastNoteName = LocalDataManager.getLastNote();
         if ( noteListView.getItems().contains(lastNoteName) ) ;
         noteListView.getSelectionModel().select(lastNoteName);
-        System.out.println(noteListView.getStylesheets());
-        //noteListView.getStylesheets().clear();
-        noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
+        //System.out.println("file:///" + LocalDataManager.getNoteCSS(currentNote).getAbsolutePath().replace(" ", "%20"));
+        noteListView.getStylesheets().add("file:" + ( LocalDataManager.getLocalNotesFilePath() + "New Note (2)/New Note (2).css" ).replace(" ", "%20"));
+
         return true;
     }
 

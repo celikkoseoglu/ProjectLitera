@@ -73,7 +73,6 @@ public class LocalDataManager
         OS_NOTES_FILE_PATH = OS_FILE_PATH + "Notes/";
         OS_TRASH_FILE_PATH = OS_FILE_PATH + "Trash/";
         OS_OPTIONS_FILE_PATH = OS_FILE_PATH + "Options/";
-        OS_STYLE_FILE_PATH = OS_FILE_PATH + "Style/";
         System.out.println("Default OS FilePath: " + OS_FILE_PATH);
         System.out.println("Default note directory FilePath:" + OS_NOTES_FILE_PATH);
         System.out.println("Default trash directory FilePath: " + OS_TRASH_FILE_PATH);
@@ -109,12 +108,12 @@ public class LocalDataManager
         }
     }
 
-    public static boolean saveNoteCSS(Note n, String hexColor)
+    /*public static boolean saveNoteCSS(Note n, String hexColor)
     {
         try
         {
-            directoryExists(OS_STYLE_FILE_PATH);
-            FileWriter fw = new FileWriter(OS_STYLE_FILE_PATH + n.getNoteName().replaceAll(" ", "_") + ".css"/* ,true (to append)*/);
+            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
+            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".css");
             fw.write(Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2);
             fw.close();
             return true;
@@ -131,12 +130,12 @@ public class LocalDataManager
         }
     }
 
-    public static File getNoteCSS(Note n)
+    /*public static File getNoteCSS(Note n)
     {
-        File f = new File(OS_STYLE_FILE_PATH + n.getNoteName().replaceAll(" ", "_") + ".css");
+        File f = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".css");
         System.out.println(f.exists());
         return f;
-    }
+    }*/
 
     /**
      * @param n    the Note object to change the name for

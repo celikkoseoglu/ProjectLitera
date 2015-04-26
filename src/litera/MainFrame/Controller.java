@@ -22,8 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
-import litera.Multimedia.AudioController;
-import litera.Multimedia.PlayerController;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -31,14 +29,11 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable
 {
-    // Other variables' Declaration
     private static Note currentNote;
     private static WebPage webPage;
-    private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
+    private ObservableList<String> noteListScrollPaneItems;
     private boolean isNoteChanged;
 
-    @FXML
-    private ToolBar styleToolbar;
     @FXML
     private ToggleButton boldToggleButton, italicToggleButton, underlineToggleButton, strikethroughToggleButton, insertOrderedListToggleButton;
     @FXML
@@ -59,6 +54,10 @@ public class Controller implements Initializable
     private ContextMenu trashContextMenu;
     @FXML
     private MenuItem recoverMenuItem, deleteMenuItem;
+    @FXML
+    private ToolBar optionsToolbar;
+    @FXML
+    private Separator noteNameSeperator;
 
     //Stage closing event calls this function to save the last note so Litera can start with the latest edited note next time.
     public static void onExit()
@@ -92,69 +91,30 @@ public class Controller implements Initializable
         editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> buttonFeedback());
         editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> buttonFeedback());
 
-        // Button Listeners for Bottom Toolbar
         trashButton.setOnAction(event -> {
-            String[] trashNoteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath());
-            trashNoteListView.setItems(FXCollections.observableArrayList(trashNoteList));
+            trashNoteListView.setItems(FXCollections.observableArrayList(LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath())));
             trashContextMenu.show(trashButton, Side.RIGHT, -20, -20); //show the trash menu on left click at the correct location
         });
 
         recoverMenuItem.setOnAction(event -> {
             LocalDataManager.moveNotes(trashNoteListView.getSelectionModel().getSelectedItems(), false);
-            populateNoteListbox();
+            populateNoteListbox(); //load recovered notes back while keeping the alphabetical order
         });
 
-        deleteMenuItem.setOnAction(event -> {
-            LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems());
-        });
+        deleteMenuItem.setOnAction(event -> LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems()));
 
         optionsButton.setOnAction(event -> {
-            try
-            {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Options/options.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Options");
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-            catch ( Exception ex )
-            {
-                System.out.println(ex.toString());
-            }
+            loadWindow("../Multimedia/options.fxml", "Litera Options");
         });
 
         addAudioButton.setOnAction(event -> {
-            try
-            {
-                addAudio();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/audio.fxml"));
-                fxmlLoader.setController(new AudioController());
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Audio");
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-            catch ( Exception ex )
-            {
-
-            }
+            loadWindow("../Multimedia/audio.fxml", "Litera Recorder");
         });
 
         addVideoButton.setOnAction(event -> {
             try
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/player.fxml"));
-                fxmlLoader.setController(new PlayerController(null));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Litera Player");
-                stage.setScene(new Scene(root));
-                stage.show();
+                loadWindow("../Multimedia/player.fxml", "Litera Player");
                 /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Choose Video");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4"));
@@ -162,7 +122,6 @@ public class Controller implements Initializable
                 System.out.println(Paths.get(selectedFile.toURI()));
                 System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
                 Files.copy(Paths.get(selectedFile.toURI()), Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"), StandardCopyOption.REPLACE_EXISTING);*/
-
             }
             catch ( Exception ex )
             {
@@ -171,38 +130,21 @@ public class Controller implements Initializable
         });
 
         addImageButton.setOnAction(event -> {
-            try
-            {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/video.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Picture");
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-            catch ( Exception ex )
-            {
-
-            }
+            loadWindow("../Multimedia/video.fxml", "Litera Player");
         });
 
-        foregroundColorPicker.setOnAction(ev1 -> {
+        foregroundColorPicker.setOnAction(event -> {
             Color newValue = foregroundColorPicker.getValue();
             if ( newValue != null )
-            {
                 addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
-                foregroundColorPicker.hide();
-            }
         });
 
-        notePadColorPicker.setOnAction(ev1 -> {
+        notePadColorPicker.setOnAction(event -> {
             Color newValue = notePadColorPicker.getValue();
             if ( newValue != null )
             {
                 LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
-                borderPane.setStyle("-fx-background-color: " + Defaults.colorValueToHex(newValue));
-                notePadColorPicker.hide();
+                loadCSS(currentNote);
             }
         });
 
@@ -231,8 +173,7 @@ public class Controller implements Initializable
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
-                borderPane.getStylesheets().clear();
-                borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                loadCSS(currentNote);
             }
         });
 
@@ -253,9 +194,29 @@ public class Controller implements Initializable
 
         // Start up of the program
         borderPane.getStyleClass().add("border-pane");
+        noteNameTextField.getStyleClass().add("list-view");
+        optionsToolbar.getStyleClass().add("list-view");
         populateNoteListbox();
         loadLastNote();
 
+    }
+
+    private void loadWindow(String windowPath, String windowTitle)
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(windowPath));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(windowTitle);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch ( Exception ex )
+        {
+            ex.toString();
+        }
     }
 
     // Returns the string version of the page
@@ -317,5 +278,11 @@ public class Controller implements Initializable
         underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));
         strikethroughToggleButton.setSelected(webPage.queryCommandState(Defaults.STRIKETHROUGH_COMMAND));
         insertOrderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.NUMBERS_COMMAND));
+    }
+
+    private void loadCSS(Note n)
+    {
+        borderPane.getStylesheets().clear();
+        borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
     }
 }

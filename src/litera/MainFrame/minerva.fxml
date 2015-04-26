@@ -13,8 +13,8 @@
     <bottom>
         <GridPane style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="182.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="212.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="188.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="254.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" />
             </columnConstraints>
@@ -22,7 +22,8 @@
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ToolBar maxHeight="20.0" prefHeight="20.0" style="-fx-background-color: transparent;">
+                <ToolBar fx:id="optionsToolbar" maxHeight="20.0" prefHeight="20.0"
+                         style="-fx-background-color: transparent;">
                     <items>
                         <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
                         <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />

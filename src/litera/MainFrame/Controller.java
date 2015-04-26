@@ -13,6 +13,7 @@ import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -166,7 +167,7 @@ public class Controller implements Initializable
             {
                 if ( isNoteChanged ) //there is no need for a save operation if you didn't change anything
                 {
-                    currentNote.setHtmlNote(getWebViewContent());
+                    currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
                     LocalDataManager.saveNote(currentNote);
                     isNoteChanged = false;
                 }
@@ -182,22 +183,23 @@ public class Controller implements Initializable
             System.out.println("Alert Event  -  Message:  " + wEvent.getData());
         });
 
-        noteNameTextField.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> {
+        noteNameTextField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             //do not try to change the name if textField is empty or the note with the same name exists
-            if ( !noteNameTextField.getText().isEmpty() && !Arrays.asList(LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath())).contains(noteNameTextField.getText()) )
+            if ( !noteNameTextField.getText().isEmpty() && !noteListScrollPaneItems.contains(noteNameTextField.getText()) )
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
-                populateNoteListbox();
+                populateNoteListbox(); //need this to retain the alphabetical order
             }
         });
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
 
         // Start up of the program
-        borderPane.getStyleClass().add("border-pane");
-        noteNameTextField.getStyleClass().add("list-view");
+        borderPane.getStyleClass().add("border-pane"); //border-pane has the background-color property
+        noteNameTextField.getStyleClass().add("list-view"); //list-view has the border-color property
         optionsToolbar.getStyleClass().add("list-view");
         populateNoteListbox();
         loadLastNote();
+        System.out.println(Arrays.toString(LocalDataManager.getFileIDs()));
 
     }
 
@@ -217,12 +219,6 @@ public class Controller implements Initializable
         {
             ex.toString();
         }
-    }
-
-    // Returns the string version of the page
-    private String getWebViewContent()
-    {
-        return webPage.getHtml(webPage.getMainFrame()); //old method: (String)editor.getEngine().executeScript("document.documentElement.outerHTML");
     }
 
     /**
@@ -249,6 +245,7 @@ public class Controller implements Initializable
         {
             currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
             LocalDataManager.saveNote(currentNote);
+            LocalDataManager.generateAndSaveID(currentNote);
             noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
         }
         noteListScrollPaneItems = FXCollections.observableArrayList(noteList);

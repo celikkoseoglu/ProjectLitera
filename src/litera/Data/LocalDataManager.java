@@ -21,6 +21,7 @@ import java.util.Arrays;
  * change log:
  * 26/05/2015
  * saves and loads note colors
+ * every file has a unique id now
  *
  * 25/04/2015
  * Trash was finally implemented.
@@ -364,9 +365,54 @@ public class LocalDataManager
             }
         }
 
-        saveNote(new Note(newNoteName, Defaults.newNotePage));
-
+        Note n = new Note(newNoteName, Defaults.newNotePage);
+        saveNote(n);
+        generateAndSaveID(n);
         return newNoteName;
+    }
+
+    public static boolean generateAndSaveID(Note n)
+    {
+        try
+        {
+            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
+            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/id.lit");
+            fw.write(java.time.LocalDateTime.now().toString());
+            fw.close();
+            return true;
+        }
+        catch ( NullPointerException nullPtrException )
+        {
+            System.err.println(nullPtrException.toString() + " :cannot save with a null note. How did it even get here?");
+            return false;
+        }
+        catch ( Exception ioe )
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+            return false;
+        }
+    }
+
+    public static String[] getFileIDs()
+    {
+        try
+        {
+            String[] notes = getNoteNames(OS_NOTES_FILE_PATH);
+            for ( int i = 0; i < notes.length; i++ )
+            {
+                FileReader fr = new FileReader(OS_NOTES_FILE_PATH + notes[i] + "/id.lit");
+                BufferedReader textReader = new BufferedReader(fr);
+                notes[i] = textReader.readLine();
+                textReader.close();
+                fr.close();
+            }
+            return notes;
+        }
+        catch ( Exception e )
+        {
+            System.out.println("FileID reading error");
+        }
+        return null;
     }
 
     public static File addAudio(File file, Note n)

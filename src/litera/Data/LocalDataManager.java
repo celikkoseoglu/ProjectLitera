@@ -9,12 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 /**
  * the Local Data Manager class for Litera. Manages local data & encryption
  * all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
  * @author Çelik Köseoğlu
- * @version 5
+ * @version 12
  */
 
 /*
@@ -22,6 +23,7 @@ import java.util.Arrays;
  * 26/05/2015
  * saves and loads note colors
  * every file has a unique id now
+ * many functions were saving text so I created the saveText() method to eliminate code duplicates
  *
  * 25/04/2015
  * Trash was finally implemented.
@@ -73,6 +75,9 @@ public class LocalDataManager
         else if ( osName.indexOf("Windows") != -1 ) //what if we changed user.name to user.home? will try soon...
             OS_FILE_PATH = "C:/Users/" + System.getProperty("user.name") + "/Documents/Litera/";
 
+        else if ( osName.indexOf("Linux") != -1 )
+            OS_FILE_PATH = System.getProperty("user.home") + "/Litera/";
+
         OS_NOTES_FILE_PATH = OS_FILE_PATH + "Notes/";
         OS_TRASH_FILE_PATH = OS_FILE_PATH + "Trash/";
         OS_OPTIONS_FILE_PATH = OS_FILE_PATH + "Options/";
@@ -84,6 +89,23 @@ public class LocalDataManager
         return true;
     }
 
+    private static boolean saveText(String filePath, String fileName, String text)
+    {
+        try
+        {
+            directoryExists(filePath);
+            FileWriter fw = new FileWriter(filePath + fileName);
+            fw.write(/*EncryptionManager.encryptString*/( text ));
+            fw.close();
+            return true;
+        }
+        catch ( Exception ioe )
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+            return false;
+        }
+    }
+
     /**
      * @param n is the note to be saved
      * @return true if save is successful
@@ -91,52 +113,32 @@ public class LocalDataManager
      */
     public static boolean saveNote(Note n)
     {
-        try
+        if ( n != null )
         {
-            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
-            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".html"/* ,true (to append)*/);
-            fw.write(/*EncryptionManager.encryptString*/(n.getHtmlNote()));
-            fw.close();
+            String filePath = OS_NOTES_FILE_PATH + n.getNoteName() + "/";
+            String fileName = n.getNoteName() + ".html";
+            saveText(filePath, fileName, n.getHtmlNote());
             return true;
         }
-        catch ( NullPointerException nullPtrException )
-        {
-            System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
-            return false;
-        }
-        catch ( Exception ioe )
-        {
-            System.err.println("IOException: " + ioe.getMessage());
-            return false;
-        }
+        return false;
     }
 
     public static boolean saveNoteCSS(Note n, String hexColor)
     {
-        try
+        if ( n != null && hexColor != null )
         {
-            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
-            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/style.css");
-            fw.write(Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2 + hexColor + Defaults.COLOR_SCHEME_CSS_3 + hexColor + Defaults.COLOR_SCHEME_CSS_4);
-            fw.close();
+            String filePath = OS_NOTES_FILE_PATH + n.getNoteName() + "/";
+            String fileName = "style.css";
+            saveText(filePath, fileName, Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2 + hexColor + Defaults.COLOR_SCHEME_CSS_3 + hexColor + Defaults.COLOR_SCHEME_CSS_4);
             return true;
         }
-        catch ( NullPointerException nullPtrException )
-        {
-            System.err.println(nullPtrException.toString() + " :cannot save with a null note. How did it even get here?");
-            return false;
-        }
-        catch ( Exception ioe )
-        {
-            System.err.println("IOException: " + ioe.getMessage());
-            return false;
-        }
+        return false;
     }
 
     public static String getNoteCSS(Note n)
     {
         File f = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/style.css");
-        return f.exists() ? "file:" + f.toString() : Defaults.class.getResource("../Defaults/Default.css").toExternalForm();
+        return f.exists() ? "file:" + f.toString() : Defaults.class.getResource("../Defaults/Default.css").toString();
     }
 
     /**
@@ -373,24 +375,12 @@ public class LocalDataManager
 
     public static boolean generateAndSaveID(Note n)
     {
-        try
+        if ( n != null )
         {
-            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
-            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/id.lit");
-            fw.write(java.time.LocalDateTime.now().toString());
-            fw.close();
+            saveText(OS_NOTES_FILE_PATH + n.getNoteName() + "/", "id.lit", LocalDateTime.now().toString());
             return true;
         }
-        catch ( NullPointerException nullPtrException )
-        {
-            System.err.println(nullPtrException.toString() + " :cannot save with a null note. How did it even get here?");
-            return false;
-        }
-        catch ( Exception ioe )
-        {
-            System.err.println("IOException: " + ioe.getMessage());
-            return false;
-        }
+        return false;
     }
 
     public static String[] getFileIDs()

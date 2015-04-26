@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ProjectMinerva" />
+      <artifact name="ProjectLitera:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Notes have colors now!">
+    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Unique FileID support">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/ProjectMinerva.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -35,8 +36,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.888889">
-              <caret line="202" column="73" selection-start-line="202" selection-start-column="73" selection-end-line="202" selection-end-column="73" />
+            <state vertical-scroll-proportion="-5.5185184">
+              <caret line="136" column="70" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -87,14 +88,15 @@
       <file leaf-file-name="LocalDataManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7758945">
-              <caret line="373" column="10" selection-start-line="373" selection-start-column="10" selection-end-line="373" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.5654762">
+              <caret line="140" column="105" selection-start-line="140" selection-start-column="105" selection-end-line="140" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
-                <element signature="method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#saveText#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
-                <element signature="method#getNoteCSS#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
@@ -103,10 +105,13 @@
                 <element signature="docComment;method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#getNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#getFileIDs#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#addAudio#0;class#LocalDataManager#0" expanded="false" />
@@ -196,8 +201,8 @@
         <option value="$PROJECT_DIR$/src/litera/Defaults/Defaults.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/Note.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" />
-        <option value="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
+        <option value="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
       </list>
     </option>
   </component>
@@ -244,8 +249,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -261,6 +267,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -322,28 +342,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Icons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Defaults" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -372,7 +370,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -386,7 +383,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/README.md" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/ProjectLitera" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -397,6 +394,13 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="false" />
+    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="projectlitera" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -763,7 +767,8 @@
       <workItem from="1429995086184" duration="1571000" />
       <workItem from="1430035095301" duration="4958000" />
       <workItem from="1430042800618" duration="1793000" />
-      <workItem from="1430050438803" duration="2815000" />
+      <workItem from="1430050438803" duration="2857000" />
+      <workItem from="1430053923761" duration="4335000" />
     </task>
     <task id="LOCAL-00001" summary="It compiles!">
       <created>1429551929907</created>
@@ -861,11 +866,17 @@
       <option name="project" value="LOCAL" />
       <updated>1430044705571</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Unique FileID support">
+      <created>1430053698890</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1430053698890</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97436000" />
+    <option name="totallyTimeSpent" value="101813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -878,10 +889,10 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39518073" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39518073" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39518073" sideWeight="0.49427754" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32650602" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32650602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32650602" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27349398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -923,7 +934,8 @@
     <MESSAGE value="Colors!" />
     <MESSAGE value="Video and Stuff" />
     <MESSAGE value="Notes have colors now!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Notes have colors now!" />
+    <MESSAGE value="Unique FileID support" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unique FileID support" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -939,47 +951,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getNoteCSS#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getFileIDs#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#addAudio#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1334,14 +1305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1350,10 +1313,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33291772">
+          <caret line="260" column="12" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Default.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.888889">
-          <caret line="202" column="73" selection-start-line="202" selection-start-column="73" selection-end-line="202" selection-end-column="73" />
+        <state vertical-scroll-proportion="-5.5185184">
+          <caret line="136" column="70" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1362,14 +1349,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7758945">
-          <caret line="373" column="10" selection-start-line="373" selection-start-column="10" selection-end-line="373" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.5654762">
+          <caret line="140" column="105" selection-start-line="140" selection-start-column="105" selection-end-line="140" selection-end-column="105" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#setOS_FILE_PATH#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveText#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getNoteCSS#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
@@ -1378,10 +1366,13 @@
             <element signature="docComment;method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#getFileIDs#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#addAudio#0;class#LocalDataManager#0" expanded="false" />
@@ -1399,7 +1390,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>ProjectMinerva</last-edited>
+          <last-edited>ProjectLitera:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

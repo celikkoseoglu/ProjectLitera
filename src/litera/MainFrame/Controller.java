@@ -75,8 +75,7 @@ public class Controller implements Initializable
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
-        // initializing webPage
-        webPage = Accessor.getPageFor(editor.getEngine());
+        webPage = Accessor.getPageFor(editor.getEngine()); //webPage is the controller for the webView for executing scripts etc.
         isNoteChanged = false;
 
         // Button Listeners for Style
@@ -89,8 +88,8 @@ public class Controller implements Initializable
         // Listeners for Style buttons
         editor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> buttonFeedback());
         editor.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> buttonFeedback());
-        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> buttonFeedback());
-        editor.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> buttonFeedback());
+        editor.addEventHandler(KeyEvent.KEY_RELEASED, event -> buttonFeedback());
+        editor.addEventHandler(KeyEvent.KEY_PRESSED, event -> buttonFeedback());
 
         trashButton.setOnAction(event -> {
             trashNoteListView.setItems(FXCollections.observableArrayList(LocalDataManager.getNoteNames(LocalDataManager.getLocalTrashFilePath())));
@@ -104,9 +103,7 @@ public class Controller implements Initializable
 
         deleteMenuItem.setOnAction(event -> LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems()));
 
-        optionsButton.setOnAction(event -> {
-            loadWindow("../Multimedia/options.fxml", "Litera Options");
-        });
+        optionsButton.setOnAction(event -> loadWindow("../Multimedia/options.fxml", "Litera Options"));
 
         addAudioButton.setOnAction(event -> {
             loadWindow("../Multimedia/audio.fxml", "Litera Recorder");
@@ -156,7 +153,7 @@ public class Controller implements Initializable
 
         deleteNoteButton.setOnAction(event -> {
             LocalDataManager.moveNotes(noteListView.getSelectionModel().getSelectedItems(), true);
-            noteListScrollPaneItems.remove(noteListView.getSelectionModel().getSelectedItem().toString());
+            noteListScrollPaneItems.remove(noteListView.getSelectionModel().getSelectedItem());
             noteListView.getSelectionModel().select(noteListView.getItems().size() - 1);
         });
 
@@ -200,7 +197,6 @@ public class Controller implements Initializable
         populateNoteListbox();
         loadLastNote();
         System.out.println(Arrays.toString(LocalDataManager.getFileIDs()));
-
     }
 
     private void loadWindow(String windowPath, String windowTitle)
@@ -222,7 +218,7 @@ public class Controller implements Initializable
     }
 
     /**
-     * @param command           some commands are located in the Defaults class
+     * @param command some commands are located in the Defaults class
      * @param commandComplement Color commands may go here
      * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
@@ -240,7 +236,6 @@ public class Controller implements Initializable
     private boolean populateNoteListbox()
     {
         String[] noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
-
         if ( noteList == null )
         {
             currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);

@@ -138,7 +138,7 @@ public class LocalDataManager
     public static String getNoteCSS(Note n)
     {
         File f = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/style.css");
-        return f.exists() ? "file:" + f.toString() : Defaults.class.getResource("../Defaults/Default.css").toString();
+        return f.exists() ? "file:" + f.toString() : Defaults.class.getResource("/litera/Defaults/Default.css").toString();
     }
 
     /**

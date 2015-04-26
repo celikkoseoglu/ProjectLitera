@@ -103,16 +103,16 @@ public class Controller implements Initializable
 
         deleteMenuItem.setOnAction(event -> LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems()));
 
-        optionsButton.setOnAction(event -> loadWindow("../Multimedia/options.fxml", "Litera Options"));
+        optionsButton.setOnAction(event -> loadWindow("/litera/Options/options.fxml", "Litera Options"));
 
         addAudioButton.setOnAction(event -> {
-            loadWindow("../Multimedia/audio.fxml", "Litera Recorder");
+            loadWindow("/litera/Multimedia/audio.fxml", "Litera Recorder");
         });
 
         addVideoButton.setOnAction(event -> {
             try
             {
-                loadWindow("../Multimedia/player.fxml", "Litera Player");
+                loadWindow("/litera/Multimedia/player.fxml", "Litera Player");
                 /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Choose Video");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4"));
@@ -128,7 +128,7 @@ public class Controller implements Initializable
         });
 
         addImageButton.setOnAction(event -> {
-            loadWindow("../Multimedia/video.fxml", "Litera Player");
+            loadWindow("/litera/Multimedia/video.fxml", "Litera Player");
         });
 
         foregroundColorPicker.setOnAction(event -> {
@@ -197,6 +197,7 @@ public class Controller implements Initializable
         populateNoteListbox();
         loadLastNote();
         System.out.println(Arrays.toString(LocalDataManager.getFileIDs()));
+        System.out.println(System.getProperty("user.dir"));
     }
 
     private void loadWindow(String windowPath, String windowTitle)
@@ -275,6 +276,6 @@ public class Controller implements Initializable
     private void loadCSS(Note n)
     {
         borderPane.getStylesheets().clear();
-        borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+        borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(n).replace(" ", "%20"));
     }
 }

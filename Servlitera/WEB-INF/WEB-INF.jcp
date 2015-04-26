@@ -12,7 +12,6 @@
 	</settings>
 	<ant_events/>
 	<run_items>
-		<item run/>
 		<item run="Default"/>
 	</run_items>
 	<runtimes>
@@ -27,7 +26,9 @@
 		</runtime>
 	</runtimes>
 	<libraries>
-		<library_ref>sqljdbc41</library_ref>
+		<library_ref>edtftpj</library_ref>
+		<library_ref>junit</library_ref>
+		<library_ref>mysql-connector-java-5.1.35-bin</library_ref>
 	</libraries>
 	<files>
 		<include>
@@ -53,6 +54,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\Default.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\MyHttpServlet.java</path>
 				<folder>src</folder>
 			</fileitem>
 		</include>

@@ -1,5 +1,9 @@
 package litera.Defaults;
 
+import javafx.scene.paint.Color;
+
+import java.util.Locale;
+
 public class Defaults
 {
     public final static String welcomePage = "<!DOCTYPE html>" +
@@ -32,5 +36,21 @@ public class Defaults
     public static final String BACKGROUND_COLOR_COMMAND = "backcolor";
 
     public static final String COLOR_SCHEME_CSS_1 = ".list-cell:filled:selected:focused,.list-cell:filled:selected {-fx-background-color:";
-    public static final String COLOR_SCHEME_CSS_2 = ";-fx-text-fill: white;}.list-cell:filled:hover {-fx-background-color: #d2d2d2;-fx-text-fill: white;}";
+    public static final String COLOR_SCHEME_CSS_2 = ";-fx-text-fill: white;}.list-cell:filled:hover {-fx-background-color: #d2d2d2;-fx-text-fill: white;}.list-view{-fx-border-color:";
+    public static final String COLOR_SCHEME_CSS_3 = ";}.border-pane{-fx-background-color:";
+    public static final String COLOR_SCHEME_CSS_4 = ";}";
+
+    /**
+     * @param c Color to be converted
+     * @return String containing Hex representation of the color
+     * @description converts the Color object c to a Hex representation of th color
+     */
+    public static String colorValueToHex(Color c)
+    {
+        return String.format((Locale) null, "#%02x%02x%02x",
+                Math.round(c.getRed() * 255),
+                Math.round(c.getGreen() * 255),
+                Math.round(c.getBlue() * 255));
+    }
+
 }

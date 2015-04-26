@@ -19,6 +19,9 @@ import java.util.Arrays;
 
 /*
  * change log:
+ * 26/05/2015
+ * saves and loads note colors
+ *
  * 25/04/2015
  * Trash was finally implemented.
  *
@@ -50,7 +53,6 @@ public class LocalDataManager
     private static String OS_NOTES_FILE_PATH;
     private static String OS_TRASH_FILE_PATH;
     private static String OS_OPTIONS_FILE_PATH;
-    private static String OS_STYLE_FILE_PATH;
 
     /**
      * @return true if operating system is supported by Litera
@@ -108,19 +110,19 @@ public class LocalDataManager
         }
     }
 
-    /*public static boolean saveNoteCSS(Note n, String hexColor)
+    public static boolean saveNoteCSS(Note n, String hexColor)
     {
         try
         {
             directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
-            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".css");
-            fw.write(Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2);
+            FileWriter fw = new FileWriter(OS_NOTES_FILE_PATH + n.getNoteName() + "/style.css");
+            fw.write(Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2 + hexColor + Defaults.COLOR_SCHEME_CSS_3 + hexColor + Defaults.COLOR_SCHEME_CSS_4);
             fw.close();
             return true;
         }
         catch ( NullPointerException nullPtrException )
         {
-            System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
+            System.err.println(nullPtrException.toString() + " :cannot save with a null note. How did it even get here?");
             return false;
         }
         catch ( Exception ioe )
@@ -130,12 +132,11 @@ public class LocalDataManager
         }
     }
 
-    /*public static File getNoteCSS(Note n)
+    public static String getNoteCSS(Note n)
     {
-        File f = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/" + n.getNoteName() + ".css");
-        System.out.println(f.exists());
-        return f;
-    }*/
+        File f = new File(OS_NOTES_FILE_PATH + n.getNoteName() + "/style.css");
+        return f.exists() ? "file:" + f.toString() : Defaults.class.getResource("../Defaults/Default.css").toExternalForm();
+    }
 
     /**
      * @param n    the Note object to change the name for

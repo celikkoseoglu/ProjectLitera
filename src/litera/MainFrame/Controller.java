@@ -27,7 +27,6 @@ import litera.Multimedia.PlayerController;
 
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -35,6 +34,8 @@ public class Controller implements Initializable
     // Other variables' Declaration
     private static Note currentNote;
     private static WebPage webPage;
+    private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
+    private boolean isNoteChanged;
 
     @FXML
     private ToolBar styleToolbar;
@@ -43,13 +44,9 @@ public class Controller implements Initializable
     @FXML
     private Button addAudioButton, addVideoButton, addImageButton;
     @FXML
-    private Button addNoteButton, deleteNoteButton;
+    private Button addNoteButton, deleteNoteButton, trashButton, optionsButton;
     @FXML
     private BorderPane borderPane;
-    @FXML
-    private Button trashButton;
-    @FXML
-    private Button optionsButton;
     @FXML
     private ListView noteListView, trashNoteListView;
     @FXML
@@ -63,27 +60,11 @@ public class Controller implements Initializable
     @FXML
     private MenuItem recoverMenuItem, deleteMenuItem;
 
-    private ObservableList<String> noteListScrollPaneItems, trashListScrollPaneItems;
-    private boolean isChanged;
-
-    // Saves the current note on exit
+    //Stage closing event calls this function to save the last note so Litera can start with the latest edited note next time.
     public static void onExit()
     {
         currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
         LocalDataManager.saveLastNote(currentNote);
-    }
-
-    /**
-     * @param c Color to be converted
-     * @return String containing Hex representation of the color
-     * @description converts the Color object c to a Hex representation of th color
-     */
-    private static String colorValueToHex(Color c)
-    {
-        return String.format((Locale) null, "#%02x%02x%02x",
-                Math.round(c.getRed() * 255),
-                Math.round(c.getGreen() * 255),
-                Math.round(c.getBlue() * 255));
     }
 
     public static void addAudio(/*File file*/)
@@ -96,7 +77,7 @@ public class Controller implements Initializable
     {
         // initializing webPage
         webPage = Accessor.getPageFor(editor.getEngine());
-        isChanged = false;
+        isNoteChanged = false;
 
         // Button Listeners for Style
         boldToggleButton.setOnAction(event -> addStyle(Defaults.BOLD_COMMAND, null));
@@ -210,7 +191,7 @@ public class Controller implements Initializable
             Color newValue = foregroundColorPicker.getValue();
             if ( newValue != null )
             {
-                addStyle(Defaults.FOREGROUND_COLOR_COMMAND, colorValueToHex(newValue));
+                addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
                 foregroundColorPicker.hide();
             }
         });
@@ -219,8 +200,8 @@ public class Controller implements Initializable
             Color newValue = notePadColorPicker.getValue();
             if ( newValue != null )
             {
-                //LocalDataManager.saveNoteCSS(currentNote, colorValueToHex(newValue));
-                borderPane.setStyle("-fx-background-color: " + colorValueToHex(newValue));
+                LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
+                borderPane.setStyle("-fx-background-color: " + Defaults.colorValueToHex(newValue));
                 notePadColorPicker.hide();
             }
         });
@@ -241,41 +222,37 @@ public class Controller implements Initializable
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
             {
-                if ( isChanged ) //there is no need for a save operation if you didn't change anything
+                if ( isNoteChanged ) //there is no need for a save operation if you didn't change anything
                 {
                     currentNote.setHtmlNote(getWebViewContent());
                     LocalDataManager.saveNote(currentNote);
-                    isChanged = false; //checked via webPage listeners
+                    isNoteChanged = false;
                 }
-
-                /* Gets the selected note from the notes directory
-                 * If LocalDataManager can't find the file, returns null. Either this is the first run or the user messed up with Litera directory.
-                 * While evaluating this statement, the note gets loaded into the currentNote object.*/
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
-                //noteListView.getStylesheets().clear();
-                //noteListView.getStylesheets().add("file:" + LocalDataManager.getNoteCSS(currentNote));
+                borderPane.getStylesheets().clear();
+                borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
             }
         });
 
+        //Event handler for button clicks on the note
         editor.getEngine().setOnAlert((WebEvent<String> wEvent) -> {
             System.out.println("Alert Event  -  Message:  " + wEvent.getData());
         });
 
-        //calling populateListbox() is EXTREMELY INEFFICIENT. Will fix.
         noteNameTextField.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, event -> {
-            //do not try to change the name if textField is empty.
+            //do not try to change the name if textField is empty or the note with the same name exists
             if ( !noteNameTextField.getText().isEmpty() && !Arrays.asList(LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath())).contains(noteNameTextField.getText()) )
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
                 populateNoteListbox();
             }
-            //LocalDataManager.getNoteNames();
         });
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
 
         // Start up of the program
+        borderPane.getStyleClass().add("border-pane");
         populateNoteListbox();
         loadLastNote();
 
@@ -288,7 +265,7 @@ public class Controller implements Initializable
     }
 
     /**
-     * @param command some commands are located in the Defaults class
+     * @param command           some commands are located in the Defaults class
      * @param commandComplement Color commands may go here
      * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
@@ -319,27 +296,22 @@ public class Controller implements Initializable
     }
 
     /**
+     * returns the last note name of
+     *
      * @return
-     * @description the aim is to open the last note the user edited. I know it doesn't work as expected right now. (Celik)
      */
     private boolean loadLastNote()
     {
         String lastNoteName = LocalDataManager.getLastNote();
-        if ( noteListView.getItems().contains(lastNoteName) ) ;
-        noteListView.getSelectionModel().select(lastNoteName);
-        //System.out.println("file:///" + LocalDataManager.getNoteCSS(currentNote).getAbsolutePath().replace(" ", "%20"));
-        noteListView.getStylesheets().add("file:" + ( LocalDataManager.getLocalNotesFilePath() + "New Note (2)/New Note (2).css" ).replace(" ", "%20"));
-
+        if ( noteListView.getItems().contains(lastNoteName) )
+            noteListView.getSelectionModel().select(lastNoteName);
         return true;
     }
 
-    /**
-     * @description changes button states according to the currently edited text. For instance if the text you are working on is
-     * Italic, toggles the Italic button.
-     */
+    //changes button states according to the currently edited text. For instance if the text you are working on is Italic, toggles the Italic button.
     private void buttonFeedback()
     {
-        isChanged = true;
+        isNoteChanged = true;
         boldToggleButton.setSelected(webPage.queryCommandState(Defaults.BOLD_COMMAND));
         italicToggleButton.setSelected(webPage.queryCommandState(Defaults.ITALIC_COMMAND));
         underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));

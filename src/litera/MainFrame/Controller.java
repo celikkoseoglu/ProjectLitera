@@ -57,8 +57,6 @@ public class Controller implements Initializable
     private MenuItem recoverMenuItem, deleteMenuItem;
     @FXML
     private ToolBar optionsToolbar;
-    @FXML
-    private Separator noteNameSeperator;
 
     //Stage closing event calls this function to save the last note so Litera can start with the latest edited note next time.
     public static void onExit()

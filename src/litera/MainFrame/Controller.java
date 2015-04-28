@@ -25,7 +25,6 @@ import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -194,8 +193,6 @@ public class Controller implements Initializable
         optionsToolbar.getStyleClass().add("list-view");
         populateNoteListbox();
         loadLastNote();
-        System.out.println(Arrays.toString(LocalDataManager.getFileIDs()));
-        System.out.println(System.getProperty("user.dir"));
     }
 
     private void loadWindow(String windowPath, String windowTitle)
@@ -257,6 +254,8 @@ public class Controller implements Initializable
         String lastNoteName = LocalDataManager.getLastNote();
         if ( noteListView.getItems().contains(lastNoteName) )
             noteListView.getSelectionModel().select(lastNoteName);
+        else
+            noteListView.getSelectionModel().selectFirst();
         return true;
     }
 

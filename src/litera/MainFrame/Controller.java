@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
+import litera.Multimedia.AudioController;
 import litera.Multimedia.PlayerController;
 
 import java.io.File;
@@ -119,7 +120,22 @@ public class Controller implements Initializable
         optionsButton.setOnAction(event -> loadWindow("/litera/Options/options.fxml", "Litera Options"));
 
         addAudioButton.setOnAction(event -> {
-            loadWindow("/litera/Multimedia/audio.fxml", "Litera Recorder");
+            try
+            {
+                addAudio();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/audio.fxml"));
+                fxmlLoader.setController(new AudioController(currentNote));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Audio");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception ex )
+            {
+                System.out.println(ex.toString());
+            }
         });
 
         addVideoButton.setOnAction(event -> {

@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -22,11 +23,18 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//mert aytöre
+
 public class PlayerController implements Initializable
 {
-    private static final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+    private final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
     private final boolean repeat = false; //new added here
-    private final Media m = new Media(MEDIA_URL); //MEDIA_URL);//f.toURI().toString());
+    String workingDir = System.getProperty("user.dir"); // filepath
+    final File f = new File(workingDir, "/91.m4v");//"bird.wav");//"/91.m4v");//"/08.mp3");
+    private Media m;//= new Media(MEDIA_URL); //MEDIA_URL);//f.toURI().toString());
+    private MediaPlayer mp; //= new MediaPlayer(m);
+    @FXML
+    private BorderPane playerBorderPane;
     @FXML
     private Button playButton;
     @FXML
@@ -35,19 +43,22 @@ public class PlayerController implements Initializable
     private Label playTime;
     @FXML
     private MediaView mediaView;
-    private MediaPlayer mp = new MediaPlayer(m);
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
     private Duration duration;
 
     public PlayerController(File f)// , Note note, String fileName) needed
     {
+        File file;
+        file = f;//file.toURI().toString());
+        m = new Media(file.toURI().toString());
+        mp = new MediaPlayer(m);
     }
 
     private static String formatTime(Duration elapsed, Duration duration)
     {
         int intElapsed = (int) Math.floor(elapsed.toSeconds());
-        int elapsedHours = intElapsed / ( 60 * 60 );
+        int elapsedHours = intElapsed / (60 * 60);
         if ( elapsedHours > 0 )
         {
             intElapsed -= elapsedHours * 60 * 60;
@@ -58,7 +69,7 @@ public class PlayerController implements Initializable
         if ( duration.greaterThan(Duration.ZERO) )
         {
             int intDuration = (int) Math.floor(duration.toSeconds());
-            int durationHours = intDuration / ( 60 * 60 );
+            int durationHours = intDuration / (60 * 60);
             if ( durationHours > 0 )
             {
                 intDuration -= durationHours * 60 * 60;
@@ -89,12 +100,16 @@ public class PlayerController implements Initializable
         }
     }
 
+    public void disposeThis()
+    {
+        this.mp.dispose();
+    }
+
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
         mediaView.setMediaPlayer(mp);
 
-        final javafx.scene.control.Button playButton = new javafx.scene.control.Button(">");
         playButton.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent e)
@@ -182,7 +197,6 @@ public class PlayerController implements Initializable
             }
         });
 
-
         // Add time slider
         HBox.setHgrow(timeSlider, Priority.ALWAYS);
         timeSlider.setMinWidth(50);
@@ -213,7 +227,15 @@ public class PlayerController implements Initializable
                 }
             }
         });
+
         mp.play();
+        mediaView.fitWidthProperty().bind(playerBorderPane.widthProperty());
+        mediaView.fitHeightProperty().bind(playerBorderPane.heightProperty());
+        playerBorderPane.setMinSize(500, 500);
+        System.out.println(mediaView.getFitWidth());
+        System.out.println(mediaView.getFitHeight());
+        //if() dosya uzant�s�na g�re
+        //playerBorderPane.setMinSize(500, 600);
     }
 
     protected void updateValues()

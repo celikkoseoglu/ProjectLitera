@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,13 +20,28 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
+import litera.Multimedia.PlayerController;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+
+/**
+ * UI Controller for the Main Frame
+ *
+ * @author Çelik Köseoğlu - all except below
+ * @author Caner Çalışkaner - buttonFeedback method and styling toolbar listeners
+ * @author Orhun Çağlayan - rename algorithm
+ */
 
 public class Controller implements Initializable
 {
@@ -109,14 +125,41 @@ public class Controller implements Initializable
         addVideoButton.setOnAction(event -> {
             try
             {
-                loadWindow("/litera/Multimedia/player.fxml", "Litera Player");
-                /*FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Choose Video");
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4"));
-                File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
-                System.out.println(Paths.get(selectedFile.toURI()));
-                System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
-                Files.copy(Paths.get(selectedFile.toURI()), Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"), StandardCopyOption.REPLACE_EXISTING);*/
+                try
+                {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Choose Video");
+                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
+                    File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
+                    System.out.println(Paths.get(selectedFile.toURI()));
+                    System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
+                    Files.copy(Paths.get(selectedFile.toURI()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "\\" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                    PlayerController a = new PlayerController(selectedFile);
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/player.fxml"));
+                    fxmlLoader.setController(a);
+                    Parent root = fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Litera Player");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
+                    {
+                        public void handle(WindowEvent we)
+                        {
+                            System.out.println("Stage is closing");
+                            a.disposeThis();
+
+                        }
+                    });
+
+
+                }
+                catch ( Exception ex )
+                {
+                    System.out.println(ex.toString());
+                }
             }
             catch ( Exception ex )
             {

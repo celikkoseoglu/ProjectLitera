@@ -2,17 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="40.0" maxWidth="210.0" minHeight="40.0" minWidth="210.0"
-      prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8">
-   <children>
-      <ToolBar prefHeight="40.0" prefWidth="210.0">
-        <items>
-            <Button fx:id="rec" mnemonicParsing="false" text="●" textFill="RED" />
-            <Button fx:id="play" mnemonicParsing="false" text="▶" />
-            <Button fx:id="stop" mnemonicParsing="false" text="■" />
-            <Button fx:id="choose" mnemonicParsing="false" text="Choose" />
-            <Button fx:id="ok" mnemonicParsing="false" text="OK" />
-        </items>
-      </ToolBar>
-   </children>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="52.0" maxWidth="210.0" minHeight="40.0" minWidth="210.0"
+      prefHeight="48.0" prefWidth="210.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8">
+    <children>
+        <ToolBar fx:id="slide" prefHeight="40.0" prefWidth="210.0">
+            <items>
+                <Button fx:id="rec" mnemonicParsing="false" text="●" textFill="RED"/>
+                <Button fx:id="play" mnemonicParsing="false" text="▶"/>
+                <Button fx:id="stop" mnemonicParsing="false" text="■"/>
+                <Button fx:id="choose" mnemonicParsing="false" text="Choose"/>
+                <Button fx:id="ok" mnemonicParsing="false" text="OK"/>
+            </items>
+        </ToolBar>
+        <Slider fx:id="slider" layoutY="36.0" prefHeight="14.0" prefWidth="210.0"/>
+    </children>
 </Pane>

@@ -6,10 +6,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @description the Encryption Manager class for Litera. Manages local data & encryption
- * @info all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
- * @devloper Çelik Köseoğlu
- * @revision 1
+ * @the Encryption Manager class for Litera. Manages local data & encryption
+ * @author Çelik Köseoğlu
+ * @version 2
  */
 
 public class EncryptionManager

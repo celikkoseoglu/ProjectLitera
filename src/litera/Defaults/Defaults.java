@@ -4,6 +4,13 @@ import javafx.scene.paint.Color;
 
 import java.util.Locale;
 
+/**
+ * contains default parameters for the HTML page and some other essential functions for Litera
+ *
+ * @author Çelik Köseoğlu
+ * @version 2
+ */
+
 public class Defaults
 {
     public final static String welcomePage = "<!DOCTYPE html>" +

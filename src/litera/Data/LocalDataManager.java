@@ -15,7 +15,7 @@ import java.util.Arrays;
  * the Local Data Manager class for Litera. Manages local data & encryption
  * all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
  * @author Çelik Köseoğlu
- * @version 12
+ * @version 13
  */
 
 /*

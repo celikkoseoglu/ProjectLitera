@@ -3,11 +3,15 @@ package litera.Multimedia;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import litera.Data.LocalDataManager;
+import litera.MainFrame.Note;
 
 import java.io.File;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 /**
@@ -24,19 +28,40 @@ public class AudioController implements Initializable {
     Button choose;
     @FXML
     Button ok;
+    @FXML
+    Slider timeSlider;
 
     File file;
+    Audio record;
+    String path;
+    Note current;
+    private Duration duration;
+
+    /**
+     * @param currentNote takes currentNote as a parameter and uses it to save audio to right file path
+     */
+    public AudioController(Note currentNote)
+    {
+        super();
+        current = currentNote;
+        //record = new Audio(path);
+    }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
+
         rec.setDisable(false);
         play.setDisable(true);
         stop.setDisable(true);
         choose.setDisable(false);
         ok.setDisable(false);
-
         rec.setOnAction(event -> {
+
+            //change path in every record not to override audio files
+            path = LocalDataManager.getLocalNotesFilePath() + current.getNoteName()/*.replace( " ", "%20")*/ + "/" + java.time.LocalDateTime.now() + ".wav";
+            record = new Audio(path);
+            record.captureAudio();
             rec.setDisable(true);
             play.setDisable(true);
             stop.setDisable(false);
@@ -50,9 +75,13 @@ public class AudioController implements Initializable {
             stop.setDisable(false);
             choose.setDisable(true);
             ok.setDisable(true);
+            Audio.playSound(record.getFileName());
+
         });
 
         stop.setOnAction(event ->{
+            record.stopCapture();
+            record.saveAudio();
             rec.setDisable(false);
             play.setDisable(false);
             stop.setDisable(true);
@@ -84,5 +113,38 @@ public class AudioController implements Initializable {
             }
             ((Stage) ok.getScene().getWindow()).close();
         });
+
+        // Add time slider
+       /* timeSlider.valueProperty().addListener(new InvalidationListener()
+        {
+            public void invalidated(Observable ov)
+            {
+                if ( timeSlider.isValueChanging() )
+                {
+                    // multiply duration by percentage calculated by slider position
+                    mp.seek(duration.multiply(timeSlider.getValue() / 100.0));
+                }
+            }
+        });
+    }*/
+   /* protected void updateValues(){
+        if ( timeSlider != null)
+        {
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    javafx.util.Duration currentTime = mp.getCurrentTime();
+                    timeSlider.setDisable(duration.isUnknown());
+                    if (!timeSlider.isDisabled()
+                            && duration.greaterThan(javafx.util.Duration.ZERO)
+                            && !timeSlider.isValueChanging()) {
+                        timeSlider.setValue(currentTime.divide(duration).toMillis() * 100.0);
+                    }
+
+                }
+            });
+        }*/
+
+
     }
+
 }

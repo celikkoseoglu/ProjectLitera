@@ -7,6 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
 
+/**
+ * Starts the Main stage of Litera
+ *
+ * @author Çelik Köseoğlu
+ * @version 2
+ */
+
 public class Main extends Application
 {
     private static Stage primaryStage;

@@ -1,5 +1,12 @@
 package litera.MainFrame;
 
+/**
+ * Note class for Litera. Contains Note properties
+ *
+ * @author Çelik Köseoğlu
+ * @version 1
+ */
+
 public class Note
 {
     private String noteName, htmlNote;

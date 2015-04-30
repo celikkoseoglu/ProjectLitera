@@ -1,0 +1,17 @@
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #99B4D1;
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #d2d2d2;
+    -fx-text-fill: white;
+}
+
+.list-view {
+    -fx-border-color: #99B4D1;
+}
+
+.border-pane {
+    -fx-background-color: #99B4D1;
+}

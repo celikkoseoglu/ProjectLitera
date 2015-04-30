@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.MediaView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="playerBorderPane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8">
+    <bottom>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="73.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="99.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="286.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="84.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="106.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Button fx:id="playButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0"
+                        style="-fx-background-color: #ffffff;"/>
+                <Slider fx:id="volumeSlider" GridPane.columnIndex="4"/>
+                <Slider fx:id="timeSlider" prefHeight="14.0" prefWidth="144.0" GridPane.columnIndex="2"/>
+                <Label fx:id="playTime" text="timeLabel" textFill="#fffffff5" GridPane.columnIndex="1"/>
+                <Label prefHeight="17.0" prefWidth="77.0" text="Volume:" textFill="WHITE" GridPane.columnIndex="3"/>
+            </children>
+        </GridPane>
+    </bottom>
+    <left>
+        <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="600.0" BorderPane.alignment="CENTER"/>
+    </left>
+</BorderPane>

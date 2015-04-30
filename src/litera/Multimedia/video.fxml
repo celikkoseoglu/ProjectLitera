@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="40.0" maxWidth="119.0" minHeight="40.0" minWidth="119.0"
+      prefHeight="40.0" prefWidth="119.0" style="-fx-background-color: #99B4D1;" xmlns="http://javafx.com/javafx/8"
+      fx:controller="litera.Multimedia.AudioController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="119.0">
+        <items>
+            <Button mnemonicParsing="false" text="Choose" />
+            <Button mnemonicParsing="false" text="OK">
+                <graphic>
+                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../Icons/bold.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </items>
+      </ToolBar>
+   </children>
+</Pane>

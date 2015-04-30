@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -18,6 +20,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import litera.Data.LocalDataManager;
+import litera.MainFrame.Note;
 
 import java.io.File;
 import java.net.URL;
@@ -46,14 +50,23 @@ public class PlayerController implements Initializable
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
     private Duration duration;
+    private Note note;
 
-    public PlayerController(File f)// , Note note, String fileName) needed
+    public PlayerController(File f, Note note)
     {
+        this.note = note;
+        String colorCode = LocalDataManager.getNoteCSS(note).substring(8);
+        System.out.println(colorCode);
+        colorCode = colorCode.substring(colorCode.indexOf('#') + 1, colorCode.indexOf('#') + 7);
         File file;
-        file = f;//file.toURI().toString());
+        file = f;
         m = new Media(file.toURI().toString());
         mp = new MediaPlayer(m);
+        playButton.setStyle("-fx-background-color: transparent;");
+        //playButton.getStyleClass().add("????");
+        playButton.setStyle(colorCode);
     }
+
 
     private static String formatTime(Duration elapsed, Duration duration)
     {
@@ -160,7 +173,12 @@ public class PlayerController implements Initializable
                 }
                 else
                 {
-                    playButton.setText("||");
+                    Image im = new Image(getClass().getResourceAsStream("../Icons/pauseButton2.png"));
+                    ImageView iv = new ImageView(im);
+                    iv.setFitWidth(24);
+                    iv.setFitHeight(24);
+                    playButton.setGraphic(iv);
+                    //playButton.setText("||");
                 }
             }
         });
@@ -170,7 +188,12 @@ public class PlayerController implements Initializable
             public void run()
             {
                 System.out.println("onPaused");
-                playButton.setText(">");
+                Image im = new Image(getClass().getResourceAsStream("../Icons/playButton5.png"));
+                ImageView iv = new ImageView(im);
+                iv.setFitWidth(24);
+                iv.setFitHeight(24);
+                playButton.setGraphic(iv);
+                //playButton.setText(">");
             }
         });
 
@@ -190,7 +213,12 @@ public class PlayerController implements Initializable
             {
                 if ( !repeat )
                 {
-                    playButton.setText(">");
+                    Image im = new Image(getClass().getResourceAsStream("../Icons/playButton5.png"));
+                    ImageView iv = new ImageView(im);
+                    iv.setFitWidth(24);
+                    iv.setFitHeight(24);
+                    playButton.setGraphic(iv);
+                    //playButton.setText(">");
                     stopRequested = true;
                     atEndOfMedia = true;
                 }

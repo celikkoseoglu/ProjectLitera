@@ -151,7 +151,7 @@ public class Controller implements Initializable
                     System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
                     Files.copy(Paths.get(selectedFile.toURI()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "\\" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                    PlayerController a = new PlayerController(selectedFile);
+                    PlayerController a = new PlayerController(selectedFile, currentNote);
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/player.fxml"));
                     fxmlLoader.setController(a);
                     Parent root = fxmlLoader.load();
@@ -160,17 +160,13 @@ public class Controller implements Initializable
                     stage.setTitle("Litera Player");
                     stage.setScene(new Scene(root));
                     stage.show();
-                    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
-                    {
+                    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                         public void handle(WindowEvent we)
                         {
                             System.out.println("Stage is closing");
                             a.disposeThis();
-
                         }
                     });
-
-
                 }
                 catch ( Exception ex )
                 {

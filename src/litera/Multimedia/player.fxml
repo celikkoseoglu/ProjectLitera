@@ -5,7 +5,7 @@
 <?import javafx.scene.media.MediaView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="playerBorderPane" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8">
+            style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8">
     <bottom>
         <GridPane BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -19,7 +19,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Button fx:id="playButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="▶"/>
+                <Button fx:id="playButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0"
+                        style="-fx-background-color: #ffffff;"/>
                 <Slider fx:id="volumeSlider" GridPane.columnIndex="4"/>
                 <Slider fx:id="timeSlider" prefHeight="14.0" prefWidth="144.0" GridPane.columnIndex="2"/>
                 <Label fx:id="playTime" text="timeLabel" textFill="#fffffff5" GridPane.columnIndex="1"/>

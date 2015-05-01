@@ -6,7 +6,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,7 +22,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 import litera.Multimedia.AudioController;
@@ -89,6 +87,7 @@ public class Controller implements Initializable
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
+
         webPage = Accessor.getPageFor(editor.getEngine()); //webPage is the controller for the webView for executing scripts etc.
         isNoteChanged = false;
 
@@ -132,7 +131,7 @@ public class Controller implements Initializable
                 stage.setScene(new Scene(root));
                 stage.show();
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
                 System.out.println(ex.toString());
             }
@@ -141,45 +140,33 @@ public class Controller implements Initializable
         addVideoButton.setOnAction(event -> {
             try
             {
-                try
-                {
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setTitle("Choose Video");
-                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
-                    File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
-                    System.out.println(Paths.get(selectedFile.toURI()));
-                    System.out.println(Paths.get(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/"));
-                    Files.copy(Paths.get(selectedFile.toURI()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "\\" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Choose Video");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
+                File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
+                Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                    PlayerController a = new PlayerController(selectedFile);
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/player.fxml"));
-                    fxmlLoader.setController(a);
-                    Parent root = fxmlLoader.load();
-                    Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setTitle("Litera Player");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
-                    {
-                        public void handle(WindowEvent we)
-                        {
-                            System.out.println("Stage is closing");
-                            a.disposeThis();
-
-                        }
-                    });
-
-
-                }
-                catch ( Exception ex )
-                {
-                    System.out.println(ex.toString());
-                }
+                PlayerController a = new PlayerController(selectedFile, currentNote);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Multimedia/player.fxml"));
+                fxmlLoader.setController(a);
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                Scene s = new Scene(root);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Litera Player");
+                stage.setScene(s);
+                //stage.minWidthProperty().bind(s.heightProperty().multiply(4));
+                //stage.minHeightProperty().bind(s.widthProperty().divide(4));
+                stage.show();
+                stage.setOnCloseRequest(we -> {
+                    System.out.println("Stage is closing");
+                    a.disposeThis();
+                });
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                System.out.println("File copy operation fail!");
+                System.out.println("Exception occured in player init:" + ex.toString());
+                ex.printStackTrace();
             }
         });
 
@@ -189,13 +176,12 @@ public class Controller implements Initializable
 
         foregroundColorPicker.setOnAction(event -> {
             Color newValue = foregroundColorPicker.getValue();
-            if ( newValue != null )
-                addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
+            if (newValue != null) addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
         });
 
         notePadColorPicker.setOnAction(event -> {
             Color newValue = notePadColorPicker.getValue();
-            if ( newValue != null )
+            if (newValue != null)
             {
                 LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
                 loadCSS(currentNote);
@@ -218,7 +204,7 @@ public class Controller implements Initializable
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
             {
-                if ( isNoteChanged ) //there is no need for a save operation if you didn't change anything
+                if (isNoteChanged) //there is no need for a save operation if you didn't change anything
                 {
                     currentNote.setHtmlNote(webPage.getHtml(webPage.getMainFrame()));
                     LocalDataManager.saveNote(currentNote);
@@ -238,7 +224,7 @@ public class Controller implements Initializable
 
         noteNameTextField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             //do not try to change the name if textField is empty or the note with the same name exists
-            if ( !noteNameTextField.getText().isEmpty() && !noteListScrollPaneItems.contains(noteNameTextField.getText()) )
+            if (!noteNameTextField.getText().isEmpty() && !noteListScrollPaneItems.contains(noteNameTextField.getText()))
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
                 populateNoteListbox(); //need this to retain the alphabetical order
@@ -266,14 +252,14 @@ public class Controller implements Initializable
             stage.setScene(new Scene(root));
             stage.show();
         }
-        catch ( Exception ex )
+        catch (Exception ex)
         {
             ex.toString();
         }
     }
 
     /**
-     * @param command some commands are located in the Defaults class
+     * @param command           some commands are located in the Defaults class
      * @param commandComplement Color commands may go here
      * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
@@ -291,7 +277,7 @@ public class Controller implements Initializable
     private boolean populateNoteListbox()
     {
         String[] noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
-        if ( noteList == null )
+        if (noteList == null)
         {
             currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
             LocalDataManager.saveNote(currentNote);
@@ -311,10 +297,8 @@ public class Controller implements Initializable
     private boolean loadLastNote()
     {
         String lastNoteName = LocalDataManager.getLastNote();
-        if ( noteListView.getItems().contains(lastNoteName) )
-            noteListView.getSelectionModel().select(lastNoteName);
-        else
-            noteListView.getSelectionModel().selectFirst();
+        if (noteListView.getItems().contains(lastNoteName)) noteListView.getSelectionModel().select(lastNoteName);
+        else noteListView.getSelectionModel().selectFirst();
         return true;
     }
 

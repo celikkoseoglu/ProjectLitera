@@ -16,7 +16,6 @@ import litera.Data.LocalDataManager;
 
 public class Main extends Application
 {
-    private static Stage primaryStage;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -26,15 +25,9 @@ public class Main extends Application
         launch(args);
     }
 
-    public static Stage getPrimaryStage()
-    {
-        return primaryStage;
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Main.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("minerva.fxml"));
         primaryStage.setTitle("Project Litera");
         primaryStage.setScene(new Scene(root, 800, 600));

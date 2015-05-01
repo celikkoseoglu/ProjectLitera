@@ -1,6 +1,9 @@
 package litera.Defaults;
 
+import javafx.scene.Parent;
 import javafx.scene.paint.Color;
+import litera.Data.LocalDataManager;
+import litera.MainFrame.Note;
 
 import java.util.Locale;
 
@@ -58,6 +61,12 @@ public class Defaults
                 Math.round(c.getRed() * 255),
                 Math.round(c.getGreen() * 255),
                 Math.round(c.getBlue() * 255));
+    }
+
+    public static void loadCSS(Note n, Parent component)
+    {
+        component.getStylesheets().clear();
+        component.getStylesheets().add(LocalDataManager.getNoteCSS(n).replace(" ", "%20"));
     }
 
 }

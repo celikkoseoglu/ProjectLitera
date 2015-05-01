@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="700.0" prefWidth="920.0"
-            xmlns="http://javafx.com/javafx/8" fx:controller="litera.MainFrame.Controller">
+            styleClass="border-pane" xmlns="http://javafx.com/javafx/8" fx:controller="litera.MainFrame.Controller">
     <left>
         <ListView fx:id="noteListView" prefWidth="180.0" BorderPane.alignment="CENTER_LEFT"/>
     </left>
@@ -23,7 +23,7 @@
             </rowConstraints>
             <children>
                 <ToolBar fx:id="optionsToolbar" maxHeight="20.0" prefHeight="20.0"
-                         style="-fx-background-color: transparent;">
+                         style="-fx-background-color: transparent;" styleClass="list-view">
                     <items>
                         <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
                         <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />
@@ -178,7 +178,8 @@
             </rowConstraints>
             <children>
                 <WebView fx:id="editor" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                <TextField fx:id="noteNameTextField" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: transparent;">
+                <TextField fx:id="noteNameTextField" maxHeight="50.0" minHeight="50.0" prefHeight="50.0"
+                           style="-fx-background-color: transparent;" styleClass="list-view">
                     <font>
                         <Font size="26.0" />
                     </font>

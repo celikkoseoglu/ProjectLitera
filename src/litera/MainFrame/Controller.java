@@ -32,6 +32,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -46,8 +47,8 @@ public class Controller implements Initializable
 {
     private static Note currentNote;
     private static WebPage webPage;
-    private ObservableList<String> noteListScrollPaneItems;
     private boolean isNoteChanged;
+    private ObservableList<String> noteListScrollPaneItems;
 
     @FXML
     private ToggleButton boldToggleButton, italicToggleButton, underlineToggleButton, strikethroughToggleButton, insertOrderedListToggleButton;
@@ -79,15 +80,14 @@ public class Controller implements Initializable
         LocalDataManager.saveLastNote(currentNote);
     }
 
-    public static void addAudio(/*File file*/)
+    public static void addMedia(String fileName, String title)
     {
-        webPage.executeScript(webPage.getMainFrame(), "document.write('<button contentEditable=\"false\" id=\"audio\" onclick=\"alert(this.id)\">SesVer</button>')");
+        webPage.executeScript(webPage.getMainFrame(), "document.write(document.documentElement.innerHTML+'<button contentEditable=\"false\" id=\"" + fileName + "\" onclick=\"alert(this.id)\">" + title + "</button>')");
     }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
-
         webPage = Accessor.getPageFor(editor.getEngine()); //webPage is the controller for the webView for executing scripts etc.
         isNoteChanged = false;
 
@@ -116,13 +116,13 @@ public class Controller implements Initializable
 
         deleteMenuItem.setOnAction(event -> LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems()));
 
-        optionsButton.setOnAction(event -> loadWindow("/litera/Options/options.fxml", "Litera Options"));
+        //optionsButton.setOnAction(event -> loadWindow("/litera/Options/options.fxml", "Litera Options"));
 
         addAudioButton.setOnAction(event -> {
             try
             {
-                addAudio();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Multimedia/audio.fxml"));
+                addMedia(null, null);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Multimedia/audio.fxml"));
                 fxmlLoader.setController(new AudioController(currentNote));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
@@ -144,39 +144,33 @@ public class Controller implements Initializable
                 fileChooser.setTitle("Choose Video");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
                 File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
-                Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                PlayerController a = new PlayerController(selectedFile, currentNote);
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Multimedia/player.fxml"));
-                fxmlLoader.setController(a);
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                Scene s = new Scene(root);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Litera Player");
-                stage.setScene(s);
-                //stage.minWidthProperty().bind(s.heightProperty().multiply(4));
-                //stage.minHeightProperty().bind(s.widthProperty().divide(4));
-                stage.show();
-                stage.setOnCloseRequest(we -> {
-                    System.out.println("Stage is closing");
-                    a.disposeThis();
-                });
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("New Media Content");
+                dialog.setContentText("Please enter content title:");
+                dialog.setHeaderText("Litera Video");
+                dialog.getDialogPane().getStyleClass().add("border-pane");
+                dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                Optional<String> result = dialog.showAndWait();
+                result.ifPresent(name -> addMedia(selectedFile.getName(), result.get()));
+
+                Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
             catch (Exception ex)
             {
-                System.out.println("Exception occured in player init:" + ex.toString());
+                System.out.println("Exception occured in player initialization of litera player:" + ex.toString());
                 ex.printStackTrace();
             }
         });
 
         addImageButton.setOnAction(event -> {
-            loadWindow("/litera/Multimedia/video.fxml", "Litera Player");
+            //loadWindow("/litera/Multimedia/video.fxml", "Litera Player");
         });
 
         foregroundColorPicker.setOnAction(event -> {
             Color newValue = foregroundColorPicker.getValue();
-            if (newValue != null) addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
+            if (newValue != null)
+                addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
         });
 
         notePadColorPicker.setOnAction(event -> {
@@ -184,7 +178,7 @@ public class Controller implements Initializable
             if (newValue != null)
             {
                 LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
-                loadCSS(currentNote);
+                Defaults.loadCSS(currentNote, borderPane);
             }
         });
 
@@ -213,13 +207,28 @@ public class Controller implements Initializable
                 currentNote = LocalDataManager.getNote(newValue);
                 editor.getEngine().loadContent(currentNote.getHtmlNote());
                 noteNameTextField.setText(newValue);
-                loadCSS(currentNote);
+                Defaults.loadCSS(currentNote, borderPane);
             }
         });
 
-        //Event handler for button clicks on the note
-        editor.getEngine().setOnAlert((WebEvent<String> wEvent) -> {
-            System.out.println("Alert Event  -  Message:  " + wEvent.getData());
+        editor.getEngine().setOnAlert((WebEvent<String> wEvent) -> { //Event handler for button clicks on the note
+            try
+            {
+                PlayerController literaPlayer = new PlayerController(new File(LocalDataManager.getFilePathForNote(currentNote) + wEvent.getData()), currentNote);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Multimedia/player.fxml"));
+                fxmlLoader.setController(literaPlayer);
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Litera Player");
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnCloseRequest(we -> literaPlayer.disposeThis());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         });
 
         noteNameTextField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
@@ -230,32 +239,10 @@ public class Controller implements Initializable
                 populateNoteListbox(); //need this to retain the alphabetical order
             }
         });
-        /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/
 
-        // Start up of the program
-        borderPane.getStyleClass().add("border-pane"); //border-pane has the background-color property
-        noteNameTextField.getStyleClass().add("list-view"); //list-view has the border-color property
-        optionsToolbar.getStyleClass().add("list-view");
+        //Do the followings during the application startup
         populateNoteListbox();
         loadLastNote();
-    }
-
-    private void loadWindow(String windowPath, String windowTitle)
-    {
-        try
-        {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(windowPath));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle(windowTitle);
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
-        catch (Exception ex)
-        {
-            ex.toString();
-        }
     }
 
     /**
@@ -290,16 +277,22 @@ public class Controller implements Initializable
     }
 
     /**
-     * returns the last note name of
-     *
-     * @return
+     * gets the last note name that the user has been working on. If it exists in the note list, selects it. If it doesn't selects the first item
+     * @return true is selection is successful
      */
     private boolean loadLastNote()
     {
         String lastNoteName = LocalDataManager.getLastNote();
-        if (noteListView.getItems().contains(lastNoteName)) noteListView.getSelectionModel().select(lastNoteName);
-        else noteListView.getSelectionModel().selectFirst();
-        return true;
+        if (noteListView.getItems().contains(lastNoteName))
+        {
+            noteListView.getSelectionModel().select(lastNoteName);
+            return true;
+        }
+        else
+        {
+            noteListView.getSelectionModel().selectFirst();
+            return false;
+        }
     }
 
     //changes button states according to the currently edited text. For instance if the text you are working on is Italic, toggles the Italic button.
@@ -311,11 +304,5 @@ public class Controller implements Initializable
         underlineToggleButton.setSelected(webPage.queryCommandState(Defaults.UNDERLINE_COMMAND));
         strikethroughToggleButton.setSelected(webPage.queryCommandState(Defaults.STRIKETHROUGH_COMMAND));
         insertOrderedListToggleButton.setSelected(webPage.queryCommandState(Defaults.NUMBERS_COMMAND));
-    }
-
-    private void loadCSS(Note n)
-    {
-        borderPane.getStylesheets().clear();
-        borderPane.getStylesheets().add(LocalDataManager.getNoteCSS(n).replace(" ", "%20"));
     }
 }

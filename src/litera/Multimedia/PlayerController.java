@@ -51,7 +51,6 @@ public class PlayerController implements Initializable
 
     public PlayerController(File f, Note note)
     {
-        //System.out.println(f.toURI().toString());
         media = new Media(f.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         n = note;

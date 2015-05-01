@@ -15,11 +15,15 @@ import java.util.Arrays;
  * the Local Data Manager class for Litera. Manages local data & encryption
  * all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
  * @author Çelik Köseoğlu
- * @version 13
+ * @version 17
  */
 
 /*
  * change log:
+ * 01/05/2015
+ * added getFilePathForNote() function
+ * added more comments
+ *
  * 26/05/2015
  * saves and loads note colors
  * every file has a unique id now
@@ -29,7 +33,7 @@ import java.util.Arrays;
  * Trash was finally implemented.
  *
  * 23/04/2015
- * New comments were added
+ * New comments have been added
  * Shortened some of the code (Thanks to my RubberDuck)
  * I may have introduced some new bugs, we'll see
  *
@@ -106,6 +110,17 @@ public class LocalDataManager
         }
     }
 
+
+    /**
+     * TO BE IMPLEMENTED SOON. WHEN DONE, THIS CLASS WILL BE 16 LINES SHORTER ~Ç
+     *
+     * @return
+     */
+    private static String readText()
+    {
+        return null;
+    }
+
     /**
      * @param n is the note to be saved
      * @return true if save is successful
@@ -174,8 +189,7 @@ public class LocalDataManager
     }
 
     /**
-     * DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
-     *
+     * deleted the selected notes permanently using the delete() method
      * @return true if deletion is successful
      * @description permanently deletes notes. this function will be used for the Trash in the future..
      */
@@ -196,12 +210,12 @@ public class LocalDataManager
     }
 
     /**
+     * recursively deletes directory and its subdirectories
      * credit - http://www.mkyong.com/java/how-to-delete-directory-in-java/
-     *
      * @param file
      * @throws IOException
      */
-    public static void delete(File file) throws IOException
+    private static void delete(File file) throws IOException
     {
 
         if ( file.isDirectory() )
@@ -405,31 +419,10 @@ public class LocalDataManager
         return null;
     }
 
-    public static File addAudio(File file, Note n)
-    {
-        try
-        {
-            //pass note object instead of making current note public!!
-            directoryExists(OS_NOTES_FILE_PATH + n.getNoteName() + "/");
-            // copy!
-            return file;
-        }
-        catch ( NullPointerException nullPtrException )
-        {
-            System.err.println(nullPtrException.toString() + " :cannot save a null note. How did it even get here?");
-            return null;
-        }
-        catch ( Exception ioe )
-        {
-            System.err.println("IOException: " + ioe.getMessage());
-            return null;
-        }
-    }
-
     /**
-     * DO NOT TOUCH THIS!!! STILL IMPLEMENTING...
-     *
+     * moves notes back and forth between trash list and the actual note list
      * @param selectedNotes
+     * @param isMovingToTrash true if the move operation is from the listbox to the trash, false otherwise
      * @return
      * @description moves the selected notes to trash when the |-| button is clicked
      */
@@ -481,6 +474,11 @@ public class LocalDataManager
             }
             return false;
         }
+    }
+
+    public static String getFilePathForNote(Note n)
+    {
+        return OS_NOTES_FILE_PATH + "/" + n.getNoteName() + "/";
     }
 
     public static String getLocalTrashFilePath()

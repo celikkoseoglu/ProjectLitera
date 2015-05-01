@@ -56,4 +56,14 @@ public class EncryptionManager
         }
         return null;
     }
+
+    /**
+     * IMPLEMENTING AS SOON AS POSSIBLE...
+     * PASSWORD PROTECTION IS COMING!
+     *
+     * @param s
+     */
+    public static void setEncryptionKey(String s)
+    {
+    }
 }

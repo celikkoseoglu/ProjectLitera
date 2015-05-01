@@ -40,7 +40,7 @@ import java.util.ResourceBundle;
  * UI Controller for the Main Frame
  *
  * @author Çelik Köseoğlu - all except below
- * @author Caner Çalışkaner - buttonFeedback method and styling toolbar listeners
+ * @author Mert Aytöre - buttonFeedback method and styling toolbar listeners
  * @author Orhun Çağlayan - rename algorithm
  */
 

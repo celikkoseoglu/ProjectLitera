@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.ResourceBundle;
 
 /**
- * Created by Alchemistake on 29/03/15.
+ * Created by orhun on 29/03/15.
  */
 public class AudioController implements Initializable {
     @FXML

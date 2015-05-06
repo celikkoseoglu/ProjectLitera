@@ -110,17 +110,6 @@ public class LocalDataManager
         }
     }
 
-
-    /**
-     * TO BE IMPLEMENTED SOON. WHEN DONE, THIS CLASS WILL BE 16 LINES SHORTER ~Ç
-     *
-     * @return
-     */
-    private static String readText()
-    {
-        return null;
-    }
-
     /**
      * @param n is the note to be saved
      * @return true if save is successful

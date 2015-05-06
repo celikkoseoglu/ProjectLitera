@@ -85,6 +85,11 @@ public class Controller implements Initializable
         webPage.executeScript(webPage.getMainFrame(), "document.write(document.documentElement.innerHTML+'<button contentEditable=\"false\" id=\"" + fileName + "\" onclick=\"alert(this.id)\">" + title + "</button>')");
     }
 
+    public static void addImage(File f, String title)
+    {
+        webPage.executeScript(webPage.getMainFrame(), "document.write(document.documentElement.innerHTML+'<img src=\"" + f.toURI() + "\" alt=\"" + title + "\" style=\"width:304px;height:228px\">')");
+    }
+
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
@@ -145,26 +150,69 @@ public class Controller implements Initializable
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
                 File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
 
-                TextInputDialog dialog = new TextInputDialog();
-                dialog.setTitle("New Media Content");
-                dialog.setContentText("Please enter content title:");
-                dialog.setHeaderText("Litera Video");
-                dialog.getDialogPane().getStyleClass().add("border-pane");
-                dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
-                Optional<String> result = dialog.showAndWait();
-                result.ifPresent(name -> addMedia(selectedFile.getName(), result.get()));
+                if ( selectedFile != null )
+                {
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("New Media Content");
+                    dialog.setContentText("Please enter content title:");
+                    dialog.setHeaderText("Litera Video");
+                    dialog.getDialogPane().getStyleClass().add("border-pane");
+                    dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(name -> addMedia(selectedFile.getName(), result.get()));
 
-                Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
             }
             catch (Exception ex)
             {
-                System.out.println("Exception occured in player initialization of litera player:" + ex.toString());
                 ex.printStackTrace();
             }
         });
 
         addImageButton.setOnAction(event -> {
-            //loadWindow("/litera/Multimedia/video.fxml", "Litera Player");
+            try
+            {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Choose Photo");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png"));
+                File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
+
+                if ( selectedFile != null )
+                {
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("New Media Content");
+                    dialog.setContentText("Please enter content title:");
+                    dialog.setHeaderText("Litera Image");
+                    dialog.getDialogPane().getStyleClass().add("border-pane");
+                    dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(name -> addImage(selectedFile, result.get()));
+
+                    Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+            catch ( Exception ex )
+            {
+                ex.printStackTrace();
+            }
+        });
+
+        optionsButton.setOnAction(event -> {
+            try
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Options/options.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Litera Options");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+            }
         });
 
         foregroundColorPicker.setOnAction(event -> {

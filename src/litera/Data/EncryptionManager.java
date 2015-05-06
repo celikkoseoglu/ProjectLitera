@@ -13,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionManager
 {
-    private static byte[] encryptionKey = { 0x76, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79 };
+    private static byte[] privateEncryptionKey = {0x76, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79};
 
     /**
      * @param s String to be encoded
@@ -25,7 +25,7 @@ public class EncryptionManager
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            final SecretKeySpec secretKey = new SecretKeySpec(encryptionKey, "AES");
+            final SecretKeySpec secretKey = new SecretKeySpec(privateEncryptionKey, "AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             return Base64.encodeBase64String(cipher.doFinal(s.getBytes()));
         }
@@ -46,7 +46,7 @@ public class EncryptionManager
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            final SecretKeySpec secretKey = new SecretKeySpec(encryptionKey, "AES");
+            final SecretKeySpec secretKey = new SecretKeySpec(privateEncryptionKey, "AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.decodeBase64(s)));
         }

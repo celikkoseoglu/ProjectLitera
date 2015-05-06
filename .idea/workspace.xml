@@ -7,16 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Video Player &amp; Colors">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Icons/pauseButton.png" afterPath="$PROJECT_DIR$/src/litera/Icons/pauseButton.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Icons/playButton.png" afterPath="$PROJECT_DIR$/src/litera/Icons/playButton.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Multimedia/AudioController.java" afterPath="$PROJECT_DIR$/src/litera/Multimedia/AudioController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/litera/Options/OptionsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Defaults/Defaults.java" afterPath="$PROJECT_DIR$/src/litera/Defaults/Defaults.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Main.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Multimedia/PlayerController.java" afterPath="$PROJECT_DIR$/src/litera/Multimedia/PlayerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" afterPath="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProjectLitera.iml" afterPath="$PROJECT_DIR$/ProjectLitera.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Options/options.fxml" afterPath="$PROJECT_DIR$/src/litera/Options/options.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjectMinerva.iws" />
@@ -40,24 +37,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding>
-                <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-                <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-                <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-                <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-                <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-                <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-                <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ServerDataManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/ServerDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,8 +52,62 @@
       <file leaf-file-name="EncryptionManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.7575758">
-              <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.58181816">
+              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OptionsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/litera/Options/OptionsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Audio.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/Audio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AudioController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/AudioController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="203" column="94" selection-start-line="203" selection-start-column="94" selection-end-line="203" selection-end-column="94" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="minerva.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,59 +123,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/PlayerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/AudioController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="audio.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/audio.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.2413793">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LocalDataManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
               <folding>
-                <element signature="e#4138#4139#0" expanded="true" />
-                <element signature="e#4165#4166#0" expanded="true" />
-                <element signature="e#9420#9421#0" expanded="true" />
-                <element signature="e#9487#9488#0" expanded="true" />
-                <element signature="method#getNote#0;class#LocalDataManager#0" expanded="false" />
-                <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-                <element signature="e#16445#16446#0" expanded="true" />
-                <element signature="e#16516#16517#0" expanded="true" />
-                <element signature="e#16572#16573#0" expanded="true" />
-                <element signature="e#16613#16614#0" expanded="true" />
-                <element signature="e#16669#16670#0" expanded="true" />
-                <element signature="e#16710#16711#0" expanded="true" />
+                <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+                <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -213,11 +218,12 @@
         <option value="$PROJECT_DIR$/src/litera/Multimedia/player.fxml" />
         <option value="$PROJECT_DIR$/src/litera/Defaults/Defaults.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/Main.java" />
-        <option value="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
-        <option value="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
         <option value="$PROJECT_DIR$/src/litera/Multimedia/PlayerController.java" />
         <option value="$PROJECT_DIR$/src/litera/Multimedia/AudioController.java" />
+        <option value="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
         <option value="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
+        <option value="$PROJECT_DIR$/src/litera/Options/OptionsController.java" />
+        <option value="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
       </list>
     </option>
   </component>
@@ -272,9 +278,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -306,10 +309,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -326,54 +325,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="litera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Multimedia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MainFrame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjectLitera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litera" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Defaults" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -399,8 +350,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -414,7 +382,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="/Applications/JavaFX Scene Builder 2.0.app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/controlsfx-8.20.8.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -432,8 +400,10 @@
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="projectlitera" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -498,18 +468,94 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="depsClasspath" value="false" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="JAR_PATH" value="$PROJECT_DIR$/Litera.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/libs/controlsfx-8.20.8.jar" />
       <envs />
       <method />
     </configuration>
@@ -647,6 +693,12 @@
       <workItem from="1430475781338" duration="14574000" />
       <workItem from="1430507170893" duration="2389000" />
       <workItem from="1430514279932" duration="3881000" />
+      <workItem from="1430725935919" duration="461000" />
+      <workItem from="1430726504461" duration="2718000" />
+      <workItem from="1430813911823" duration="116000" />
+      <workItem from="1430908602639" duration="247000" />
+      <workItem from="1430913987968" duration="109000" />
+      <workItem from="1430914656986" duration="15000" />
     </task>
     <task id="LOCAL-00001" summary="It compiles!">
       <created>1429551929907</created>
@@ -772,40 +824,40 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130955000" />
+    <option name="totallyTimeSpent" value="134621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26846424" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39423078" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32473624" sideWeight="0.49427754" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32121924" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20277777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39423078" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38686988" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32473624" sideWeight="0.49427754" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20277777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32121924" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282532" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38686988" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26846424" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -851,10 +903,265 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Note.java">
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <caret line="203" column="94" selection-start-line="203" selection-start-column="94" selection-end-line="203" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding>
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/ServerDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="1" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
+          <folding>
+            <element signature="e#2335#2336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Options/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/Audio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/AudioController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding>
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/ServerDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="1" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
+          <folding>
+            <element signature="e#2335#2336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/ServerDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="1" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
+          <folding>
+            <element signature="e#2335#2336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -863,157 +1170,25 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="198" column="31" selection-start-line="198" selection-start-column="30" selection-end-line="198" selection-end-column="31" />
           <folding>
-            <element signature="e#4138#4139#0" expanded="true" />
-            <element signature="e#4165#4166#0" expanded="true" />
-            <element signature="e#9420#9421#0" expanded="true" />
-            <element signature="e#9487#9488#0" expanded="true" />
-            <element signature="method#getNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="e#16445#16446#0" expanded="true" />
-            <element signature="e#16516#16517#0" expanded="true" />
-            <element signature="e#16572#16573#0" expanded="true" />
-            <element signature="e#16613#16614#0" expanded="true" />
-            <element signature="e#16669#16670#0" expanded="true" />
-            <element signature="e#16710#16711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1025,19 +1200,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
+          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1048,19 +1214,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
+          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1071,26 +1228,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
+          <caret line="69" column="10" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1108,35 +1249,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/Audio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38181818">
           <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.01884422">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1168,30 +1284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/video.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="50" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/player.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="83" selection-start-line="20" selection-start-column="83" selection-end-line="20" selection-end-column="83" />
-          <folding>
-            <marker date="1430496064000" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.75757575">
@@ -1203,7 +1295,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="28" selection-start-line="96" selection-start-column="28" selection-end-line="96" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1211,7 +1302,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="144" column="25" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1219,7 +1309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="39" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,7 +1316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="383" column="39" selection-start-line="383" selection-start-column="39" selection-end-line="383" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,7 +1323,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1247,85 +1334,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/javafx-src.zip!/javafx/scene/layout/BorderPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6">
           <caret line="140" column="36" selection-start-line="140" selection-start-column="36" selection-end-line="140" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#4138#4139#0" expanded="true" />
-            <element signature="e#4165#4166#0" expanded="true" />
-            <element signature="e#9420#9421#0" expanded="true" />
-            <element signature="e#9487#9488#0" expanded="true" />
-            <element signature="method#getNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
-            <element signature="e#16445#16446#0" expanded="true" />
-            <element signature="e#16516#16517#0" expanded="true" />
-            <element signature="e#16572#16573#0" expanded="true" />
-            <element signature="e#16613#16614#0" expanded="true" />
-            <element signature="e#16669#16670#0" expanded="true" />
-            <element signature="e#16710#16711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/PlayerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/AudioController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/audio.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2413793">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="method#addStyle#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="method#populateNoteListbox#0;class#Controller#0" expanded="false" />
-            <element signature="docComment;method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#loadLastNote#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonFeedback#0;class#Controller#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1339,10 +1351,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/Audio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Multimedia/AudioController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Options/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding>
+            <element signature="docComment;method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#renameNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#deleteNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#getNoteNames#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#getLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#saveLastNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#createNewNote#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#generateAndSaveID#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#moveNotes#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="docComment;method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+            <element signature="method#directoryExists#0;class#LocalDataManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="94" selection-start-line="203" selection-start-column="94" selection-end-line="203" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/Data/EncryptionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7575758">
-          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.58181816">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
           <folding />
         </state>
       </provider>

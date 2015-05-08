@@ -5,6 +5,7 @@ import litera.Defaults.Defaults;
 import litera.MainFrame.Note;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -133,6 +134,14 @@ public class LocalDataManager
             return true;
         }
         return false;
+    }
+
+    public static String takeColorFromCSS( Note n) throws IOException{
+        File css = new File( getNoteCSS( n).substring( 5));
+        byte[] cssBytes= Files.readAllBytes(css.toPath());
+        String cssText = new String( cssBytes, StandardCharsets.UTF_8);
+        String result = cssText.substring(cssText.indexOf("#"), cssText.indexOf( "#") + 7);
+        return result;
     }
 
     public static String getNoteCSS(Note n)

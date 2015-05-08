@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -30,6 +32,7 @@ import litera.Multimedia.AudioController;
 import litera.Multimedia.PlayerController;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -193,12 +196,14 @@ public class Controller implements Initializable
                 addStyle(Defaults.FOREGROUND_COLOR_COMMAND, Defaults.colorValueToHex(newValue));
         });
 
-        notePadColorPicker.setOnAction(event -> {
-            Color newValue = notePadColorPicker.getValue();
-            if ( newValue != null )
-            {
-                LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
-                loadCSS(currentNote);
+        notePadColorPicker.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Color newValue = notePadColorPicker.getValue();
+                if (newValue != null) {
+                    LocalDataManager.saveNoteCSS(currentNote, Defaults.colorValueToHex(newValue));
+                    Controller.this.loadCSS(currentNote);
+                }
             }
         });
 
@@ -242,6 +247,16 @@ public class Controller implements Initializable
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
                 populateNoteListbox(); //need this to retain the alphabetical order
+            }
+        });
+        noteNameTextField.addEventHandler( MouseEvent.MOUSE_PRESSED, event ->{
+            if( event.getButton() == MouseButton.SECONDARY){
+                try {
+                    notePadColorPicker.setValue(Color.valueOf(LocalDataManager.takeColorFromCSS(currentNote)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         /*** *** *** *** *** END OF Button Listeners *** *** *** *** ***/

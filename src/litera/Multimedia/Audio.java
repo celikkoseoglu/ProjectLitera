@@ -6,46 +6,37 @@ import java.io.*;
 /**
  * Created by orhun on 23.04.2015.
  */
-public class Audio
-{
+public class Audio {
     final AudioFormat format = getFormat();
     protected boolean running;
     private ByteArrayOutputStream out;
     private ByteArrayOutputStream recordBytes;
     private String fileName;
 
-    public Audio(String fileName)
-    {
+    public Audio(String fileName) {
         this.fileName = fileName;
     }
 
     /**
      *
      */
-    public static void playSound(String strFilename)
-    {
+    public static void playSound(String strFilename) {
 
         final int BUFFER_SIZE = 128000;
         File soundFile = null;
         AudioInputStream audioStream = null;
         AudioFormat audioFormat;
         SourceDataLine sourceLine = null;
-        try
-        {
+        try {
             soundFile = new File(strFilename);
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        try
-        {
+        try {
             audioStream = AudioSystem.getAudioInputStream(soundFile);
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -53,18 +44,13 @@ public class Audio
         audioFormat = audioStream.getFormat();
 
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
-        try
-        {
+        try {
             sourceLine = (SourceDataLine) AudioSystem.getLine(info);
             sourceLine.open(audioFormat);
-        }
-        catch ( LineUnavailableException e )
-        {
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
             System.exit(1);
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -73,19 +59,14 @@ public class Audio
 
         int nBytesRead = 0;
         byte[] abData = new byte[BUFFER_SIZE];
-        while ( nBytesRead != -1 )
-        {
-            try
-            {
+        while (nBytesRead != -1) {
+            try {
                 nBytesRead = audioStream.read(abData, 0, abData.length);
-            }
-            catch ( IOException e )
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            if ( nBytesRead >= 0 )
-            {
-                @SuppressWarnings( "unused" )
+            if (nBytesRead >= 0) {
+                @SuppressWarnings("unused")
                 int nBytesWritten = sourceLine.write(abData, 0, nBytesRead);
             }
         }
@@ -94,32 +75,25 @@ public class Audio
         sourceLine.close();
     }
 
-    public void captureAudio()
-    {
-        try
-        {
+    public void captureAudio() {
+        try {
 
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
             final TargetDataLine line = (TargetDataLine) AudioSystem.getLine(info);
             line.open(format);
             line.start();
-            Runnable runner = new Runnable()
-            {
+            Runnable runner = new Runnable() {
                 int bufferSize = (int) format.getSampleRate() * format.getFrameSize();
                 byte buffer[] = new byte[bufferSize];
 
-                public void run()
-                {
+                public void run() {
                     out = new ByteArrayOutputStream();
                     running = true;
-                    try
-                    {
-                        while ( running )
-                        {
+                    try {
+                        while (running) {
                             int count =
                                     line.read(buffer, 0, buffer.length);
-                            if ( count > 0 )
-                            {
+                            if (count > 0) {
                                 out.write(buffer, 0, count);
                             }
                         }
@@ -127,9 +101,7 @@ public class Audio
                         line.drain();
                         line.close();
 
-                    }
-                    catch ( IOException e )
-                    {
+                    } catch (IOException e) {
                         System.err.println("I/O problems: " + e);
                         System.exit(-1);
                     }
@@ -137,9 +109,7 @@ public class Audio
             };
             Thread captureThread = new Thread(runner);
             captureThread.start();
-        }
-        catch ( LineUnavailableException e )
-        {
+        } catch (LineUnavailableException e) {
             System.err.println("Line unavailable: " + e);
             System.exit(-2);
         }
@@ -150,10 +120,8 @@ public class Audio
     *
     *File path'i değiştir - orrun
     * */
-    public void saveAudio()
-    {
-        try
-        {
+    public void saveAudio() {
+        try {
             byte audio[] = out.toByteArray();
             InputStream input = new ByteArrayInputStream(audio);
             final AudioFormat format = getFormat();
@@ -167,28 +135,21 @@ public class Audio
 
             // start recording
             AudioSystem.write(ais, AudioFileFormat.Type.WAVE, wavFile);//starts writing into wav file
-            Runnable runner = new Runnable()
-            {
+            Runnable runner = new Runnable() {
                 int bufferSize = (int) format.getSampleRate() * format.getFrameSize();
                 byte buffer[] = new byte[bufferSize];
 
-                public void run()
-                {
-                    try
-                    {
+                public void run() {
+                    try {
                         int count;
-                        while ( (count = ais.read(buffer, 0, buffer.length)) != -1 )
-                        {
-                            if ( count > 0 )
-                            {
+                        while ((count = ais.read(buffer, 0, buffer.length)) != -1) {
+                            if (count > 0) {
                                 line.write(buffer, 0, count);
                             }
                         }
                         line.drain();
                         line.close();
-                    }
-                    catch ( IOException e )
-                    {
+                    } catch (IOException e) {
                         System.err.println("I/O problems: " + e);
                         System.exit(-3);
                     }
@@ -196,26 +157,20 @@ public class Audio
             };
             Thread playThread = new Thread(runner);
             playThread.start();
-        }
-        catch ( LineUnavailableException e )
-        {
+        } catch (LineUnavailableException e) {
             System.err.println("Line unavailable: " + e);
             System.exit(-4);
-        }
-        catch ( IOException e )
-        {
+        } catch (IOException e) {
             System.err.println("I/O problems: " + e);
             System.exit(-3);
         }
     }
 
-    public void stopCapture()
-    {
+    public void stopCapture() {
         running = false;
     }
 
-    private AudioFormat getFormat()
-    {
+    private AudioFormat getFormat() {
         float sampleRate = 8000;//44100;
         int sampleSizeInBits = 8;//16;
         int channels = 1;
@@ -224,35 +179,23 @@ public class Audio
         return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
     }
 
-    public String getFileName()
-    {
+    public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String name)
-    {
+    public void setFileName(String name) {
         fileName = name;
     }
-    /*public double getDuration(){
-        try
-        {
-            stream = AudioSystem.getAudioInputStream(file);
 
-            AudioFormat format = stream.getFormat();
 
-            return file.length() / format.getSampleRate() / (format.getSampleSizeInBits() / 8.0) / format.getChannels();
-        }
-        catch (Exception e)
-        {
-            // log an error
-            return -1;
-        }
-        finally
-        {
-            try { stream.close(); } catch (Exception ex) { }
-        }
-
-    }*/
+    public double getDuration() throws IOException, UnsupportedAudioFileException {
+        File file = new File( fileName);
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        AudioFormat format = audioInputStream.getFormat();
+        long frames = audioInputStream.getFrameLength();
+        double durationInSeconds = (frames + 0.0) / format.getFrameRate();
+        return durationInSeconds;
+    }
 
 
 }

@@ -1,5 +1,7 @@
 package litera.Multimedia;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -67,6 +69,8 @@ public class AudioController implements Initializable {
             stop.setDisable(false);
             choose.setDisable(true);
             ok.setDisable(true);
+            timeSlider.setVisible(false);
+
         });
 
         play.setOnAction(event ->{
@@ -76,7 +80,7 @@ public class AudioController implements Initializable {
             choose.setDisable(true);
             ok.setDisable(true);
             Audio.playSound(record.getFileName());
-
+            timeSlider.setVisible( true);
         });
 
         stop.setOnAction(event ->{
@@ -114,7 +118,8 @@ public class AudioController implements Initializable {
             ((Stage) ok.getScene().getWindow()).close();
         });
 
-        // Add time slider
+
+            // Add time slider
        /* timeSlider.valueProperty().addListener(new InvalidationListener()
         {
             public void invalidated(Observable ov)
@@ -145,6 +150,6 @@ public class AudioController implements Initializable {
         }*/
 
 
-    }
+        }
 
-}
+    }

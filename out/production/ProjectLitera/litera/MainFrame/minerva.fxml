@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="700.0" prefWidth="920.0"
+            xmlns="http://javafx.com/javafx/8" fx:controller="litera.MainFrame.Controller">
+    <left>
+        <ListView fx:id="noteListView" prefWidth="180.0" BorderPane.alignment="CENTER_LEFT"/>
+    </left>
+    <bottom>
+        <GridPane style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="188.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="254.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ToolBar fx:id="optionsToolbar" maxHeight="20.0" prefHeight="20.0"
+                         style="-fx-background-color: transparent;">
+                    <items>
+                        <Button fx:id="addNoteButton" mnemonicParsing="false" text="+" />
+                        <Button fx:id="deleteNoteButton" mnemonicParsing="false" text="-" />
+                        <Button fx:id="trashButton" mnemonicParsing="false">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="@../Icons/trash.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                     <contextMenu>
+                         <ContextMenu fx:id="trashContextMenu">
+                          <items>
+                              <SeparatorMenuItem mnemonicParsing="false">
+                                 <content>
+                                    <ListView fx:id="trashNoteListView" prefHeight="200.0" prefWidth="200.0" />
+                                 </content>
+                              </SeparatorMenuItem>
+                              <MenuItem fx:id="recoverMenuItem" mnemonicParsing="false" text="Recover Selected"/>
+                              <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete Selected"/>
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                        </Button>
+                  <Button fx:id="optionsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Options" />
+                    </items>
+                </ToolBar>
+                <Label alignment="CENTER_RIGHT" nodeOrientation="RIGHT_TO_LEFT" text="Project Litera : Concept" GridPane.columnIndex="3" />
+            </children>
+        </GridPane>
+    </bottom>
+    <right>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="39.0" percentWidth="0.0" prefWidth="39.0" />
+            </columnConstraints>
+            <rowConstraints>
+            <RowConstraints maxHeight="58.0" minHeight="58.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="190.0" minHeight="190.0" prefHeight="190.0" vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ToolBar fx:id="styleToolbar" minHeight="200.0" minWidth="39.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="39.0" style="-fx-background-color: transparent;" GridPane.rowIndex="1">
+                    <items>
+                        <ToggleButton fx:id="boldToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false"
+                                      prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/bold.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="italicToggleButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false"
+                                      prefWidth="28.0" style="-fx-font-style:italic;">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/italic.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="underlineToggleButton" maxWidth="28.0" minWidth="28.0"
+                                      mnemonicParsing="false" prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/underline.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="strikethroughToggleButton" maxWidth="28.0" minWidth="28.0"
+                                      mnemonicParsing="false" prefWidth="28.0" style="-fx-strikethrough: true;">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/strikethrough.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="insertOrderedListToggleButton" maxWidth="28.0" minWidth="28.0"
+                                      mnemonicParsing="false" prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/orderedList.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
+                    </items>
+                </ToolBar>
+            <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: transparent;" GridPane.rowIndex="3">
+              <items>
+                      <ToggleButton mnemonicParsing="false" text="E" />
+              </items>
+            </ToolBar>
+                <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0"
+                         style="-fx-background-color: transparent;" GridPane.rowIndex="2">
+                    <items>
+                        <Button fx:id="addAudioButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false"
+                                prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/microphone.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="addVideoButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false"
+                                prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/video.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="addImageButton" maxWidth="28.0" minWidth="28.0" mnemonicParsing="false"
+                                prefWidth="28.0">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Icons/Picture-Frame-16.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+              </items>
+            </ToolBar>
+            </children>
+        </GridPane>
+    </right>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <WebView fx:id="editor" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                <TextField fx:id="noteNameTextField" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: transparent;">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Choose NotePad Color">
+                           <graphic>
+                              <ColorPicker fx:id="notePadColorPicker" promptText="Choose NotePad Color" />
+                           </graphic>
+                        </MenuItem>
+                    </items>
+                  </ContextMenu>
+               </contextMenu></TextField>
+            <Separator maxHeight="8.0" minHeight="8.0" prefHeight="8.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+    </center>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+      </GridPane>
+   </top>
+</BorderPane>

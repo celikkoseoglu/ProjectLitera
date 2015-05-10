@@ -121,8 +121,6 @@ public class Controller implements Initializable
 
         deleteMenuItem.setOnAction(event -> LocalDataManager.deleteNote(trashNoteListView.getSelectionModel().getSelectedItems()));
 
-        //optionsButton.setOnAction(event -> loadWindow("/litera/Options/options.fxml", "Litera Options"));
-
         addAudioButton.setOnAction(event -> {
             try
             {
@@ -206,6 +204,7 @@ public class Controller implements Initializable
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Litera Options");
+                stage.setResizable(false);
                 stage.setScene(new Scene(root));
                 stage.show();
             }

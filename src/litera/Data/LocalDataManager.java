@@ -11,9 +11,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+
 /**
  * the Local Data Manager class for Litera. Manages local data & encryption
  * all functions are made as efficient as possible. prove otherwise, and your code will replace mine :) (please do it)
+ *
  * @author Çelik Köseoğlu
  * @version 17
  */
@@ -99,7 +101,7 @@ public class LocalDataManager
         {
             directoryExists(filePath);
             FileWriter fw = new FileWriter(filePath + fileName);
-            fw.write(/*EncryptionManager.encryptString*/( text ));
+            fw.write(/*EncryptionManager.encryptString*/(text));
             fw.close();
             return true;
         }
@@ -179,6 +181,7 @@ public class LocalDataManager
 
     /**
      * deleted the selected notes permanently using the delete() method
+     *
      * @return true if deletion is successful
      * @description permanently deletes notes. this function will be used for the Trash in the future..
      */
@@ -201,6 +204,7 @@ public class LocalDataManager
     /**
      * recursively deletes directory and its subdirectories
      * credit - http://www.mkyong.com/java/how-to-delete-directory-in-java/
+     *
      * @param file
      * @throws IOException
      */
@@ -247,6 +251,7 @@ public class LocalDataManager
 
     /**
      * gets note names as a String[]. Checks if the application directory exists before trying to retrieve note names
+     *
      * @return the String[] which contains notes or if the note directory doesn't even exist, returns null
      */
     public static String[] getNoteNames(String directoryName)
@@ -275,33 +280,37 @@ public class LocalDataManager
 
     /**
      * creates and returns a note object from the specified noteName
+     *
      * @param noteName is the name of the note
      * @return Note object or null if note file is not found
      */
     public static Note getNote(String noteName)
     {
-        try
-        {
-            FileReader fr = new FileReader(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html");
-            BufferedReader textReader = new BufferedReader(fr);
-            StringBuffer strBuffer = new StringBuffer();
-            String tempString = textReader.readLine();
-
-            while ( tempString != null )
+        if ( noteName != null )
+            try
             {
-                strBuffer.append(tempString);
-                tempString = textReader.readLine();
+                FileReader fr = new FileReader(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html");
+                BufferedReader textReader = new BufferedReader(fr);
+                StringBuffer strBuffer = new StringBuffer();
+                String tempString = textReader.readLine();
+
+                while ( tempString != null )
+                {
+                    strBuffer.append(tempString);
+                    tempString = textReader.readLine();
+                }
+
+                textReader.close();
+                fr.close();
+                return new Note(noteName, /*EncryptionManager.decryptString*/(strBuffer.toString()));
             }
 
-            textReader.close();
-            fr.close();
-            return new Note(noteName, /*EncryptionManager.decryptString*/(strBuffer.toString()));
-        }
-
-        catch ( Exception e )
-        {
-            throw new RuntimeException("Something is wrong with Litera's note files.");
-        }
+            catch ( Exception e )
+            {
+                throw new RuntimeException("Something is wrong with Litera's note files.");
+            }
+        else
+            return null;
     }
 
     /**
@@ -354,6 +363,7 @@ public class LocalDataManager
     /**
      * generates a new note name when the user clicks the addNoteButton. Checks if the note with the Default.NewNoteName
      * exists and appends (occurenceCount) to the end of the new note name if a note with the same name exists.
+     *
      * @return new note name  -> Ex: New Note (4)
      */
     public static String createNewNote()
@@ -410,6 +420,7 @@ public class LocalDataManager
 
     /**
      * moves notes back and forth between trash list and the actual note list
+     *
      * @param selectedNotes
      * @param isMovingToTrash true if the move operation is from the listbox to the trash, false otherwise
      * @return
@@ -439,6 +450,7 @@ public class LocalDataManager
 
     /**
      * checks if the specified directory exists. If yes, returns true, if no, creates the directory and returns false
+     *
      * @param directoryName the directory that is to be created if not found
      * @return true if exists
      */

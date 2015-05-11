@@ -280,12 +280,20 @@ public class Controller implements Initializable
 
         noteNameTextField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             //do not try to change the name if textField is empty or the note with the same name exists
-            if (!noteNameTextField.getText().isEmpty() && !noteListScrollPaneItems.contains(noteNameTextField.getText()))
+            boolean contains = false;
+            if ( !noteNameTextField.getText().isEmpty() )
             {
-                LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
-                populateNoteListbox(); //need this to retain the alphabetical order
-                noteListView.getSelectionModel().select(noteNameTextField.getText());
-                noteNameTextField.positionCaret(noteNameTextField.getText().length());
+                for ( String s : noteListScrollPaneItems )
+                    if ( s.toLowerCase().equals(noteNameTextField.getText()) )
+                        contains = true;
+
+                if ( !contains )
+                {
+                    LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
+                    populateNoteListbox(); //need this to retain the alphabetical order
+                    noteListView.getSelectionModel().select(noteNameTextField.getText());
+                    noteNameTextField.positionCaret(noteNameTextField.getText().length());
+                }
             }
         });
 

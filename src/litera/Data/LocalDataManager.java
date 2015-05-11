@@ -306,7 +306,9 @@ public class LocalDataManager
 
             catch ( Exception e )
             {
-                throw new RuntimeException("Something is wrong with Litera's note files.");
+                System.out.println(e.toString() + ": Something is wrong with Litera's note files");
+                e.printStackTrace();
+                return null;
             }
         else
             return null;

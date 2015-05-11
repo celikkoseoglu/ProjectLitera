@@ -6,8 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="All yours Yiğit...">
+    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Rename">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjectMinerva.iws" />
@@ -34,8 +35,8 @@
       <file leaf-file-name="LocalDataManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="61.444443">
-              <caret line="177" column="21" selection-start-line="177" selection-start-column="21" selection-end-line="177" selection-end-column="21" />
+            <state vertical-scroll-proportion="6.888889">
+              <caret line="147" column="5" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
               <folding>
                 <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
@@ -49,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.8397436">
-              <caret line="295" column="17" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="17" />
+              <caret line="283" column="134" selection-start-line="283" selection-start-column="134" selection-end-line="283" selection-end-column="134" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,6 +200,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectLitera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -672,7 +687,7 @@
       <workItem from="1431326639456" duration="3421000" />
       <workItem from="1431348926186" duration="2799000" />
       <workItem from="1431367269824" duration="217000" />
-      <workItem from="1431368141452" duration="2069000" />
+      <workItem from="1431368141452" duration="3576000" />
     </task>
     <task id="LOCAL-00001" summary="It compiles!">
       <created>1429551929907</created>
@@ -812,15 +827,21 @@
       <option name="project" value="LOCAL" />
       <updated>1431304449475</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Rename">
+      <created>1431370328747</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1431370328747</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154954000" />
+    <option name="totallyTimeSpent" value="156461000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -828,7 +849,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38686988" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38686988" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39390388" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32473624" sideWeight="0.49427754" order="7" side_tool="false" content_ui="tabs" />
@@ -881,7 +902,8 @@
     <MESSAGE value="Video Player &amp; Colors" />
     <MESSAGE value="Getting ready for cloud sync!" />
     <MESSAGE value="All yours Yiğit..." />
-    <option name="LAST_COMMIT_MESSAGE" value="All yours Yiğit..." />
+    <MESSAGE value="Rename" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1309,8 +1331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="61.444443">
-          <caret line="177" column="21" selection-start-line="177" selection-start-column="21" selection-end-line="177" selection-end-column="21" />
+        <state vertical-scroll-proportion="6.888889">
+          <caret line="147" column="5" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
           <folding>
             <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
@@ -1322,7 +1344,7 @@
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8397436">
-          <caret line="295" column="17" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="17" />
+          <caret line="283" column="134" selection-start-line="283" selection-start-column="134" selection-end-line="283" selection-end-column="134" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

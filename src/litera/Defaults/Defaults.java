@@ -18,7 +18,7 @@ public class Defaults
 {
     public final static String welcomePage = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head contenteditable=true><meta charset=\"utf-8\">" +
-            "<title>Celik Koseoglu</title></head><body contenteditable=\"true\"></body></html>";
+            "<title>Minerva</title></head><body contenteditable=\"true\"></body></html>";
 
     public final static String[] welcomeList = {"Welcome!"};
 
@@ -26,7 +26,7 @@ public class Defaults
 
     public final static String newNotePage = "<!DOCTYPE html>" +
             "<html lang=\"en\"><head contenteditable=true><meta charset=\"utf-8\">" +
-            "<title>Celik Koseoglu</title></head><body contenteditable=\"true\"></body></html>";
+            "<title>Minerva</title></head><body contenteditable=\"true\"></body></html>";
 
     public static final String CUT_COMMAND = "cut";
     public static final String COPY_COMMAND = "copy";
@@ -49,6 +49,9 @@ public class Defaults
     public static final String COLOR_SCHEME_CSS_2 = ";-fx-text-fill: white;}.list-cell:filled:hover {-fx-background-color: #d2d2d2;-fx-text-fill: white;}.list-view{-fx-border-color:";
     public static final String COLOR_SCHEME_CSS_3 = ";}.border-pane{-fx-background-color:";
     public static final String COLOR_SCHEME_CSS_4 = ";}";
+
+    public static final String soundExtensions = ".wav.mp3.aac.ogg";
+    public static final String videoExtensions = ".mp4.m4v";
 
     /**
      * @param c Color to be converted

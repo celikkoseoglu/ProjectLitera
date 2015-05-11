@@ -33,6 +33,7 @@ public class PlayerController implements Initializable
 
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
+    private String fileExtension;
     private Media media;
     private MediaPlayer mediaPlayer;
     private Duration duration;
@@ -51,9 +52,12 @@ public class PlayerController implements Initializable
 
     public PlayerController(File f, Note note)
     {
+        fileExtension = f.getName().substring(f.getName().lastIndexOf('.'), f.getName().length());
+
         media = new Media(f.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         n = note;
+
     }
 
     private static String formatTime(Duration elapsed, Duration duration)

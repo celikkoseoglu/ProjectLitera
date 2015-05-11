@@ -26,6 +26,7 @@ import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
 import litera.Multimedia.AudioController;
 import litera.Multimedia.PlayerController;
+import litera.Options.OptionsController;
 
 import java.io.File;
 import java.net.URL;
@@ -191,6 +192,7 @@ public class Controller implements Initializable
             try
             {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Options/options.fxml"));
+                fxmlLoader.setController(new OptionsController(noteListView, currentNote, noteListScrollPaneItems));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -264,6 +266,9 @@ public class Controller implements Initializable
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Litera Player");
                 stage.setScene(new Scene(root));
+                System.out.println(wEvent.getData().substring(wEvent.getData().lastIndexOf('.'), wEvent.getData().length()));
+                if (Defaults.soundExtensions.indexOf(wEvent.getData().substring(wEvent.getData().lastIndexOf('.'), wEvent.getData().length())) != -1)
+                    stage.setMaxHeight(50);
                 stage.show();
                 stage.setOnCloseRequest(we -> literaPlayer.disposeThis());
             }
@@ -294,6 +299,7 @@ public class Controller implements Initializable
      * @param commandComplement Color commands may go here
      * @description adds style to the selected text. It is a low-level function. Not much to say here.
      */
+
     private void addStyle(String command, String commandComplement)
     {
         webPage.executeCommand(command, commandComplement);

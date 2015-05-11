@@ -95,13 +95,13 @@ public class LocalDataManager
         return true;
     }
 
-    private static boolean saveText(String filePath, String fileName, String text)
+    private static boolean saveText(String filePath, String fileName, String text, boolean isEncrypted)
     {
         try
         {
             directoryExists(filePath);
             FileWriter fw = new FileWriter(filePath + fileName);
-            fw.write(/*EncryptionManager.encryptString*/(text));
+            fw.write(isEncrypted ? EncryptionManager.encryptString(text) : text);
             fw.close();
             return true;
         }
@@ -123,7 +123,7 @@ public class LocalDataManager
         {
             String filePath = OS_NOTES_FILE_PATH + n.getNoteName() + "/";
             String fileName = n.getNoteName() + ".html";
-            saveText(filePath, fileName, n.getHtmlNote());
+            saveText(filePath, fileName, n.getHtmlNote(), true);
             return true;
         }
         return false;
@@ -135,7 +135,7 @@ public class LocalDataManager
         {
             String filePath = OS_NOTES_FILE_PATH + n.getNoteName() + "/";
             String fileName = "style.css";
-            saveText(filePath, fileName, Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2 + hexColor + Defaults.COLOR_SCHEME_CSS_3 + hexColor + Defaults.COLOR_SCHEME_CSS_4);
+            saveText(filePath, fileName, Defaults.COLOR_SCHEME_CSS_1 + hexColor + Defaults.COLOR_SCHEME_CSS_2 + hexColor + Defaults.COLOR_SCHEME_CSS_3 + hexColor + Defaults.COLOR_SCHEME_CSS_4, false);
             return true;
         }
         return false;
@@ -256,7 +256,6 @@ public class LocalDataManager
      */
     public static String[] getNoteNames(String directoryName)
     {
-        String[] listOfFileNames;
         if ( directoryExists(directoryName) )
         {
             File folder = new File(directoryName);
@@ -268,7 +267,7 @@ public class LocalDataManager
                 }
             };
             File[] listOfFiles = folder.listFiles(textFilter);
-            listOfFileNames = new String[listOfFiles.length];
+            String[] listOfFileNames = new String[listOfFiles.length];
 
             for ( int i = 0; i < listOfFiles.length; i++ )
                 listOfFileNames[i] = listOfFiles[i].getName();
@@ -302,7 +301,7 @@ public class LocalDataManager
 
                 textReader.close();
                 fr.close();
-                return new Note(noteName, /*EncryptionManager.decryptString*/(strBuffer.toString()));
+                return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()));
             }
 
             catch ( Exception e )
@@ -325,7 +324,7 @@ public class LocalDataManager
             FileReader fr = new FileReader(OS_OPTIONS_FILE_PATH + "lastNote.lit");
             BufferedReader textReader = new BufferedReader(fr);
             String s = EncryptionManager.decryptString(textReader.readLine());
-            System.out.println(s);
+            System.out.println("Last note is: " + s);
             textReader.close();
             fr.close();
             return s;
@@ -390,7 +389,7 @@ public class LocalDataManager
     {
         if ( n != null )
         {
-            saveText(OS_NOTES_FILE_PATH + n.getNoteName() + "/", "id.lit", LocalDateTime.now().toString());
+            saveText(OS_NOTES_FILE_PATH + n.getNoteName() + "/", "id.lit", LocalDateTime.now().toString(), false);
             return true;
         }
         return false;

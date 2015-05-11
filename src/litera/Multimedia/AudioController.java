@@ -1,23 +1,28 @@
 package litera.Multimedia;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import litera.Data.LocalDataManager;
+import litera.MainFrame.Controller;
 import litera.MainFrame.Note;
 
 import java.io.File;
 import java.net.URL;
-import java.time.Duration;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-/**
- * Orhun Caglayan
- */
-public class AudioController implements Initializable {
+public class AudioController implements Initializable
+{
     @FXML
     Button rec;
     @FXML
@@ -29,57 +34,68 @@ public class AudioController implements Initializable {
     @FXML
     Button ok;
     @FXML
-    Slider timeSlider;
+    Pane audioPane;
+    @FXML
+    private Label statusLabel;
 
-    File file;
-    Audio record;
-    String path;
-    Note current;
-    private Duration duration;
+    private File file;
+    private Audio record;
+    private String filePath, fileName;
+    private Note currentNote;
+    private String localTime;
 
-    /**
-     * @param currentNote takes currentNote as a parameter and uses it to save audio to right file path
-     */
     public AudioController(Note currentNote)
     {
-        super();
-        current = currentNote;
-        //record = new Audio(path);
+        this.currentNote = currentNote;
     }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources)
     {
-
         rec.setDisable(false);
         play.setDisable(true);
         stop.setDisable(true);
         choose.setDisable(false);
         ok.setDisable(false);
-        rec.setOnAction(event -> {
 
+        rec.setOnAction(event -> {
             //change path in every record not to override audio files
-            path = LocalDataManager.getLocalNotesFilePath() + current.getNoteName()/*.replace( " ", "%20")*/ + "/" + java.time.LocalDateTime.now() + ".wav";
-            record = new Audio(path);
+            localTime = java.time.LocalDateTime.now().toString();
+            fileName = localTime + ".wav";
+            filePath = LocalDataManager.getFilePathForNote(currentNote) + "/" + fileName;
+            record = new Audio(filePath, fileName);
             record.captureAudio();
             rec.setDisable(true);
             play.setDisable(true);
             stop.setDisable(false);
             choose.setDisable(true);
             ok.setDisable(true);
+            statusLabel.setText("Recording...");
         });
 
-        play.setOnAction(event ->{
+        play.setOnAction(event -> {
             rec.setDisable(true);
             play.setDisable(true);
             stop.setDisable(false);
             choose.setDisable(true);
             ok.setDisable(true);
-            Audio.playSound(record.getFileName());
+            statusLabel.setText("Playing...");
 
+            Task<Void> task = new Task<Void>()
+            {
+                @Override
+                public Void call() throws InterruptedException
+                {
+                    Audio.playSound(record.getFilePath());
+                    return null;
+                }
+            };
+            Thread playAudio = new Thread(task);
+            playAudio.setDaemon(true);
+            playAudio.start();
         });
 
-        stop.setOnAction(event ->{
+        stop.setOnAction(event -> {
             record.stopCapture();
             record.saveAudio();
             rec.setDisable(false);
@@ -87,64 +103,74 @@ public class AudioController implements Initializable {
             stop.setDisable(true);
             choose.setDisable(false);
             ok.setDisable(false);
+            statusLabel.setText("Stopped.");
         });
 
-        choose.setOnAction(event ->{
+        choose.setOnAction(event -> {
             rec.setDisable(true);
             play.setDisable(true);
             stop.setDisable(true);
             choose.setDisable(true);
             ok.setDisable(true);
+
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac", "*.ogg")
-            );
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac", "*.ogg"));
             file = fileChooser.showOpenDialog(choose.getScene().getWindow());
+
             rec.setDisable(false);
             play.setDisable(false);
             stop.setDisable(true);
             choose.setDisable(false);
             ok.setDisable(false);
+            statusLabel.setText("Selected: " + file.getName());
         });
 
-        ok.setOnAction(event ->{
-            if( file != null){
-                //Controller.addAudio( LocalDataManager.addAudio( file, null));
-            }
-            ((Stage) ok.getScene().getWindow()).close();
-        });
-
-        // Add time slider
-       /* timeSlider.valueProperty().addListener(new InvalidationListener()
-        {
-            public void invalidated(Observable ov)
+        ok.setOnAction(event -> {
+            try
             {
-                if ( timeSlider.isValueChanging() )
+                if (file != null)
                 {
-                    // multiply duration by percentage calculated by slider position
-                    mp.seek(duration.multiply(timeSlider.getValue() / 100.0));
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("New Media Content");
+                    dialog.setContentText("Please enter content title:");
+                    dialog.setHeaderText("Litera Audio");
+                    dialog.getDialogPane().getStyleClass().add("border-pane");
+                    dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(name -> Controller.addMedia(file.getName(), result.get()));
+
+                    Files.copy(Paths.get(file.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + file.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+
                 }
+                else if (record != null)
+                {
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("New Media Content");
+                    dialog.setContentText("Please enter content title:");
+                    dialog.setHeaderText("Litera Audio");
+                    dialog.getDialogPane().getStyleClass().add("border-pane");
+                    dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(name -> Controller.addMedia(record.getFileName(), result.get()));
+                }
+                ((Stage) ok.getScene().getWindow()).close();
             }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+            //Controller.addMedia(locTime + ".wav", "aaaa");
+
         });
-    }*/
-   /* protected void updateValues(){
-        if ( timeSlider != null)
-        {
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    javafx.util.Duration currentTime = mp.getCurrentTime();
-                    timeSlider.setDisable(duration.isUnknown());
-                    if (!timeSlider.isDisabled()
-                            && duration.greaterThan(javafx.util.Duration.ZERO)
-                            && !timeSlider.isValueChanging()) {
-                        timeSlider.setValue(currentTime.divide(duration).toMillis() * 100.0);
-                    }
 
-                }
-            });
-        }*/
+        loadCSS(currentNote);
+    }
 
-
+    private void loadCSS(Note n)
+    {
+        audioPane.getStyleClass().add("border-pane"); //border-pane has the background-color property
+        audioPane.getStylesheets().clear();
+        audioPane.getStylesheets().add(LocalDataManager.getNoteCSS(n).replace(" ", "%20"));
     }
 
 }

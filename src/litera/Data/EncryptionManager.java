@@ -57,13 +57,18 @@ public class EncryptionManager
         return null;
     }
 
+    public static String getKey()
+    {
+        return null;
+    }
+
     /**
      * IMPLEMENTING AS SOON AS POSSIBLE...
      * PASSWORD PROTECTION IS COMING!
      *
      * @param s
      */
-    public static void setEncryptionKey(String s)
+    public static void setKey(String s)
     {
     }
 }

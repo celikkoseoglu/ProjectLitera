@@ -82,12 +82,12 @@ public class Controller implements Initializable
 
     public static void addMedia(String fileName, String title)
     {
-        webPage.executeScript(webPage.getMainFrame(), "document.write(document.documentElement.innerHTML+'<button contentEditable=\"false\" id=\"" + fileName + "\" onclick=\"alert(this.id)\">" + title + "</button>')");
+        webPage.executeScript(webPage.getMainFrame(), "document.documentElement.innerHTML = (document.documentElement.innerHTML+'<button contentEditable=\"false\" id=\"" + fileName + "\" onclick=\"alert(this.id)\">" + title + "</button>')");
     }
 
-    public static void addImage(File f, String title)
+    public static void addImage(File f)
     {
-        webPage.executeScript(webPage.getMainFrame(), "document.write(document.documentElement.innerHTML+'<img src=\"" + f.toURI() + "\" alt=\"" + title + "\" style=\"width:304px;height:228px\">')");
+        webPage.executeScript(webPage.getMainFrame(), "document.documentElement.innerHTML =  (document.documentElement.innerHTML+'<img src=\"" + f.toURI() + "\" style=\"height:228px\">')");
     }
 
     @Override // This method is called by the FXMLLoader when initialization is complete
@@ -124,7 +124,6 @@ public class Controller implements Initializable
         addAudioButton.setOnAction(event -> {
             try
             {
-                addMedia(null, null);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/litera/Multimedia/audio.fxml"));
                 fxmlLoader.setController(new AudioController(currentNote));
                 Parent root = fxmlLoader.load();
@@ -148,7 +147,7 @@ public class Controller implements Initializable
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP4 Files", "*.mp4", "*.m4v"));
                 File selectedFile = fileChooser.showOpenDialog(addVideoButton.getScene().getWindow());
 
-                if ( selectedFile != null )
+                if (selectedFile != null)
                 {
                     TextInputDialog dialog = new TextInputDialog();
                     dialog.setTitle("New Media Content");
@@ -176,21 +175,13 @@ public class Controller implements Initializable
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png"));
                 File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
 
-                if ( selectedFile != null )
+                if (selectedFile != null)
                 {
-                    TextInputDialog dialog = new TextInputDialog();
-                    dialog.setTitle("New Media Content");
-                    dialog.setContentText("Please enter content title:");
-                    dialog.setHeaderText("Litera Image");
-                    dialog.getDialogPane().getStyleClass().add("border-pane");
-                    dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
-                    Optional<String> result = dialog.showAndWait();
-                    result.ifPresent(name -> addImage(selectedFile, result.get()));
-
+                    addImage(selectedFile);
                     Files.copy(Paths.get(selectedFile.getPath()), new File(LocalDataManager.getLocalNotesFilePath() + currentNote.getNoteName() + "/" + selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
                 }
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
                 ex.printStackTrace();
             }
@@ -208,7 +199,7 @@ public class Controller implements Initializable
                 stage.setScene(new Scene(root));
                 stage.show();
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
@@ -252,9 +243,13 @@ public class Controller implements Initializable
                     isNoteChanged = false;
                 }
                 currentNote = LocalDataManager.getNote(newValue);
-                editor.getEngine().loadContent(currentNote.getHtmlNote());
-                noteNameTextField.setText(newValue);
-                Defaults.loadCSS(currentNote, borderPane);
+
+                if (currentNote != null)
+                {
+                    editor.getEngine().loadContent(currentNote.getHtmlNote());
+                    noteNameTextField.setText(newValue);
+                    Defaults.loadCSS(currentNote, borderPane);
+                }
             }
         });
 
@@ -284,6 +279,8 @@ public class Controller implements Initializable
             {
                 LocalDataManager.renameNote(currentNote, noteNameTextField.getText());
                 populateNoteListbox(); //need this to retain the alphabetical order
+                noteListView.getSelectionModel().select(noteNameTextField.getText());
+                noteNameTextField.positionCaret(noteNameTextField.getText().length());
             }
         });
 
@@ -325,6 +322,7 @@ public class Controller implements Initializable
 
     /**
      * gets the last note name that the user has been working on. If it exists in the note list, selects it. If it doesn't selects the first item
+     *
      * @return true is selection is successful
      */
     private boolean loadLastNote()

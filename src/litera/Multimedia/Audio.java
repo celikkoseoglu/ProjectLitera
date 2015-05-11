@@ -3,25 +3,19 @@ package litera.Multimedia;
 import javax.sound.sampled.*;
 import java.io.*;
 
-/**
- * Created by orhun on 23.04.2015.
- */
 public class Audio
 {
     final AudioFormat format = getFormat();
     protected boolean running;
     private ByteArrayOutputStream out;
-    private ByteArrayOutputStream recordBytes;
-    private String fileName;
+    private String filePath, fileName;
 
-    public Audio(String fileName)
+    public Audio(String filePath, String fileName)
     {
+        this.filePath = filePath;
         this.fileName = fileName;
     }
 
-    /**
-     *
-     */
     public static void playSound(String strFilename)
     {
 
@@ -160,7 +154,7 @@ public class Audio
             final AudioInputStream ais = new AudioInputStream(input, format, audio.length / format.getFrameSize());
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
             final SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
-            File wavFile = new File(fileName);//saved place
+            File wavFile = new File(filePath);//saved place
             line.open(format);
             line.start();
             //System.out.println("Start recording...");
@@ -229,34 +223,11 @@ public class Audio
         return fileName;
     }
 
-    public void setFileName(String name)
+    public String getFilePath()
     {
-        fileName = name;
+        return filePath;
     }
-    /*public double getDuration(){
-        try
-        {
-            stream = AudioSystem.getAudioInputStream(file);
-
-            AudioFormat format = stream.getFormat();
-
-            return file.length() / format.getSampleRate() / (format.getSampleSizeInBits() / 8.0) / format.getChannels();
-        }
-        catch (Exception e)
-        {
-            // log an error
-            return -1;
-        }
-        finally
-        {
-            try { stream.close(); } catch (Exception ex) { }
-        }
-
-    }*/
-
-
 }
-
 
 
 

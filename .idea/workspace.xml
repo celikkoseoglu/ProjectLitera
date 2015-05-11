@@ -6,13 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Getting ready for cloud sync!">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Multimedia/Audio.java" afterPath="$PROJECT_DIR$/src/litera/Multimedia/Audio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Multimedia/AudioController.java" afterPath="$PROJECT_DIR$/src/litera/Multimedia/AudioController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Multimedia/audio.fxml" afterPath="$PROJECT_DIR$/src/litera/Multimedia/audio.fxml" />
+    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="All yours Yiğit...">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjectMinerva.iws" />
@@ -91,8 +85,8 @@
       <file leaf-file-name="LocalDataManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8609023">
-              <caret line="109" column="67" selection-start-line="109" selection-start-column="67" selection-end-line="110" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.22727273">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
               <folding>
                 <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
                 <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />
@@ -639,7 +633,7 @@
       <workItem from="1430996278479" duration="102000" />
       <workItem from="1431292497267" duration="19000" />
       <workItem from="1431292704387" duration="7228000" />
-      <workItem from="1431303777158" duration="612000" />
+      <workItem from="1431303777158" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="It compiles!">
       <created>1429551929907</created>
@@ -767,21 +761,27 @@
       <option name="project" value="LOCAL" />
       <updated>1430914705575</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="All yours Yiğit...">
+      <created>1431304408369</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1431304408369</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146306000" />
+    <option name="totallyTimeSpent" value="146360000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26846424" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39423078" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39390388" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32473624" sideWeight="0.49427754" order="7" side_tool="false" content_ui="tabs" />
@@ -835,7 +835,8 @@
     <MESSAGE value="Integrated All Code" />
     <MESSAGE value="Video Player &amp; Colors" />
     <MESSAGE value="Getting ready for cloud sync!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Getting ready for cloud sync!" />
+    <MESSAGE value="All yours Yiğit..." />
+    <option name="LAST_COMMIT_MESSAGE" value="All yours Yiğit..." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -896,7 +897,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
           <folding>
-            <element signature="e#1904#1905#0" expanded="true" />
+            <element signature="e#1925#1926#0" expanded="true" />
             <element signature="e#1931#1932#0" expanded="true" />
           </folding>
         </state>
@@ -947,7 +948,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1904#1905#0" expanded="true" />
+            <element signature="e#1925#1926#0" expanded="true" />
             <element signature="e#1931#1932#0" expanded="true" />
           </folding>
         </state>
@@ -1230,7 +1231,7 @@
         <state vertical-scroll-proportion="0.2977099">
           <caret line="26" column="38" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="38" />
           <folding>
-            <element signature="e#1904#1905#0" expanded="true" />
+            <element signature="e#1925#1926#0" expanded="true" />
             <element signature="e#1931#1932#0" expanded="true" />
           </folding>
         </state>
@@ -1290,8 +1291,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/Data/LocalDataManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8609023">
-          <caret line="109" column="67" selection-start-line="109" selection-start-column="67" selection-end-line="110" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.22727273">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
           <folding>
             <element signature="docComment;method#renameNote#0;class#LocalDataManager#0" expanded="false" />
             <element signature="method#delete#0;class#LocalDataManager#0" expanded="false" />

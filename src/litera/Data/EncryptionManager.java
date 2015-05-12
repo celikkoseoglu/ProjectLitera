@@ -1,5 +1,6 @@
 package litera.Data;
 
+import litera.Defaults.Defaults;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -13,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionManager
 {
-    private static byte[] privateEncryptionKey = {0x76, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79};
+    private static byte[] userEncryptionKey = Defaults.privateEncryptionKey;
 
     /**
      * @param s String to be encoded
@@ -25,7 +26,7 @@ public class EncryptionManager
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            final SecretKeySpec secretKey = new SecretKeySpec(privateEncryptionKey, "AES");
+            final SecretKeySpec secretKey = new SecretKeySpec(userEncryptionKey, "AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             return Base64.encodeBase64String(cipher.doFinal(s.getBytes()));
         }
@@ -46,7 +47,7 @@ public class EncryptionManager
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            final SecretKeySpec secretKey = new SecretKeySpec(privateEncryptionKey, "AES");
+            final SecretKeySpec secretKey = new SecretKeySpec(userEncryptionKey, "AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.decodeBase64(s)));
         }
@@ -57,9 +58,9 @@ public class EncryptionManager
         return null;
     }
 
-    public static String getKey()
+    public static byte[] getUserKey()
     {
-        return null;
+        return userEncryptionKey;
     }
 
     /**
@@ -68,7 +69,15 @@ public class EncryptionManager
      *
      * @param s
      */
-    public static void setKey(String s)
+    public static void setUserKey(String s)
     {
+        try
+        {
+            userEncryptionKey = s.getBytes();
+        }
+        catch ( Exception e )
+        {
+            System.out.println(e.toString());
+        }
     }
 }

@@ -16,7 +16,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="188.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="254.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="155.0" prefWidth="155.0"/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -52,7 +52,8 @@
                   <Button fx:id="optionsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Options" />
                     </items>
                 </ToolBar>
-                <Label alignment="CENTER_RIGHT" nodeOrientation="RIGHT_TO_LEFT" text="Project Litera : Concept" GridPane.columnIndex="3" />
+                <Label alignment="CENTER_RIGHT" nodeOrientation="RIGHT_TO_LEFT" text="Minerva Development"
+                       GridPane.columnIndex="3"/>
             </children>
         </GridPane>
     </bottom>
@@ -125,7 +126,7 @@
                 </ToolBar>
             <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: transparent;" GridPane.rowIndex="3">
               <items>
-                      <ToggleButton mnemonicParsing="false" text="E" />
+                  <ToggleButton fx:id="encryptionToggleButton" mnemonicParsing="false" text="E"/>
               </items>
             </ToolBar>
                 <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0"

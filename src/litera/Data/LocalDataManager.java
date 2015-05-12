@@ -122,7 +122,7 @@ public class LocalDataManager
         if ( n != null )
         {
             String filePath = OS_NOTES_FILE_PATH + n.getNoteName() + "/";
-            String fileName = n.getNoteName() + ".html";
+            String fileName = n.getNoteName() + (n.getEncrypted() ? ".litc" : ".html");
             saveText(filePath, fileName, n.getHtmlNote(), true);
             return true;
         }
@@ -272,6 +272,8 @@ public class LocalDataManager
             for ( int i = 0; i < listOfFiles.length; i++ )
                 listOfFileNames[i] = listOfFiles[i].getName();
 
+            System.out.println(Arrays.toString(listOfFileNames));
+
             return listOfFileNames;
         }
         return null;
@@ -288,7 +290,8 @@ public class LocalDataManager
         if ( noteName != null )
             try
             {
-                FileReader fr = new FileReader(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html");
+                File f = new File(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".litc");
+                FileReader fr = new FileReader(f.exists() ? f.toString() : (OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html"));
                 BufferedReader textReader = new BufferedReader(fr);
                 StringBuffer strBuffer = new StringBuffer();
                 String tempString = textReader.readLine();
@@ -301,7 +304,7 @@ public class LocalDataManager
 
                 textReader.close();
                 fr.close();
-                return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()));
+                return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()), f.exists());
             }
 
             catch ( Exception e )
@@ -381,7 +384,7 @@ public class LocalDataManager
             }
         }
 
-        Note n = new Note(newNoteName, Defaults.newNotePage);
+        Note n = new Note(newNoteName, Defaults.newNotePage, false);
         saveNote(n);
         generateAndSaveID(n);
         return newNoteName;

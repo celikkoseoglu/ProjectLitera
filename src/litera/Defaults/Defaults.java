@@ -51,7 +51,8 @@ public class Defaults
     public static final String COLOR_SCHEME_CSS_4 = ";}";
 
     public static final String soundExtensions = ".wav.mp3.aac.ogg";
-    public static final String videoExtensions = ".mp4.m4v";
+
+    public final static byte[] privateEncryptionKey = {0x76, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79};
 
     /**
      * @param c Color to be converted

@@ -94,7 +94,7 @@ public class OptionsController implements Initializable
         String[] noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());
         if (noteList == null)
         {
-            currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage);
+            currentNote = new Note(Defaults.welcomeList[0], Defaults.welcomePage, false);
             LocalDataManager.saveNote(currentNote);
             LocalDataManager.generateAndSaveID(currentNote);
             noteList = LocalDataManager.getNoteNames(LocalDataManager.getLocalNotesFilePath());

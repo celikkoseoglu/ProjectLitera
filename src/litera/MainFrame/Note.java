@@ -4,18 +4,19 @@ package litera.MainFrame;
  * Note class for Litera. Contains Note properties
  *
  * @author Çelik Köseoğlu
- * @version 1
+ * @version 2 - Encryption changes
  */
 
 public class Note
 {
     private String noteName, htmlNote;
-    private boolean isPasswordEncrypted;
+    private boolean isEncrypted;
 
-    public Note(String noteName, String htmlNote)
+    public Note(String noteName, String htmlNote, boolean isEncrypted)
     {
         this.noteName = noteName;
         this.htmlNote = htmlNote;
+        this.isEncrypted = isEncrypted;
     }
 
     public String getHtmlNote()
@@ -38,8 +39,13 @@ public class Note
         noteName = newName;
     }
 
-    public boolean isPasswordEncrypted()
+    public boolean getEncrypted()
     {
-        return isPasswordEncrypted;
+        return isEncrypted;
+    }
+
+    public void setEncrypted(boolean isEncrypted)
+    {
+        this.isEncrypted = isEncrypted;
     }
 }

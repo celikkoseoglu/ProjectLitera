@@ -254,7 +254,21 @@ public class Controller implements Initializable
 
                 if ( currentNote != null )
                 {
-                    editor.getEngine().loadContent(currentNote.getHtmlNote());
+                    if ( !currentNote.getEncrypted() )
+                    {
+                        EncryptionManager.resetKey();
+                        editor.getEngine().loadContent(EncryptionManager.decryptString(currentNote.getHtmlNote()));
+                    }
+                    else
+                    {
+                        TextInputDialog dialog = new TextInputDialog();
+                        dialog.setTitle("Encryption Pass");
+                        dialog.setHeaderText("Please enter your password");
+                        dialog.setContentText("Password:");
+                        Optional<String> result = dialog.showAndWait();
+                        result.ifPresent(name -> editor.getEngine().loadContent(EncryptionManager.decryptString(currentNote.getHtmlNote())))
+                        ;
+                    }
                     noteNameTextField.setText(newValue);
                     Defaults.loadCSS(currentNote, borderPane);
                 }
@@ -361,6 +375,7 @@ public class Controller implements Initializable
                 {
                     EncryptionManager.setUserKey(usernamePassword.getKey());
                     currentNote.setEncrypted(true);
+                    isNoteChanged = true;
                 }
             });
         });

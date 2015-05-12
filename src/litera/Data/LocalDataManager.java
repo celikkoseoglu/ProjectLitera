@@ -291,7 +291,7 @@ public class LocalDataManager
             try
             {
                 File f = new File(OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".litc");
-                FileReader fr = new FileReader(f.exists() ? f.toString() : (OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html"));
+                FileReader fr = new FileReader(f.exists() ? (OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".litc") : (OS_NOTES_FILE_PATH + noteName + "/" + noteName + ".html"));
                 BufferedReader textReader = new BufferedReader(fr);
                 StringBuffer strBuffer = new StringBuffer();
                 String tempString = textReader.readLine();
@@ -304,7 +304,7 @@ public class LocalDataManager
 
                 textReader.close();
                 fr.close();
-                return new Note(noteName, EncryptionManager.decryptString(strBuffer.toString()), f.exists());
+                return new Note(noteName, strBuffer.toString(), f.exists());
             }
 
             catch ( Exception e )

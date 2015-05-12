@@ -5,11 +5,12 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Arrays;
 
 /**
- * @the Encryption Manager class for Litera. Manages local data & encryption
  * @author Çelik Köseoğlu
  * @version 2
+ * @the Encryption Manager class for Litera. Manages local data & encryption
  */
 
 public class EncryptionManager
@@ -71,13 +72,13 @@ public class EncryptionManager
      */
     public static void setUserKey(String s)
     {
-        try
-        {
-            userEncryptionKey = s.getBytes();
-        }
-        catch ( Exception e )
-        {
-            System.out.println(e.toString());
-        }
+        System.out.println("OldKey: " + Arrays.toString(userEncryptionKey));
+        userEncryptionKey = org.apache.commons.codec.digest.DigestUtils.md5(s);
+        System.out.println("NewKey: " + Arrays.toString(userEncryptionKey));
+    }
+
+    public static void resetKey()
+    {
+        userEncryptionKey = Defaults.privateEncryptionKey;
     }
 }

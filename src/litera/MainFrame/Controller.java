@@ -2,7 +2,6 @@ package litera.MainFrame;
 
 import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,23 +9,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Side;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import litera.Data.EncryptionManager;
 import litera.Data.LocalDataManager;
 import litera.Defaults.Defaults;
@@ -58,7 +53,7 @@ public class Controller implements Initializable
     private ObservableList<String> noteListScrollPaneItems;
 
     @FXML
-    private ToggleButton boldToggleButton, italicToggleButton, underlineToggleButton, strikethroughToggleButton, insertOrderedListToggleButton, encryptionToggleButton;
+    private ToggleButton boldToggleButton, italicToggleButton, underlineToggleButton, strikethroughToggleButton, insertOrderedListToggleButton;
     @FXML
     private Button addAudioButton, addVideoButton, addImageButton;
     @FXML
@@ -317,73 +312,9 @@ public class Controller implements Initializable
             }
         });
 
-        encryptionToggleButton.setOnAction(event -> {
-            // Create the custom dialog.
-            Dialog<Pair<String, String>> dialog = new Dialog<>();
-            dialog.setTitle("Litera Encryption");
-            dialog.setHeaderText("Enter a password to protect your note");
-
-            ButtonType loginButtonType = new ButtonType("Encrypt", ButtonBar.ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-
-            GridPane grid = new GridPane();
-            dialog.getDialogPane().getStyleClass().add("border-pane"); //border-pane has the background-color property
-            dialog.getDialogPane().getStylesheets().clear();
-            dialog.getDialogPane().getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
-            grid.getStyleClass().add("border-pane"); //border-pane has the background-color property
-            grid.getStylesheets().clear();
-            grid.getStylesheets().add(LocalDataManager.getNoteCSS(currentNote).replace(" ", "%20"));
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(20, 80, 10, 10));
-
-            PasswordField username = new PasswordField();
-            username.setPromptText("Password");
-            PasswordField password = new PasswordField();
-            password.setPromptText("Verify Password");
-
-            grid.add(new Label("Password:"), 0, 0);
-            grid.add(username, 1, 0);
-            grid.add(new Label("Verify Password:"), 0, 1);
-            grid.add(password, 1, 1);
-
-            // Enable/Disable login button depending on whether a username was entered.
-            Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
-            loginButton.setDisable(true);
-
-            username.textProperty().addListener((observable, oldValue, newValue) -> {
-                loginButton.setDisable(newValue.trim().isEmpty());
-            });
-
-            dialog.getDialogPane().setContent(grid);
-
-            Platform.runLater(() -> username.requestFocus());
-
-            dialog.setResultConverter(dialogButton -> {
-                if ( dialogButton == loginButtonType )
-                {
-                    return new Pair<>(username.getText(), password.getText());
-                }
-                return null;
-            });
-
-            Optional<Pair<String, String>> result = dialog.showAndWait();
-
-            result.ifPresent(usernamePassword -> {
-                System.out.println("Password=" + usernamePassword.getKey() + ", VerifyPassword=" + usernamePassword.getValue());
-                if ( usernamePassword.getKey().equals(usernamePassword.getValue()) )
-                {
-                    EncryptionManager.setUserKey(usernamePassword.getKey());
-                    currentNote.setEncrypted(true);
-                    isNoteChanged = true;
-                }
-            });
-        });
-
         //Do the followings during the application startup
         populateNoteListbox();
         loadLastNote();
-        encryptionToggleButton.setSelected(currentNote.getEncrypted());
     }
 
     /**

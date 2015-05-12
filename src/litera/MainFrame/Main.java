@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import litera.Data.EncryptionManager;
 import litera.Data.LocalDataManager;
 
 /**
@@ -22,7 +21,6 @@ public class Main extends Application
 
     public static void main(String[] args) throws Exception
     {
-        EncryptionManager.setUserKey("123");
         LocalDataManager.setOS_FILE_PATH();
         launch(args);
     }

@@ -6,11 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Rename fixed for Windows">
+    <list default="true" id="2bd85315-a510-418f-825c-bf861d972cd3" name="Default" comment="Forgotten Shores">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" afterPath="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/Main.java" afterPath="$PROJECT_DIR$/src/litera/MainFrame/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" afterPath="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjectMinerva.iws" />
@@ -65,8 +64,8 @@
               <folding>
                 <element signature="e#1717#1718#0" expanded="true" />
                 <element signature="e#1757#1758#0" expanded="true" />
-                <element signature="e#1798#1799#0" expanded="true" />
-                <element signature="e#1863#1864#0" expanded="true" />
+                <element signature="e#1928#1929#0" expanded="true" />
+                <element signature="e#2168#2169#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.8484849">
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,17 +97,17 @@
         <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+              <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.5757575">
-              <caret line="377" column="41" selection-start-line="377" selection-start-column="41" selection-end-line="377" selection-end-column="41" />
+            <state vertical-scroll-proportion="-4.892857">
+              <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,7 +159,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="test" />
+        <entry key="$PROJECT_DIR$" value="origin" />
       </map>
     </option>
     <push-targets>
@@ -210,9 +209,9 @@
         <option value="$PROJECT_DIR$/src/litera/Options/OptionsController.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml" />
         <option value="$PROJECT_DIR$/src/litera/Data/LocalDataManager.java" />
+        <option value="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/Controller.java" />
         <option value="$PROJECT_DIR$/src/litera/MainFrame/Main.java" />
-        <option value="$PROJECT_DIR$/src/litera/Data/EncryptionManager.java" />
       </list>
     </option>
   </component>
@@ -772,7 +771,7 @@
       <workItem from="1431367269824" duration="217000" />
       <workItem from="1431368141452" duration="3770000" />
       <workItem from="1431432098529" duration="34000" />
-      <workItem from="1431455274277" duration="10405000" />
+      <workItem from="1431455274277" duration="10641000" />
     </task>
     <task id="LOCAL-00001" summary="It compiles!">
       <created>1429551929907</created>
@@ -930,11 +929,17 @@
       <option name="project" value="LOCAL" />
       <updated>1431462368588</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Forgotten Shores">
+      <created>1431467894095</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1431467894095</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167094000" />
+    <option name="totallyTimeSpent" value="167330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1001,7 +1006,8 @@
     <MESSAGE value="All yours Yiğit..." />
     <MESSAGE value="Rename" />
     <MESSAGE value="Rename fixed for Windows" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename fixed for Windows" />
+    <MESSAGE value="Forgotten Shores" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgotten Shores" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1348,7 +1354,7 @@
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/minerva.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+          <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1391,16 +1397,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/Defaults/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1424,16 +1420,26 @@
           <folding>
             <element signature="e#1717#1718#0" expanded="true" />
             <element signature="e#1757#1758#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
+            <element signature="e#1928#1929#0" expanded="true" />
+            <element signature="e#2168#2169#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5757575">
-          <caret line="377" column="41" selection-start-line="377" selection-start-column="41" selection-end-line="377" selection-end-column="41" />
+        <state vertical-scroll-proportion="-4.892857">
+          <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/litera/MainFrame/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8484849">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

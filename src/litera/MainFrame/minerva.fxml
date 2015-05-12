@@ -124,11 +124,8 @@
                         <ColorPicker fx:id="foregroundColorPicker" maxWidth="28.0" minWidth="28.0" prefWidth="28.0" />
                     </items>
                 </ToolBar>
-            <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0" style="-fx-background-color: transparent;" GridPane.rowIndex="3">
-              <items>
-                  <ToggleButton fx:id="encryptionToggleButton" mnemonicParsing="false" text="E"/>
-              </items>
-            </ToolBar>
+                <ToolBar orientation="VERTICAL" prefHeight="70.0" prefWidth="40.0"
+                         style="-fx-background-color: transparent;" GridPane.rowIndex="3"/>
                 <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0"
                          style="-fx-background-color: transparent;" GridPane.rowIndex="2">
                     <items>
